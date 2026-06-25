@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InfoGap - 全球信息差聚合平台</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --card-bg: #131820;
+    --border: #1e2836;
+    --accent: #00d4aa;
+    --accent2: #ff6b6b;
+    --accent3: #5b8cee;
+    --accent4: #f0a500;
+    --text: #cdd6e0;
+    --text2: #8b949e;
+    --text3: #566170;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  /* Header */
+  header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .logo span:first-child { color: var(--accent); }
+  .logo span:last-child { color: var(--text); }
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 14px;
+    gap: 8px;
+    min-width: 280px;
+  }
+  .search-box input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    width: 100%;
+    font-size: 14px;
+  }
+  .search-box input::placeholder { color: var(--text3); }
+  .search-box svg { color: var(--text3); flex-shrink: 0; }
+
+  /* Main */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 40px 20px 30px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--text2);
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,212,170,0.1);
+    border: 1px solid rgba(0,212,170,0.3);
+    color: var(--accent);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 14px;
+  }
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Categories */
+  .categories {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 30px;
+    justify-content: center;
+  }
+  .cat-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text2);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all .2s;
+  }
+  .cat-btn:hover { border-color: var(--text2); color: var(--text); }
+  .cat-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+  .stat-card .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-card .label {
+    font-size: 13px;
+    color: var(--text2);
+    margin-top: 4px;
+  }
+
+  /* Feed */
+  .feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .feed-header h2 { font-size: 20px; font-weight: 700; }
+  .feed-header span { color: var(--text3); font-size: 13px; }
+
+  .feed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all .2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .card-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .tag-money { background: rgba(255,107,107,0.15); color: var(--accent2); }
+  .tag-immigration { background: rgba(91,140,238,0.15); color: var(--accent3); }
+  .tag-tech { background: rgba(0,212,170,0.15); color: var(--accent); }
+  .tag-arbitrage { background: rgba(240,165,0,0.15); color: var(--accent4); }
+  .tag-life { background: rgba(180,140,255,0.15); color: #b48cff; }
+
+  .card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .card p {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text3);
+  }
+  .card .source-link {
+    color: var(--accent3);
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .card .source-link:hover { opacity: 0.8; }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text3);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 26px; }
+    .feed-grid { grid-template-columns: 1fr; }
+    .search-box { min-width: 200px; }
+  }
+
+  .hidden { display: none !important; }
+  .no-result {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+    grid-column: 1 / -1;
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo"><span>Info</span><span>Gap</span></div>
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="搜索信息差关键词...">
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>全球信息差 · 先人一步</h1>
+    <p>聚合世界各地的赚钱机会、移民政策、科技前沿与套利信息，消除认知差距</p>
+    <div class="live-badge"><span class="live-dot"></span>实时追踪 · 2026年6月</div>
+  </div>
+
+  <div class="categories" id="categoryFilters">
+    <button class="cat-btn active" data-cat="all">全部</button>
+    <button class="cat-btn" data-cat="money">赚钱机会</button>
+    <button class="cat-btn" data-cat="immigration">移民政策</button>
+    <button class="cat-btn" data-cat="tech">科技前沿</button>
+    <button class="cat-btn" data-cat="arbitrage">信息套利</button>
+    <button class="cat-btn" data-cat="life">海外生活</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">信息条目</div></div>
+    <div class="stat-card"><div class="num" id="todayCount">0</div><div class="label">今日更新</div></div>
+    <div class="stat-card"><div class="num">12+</div><div class="label">覆盖国家</div></div>
+    <div class="stat-card"><div class="num">6</div><div class="label">信息分类</div></div>
+  </div>
+
+  <div class="feed-header">
+    <h2>最新信息差</h2>
+    <span id="resultHint"></span>
+  </div>
+
+  <div class="feed-grid" id="feedGrid"></div>
+</main>
+
+<footer>
+  <p>InfoGap - 打破信息壁垒，连接全球机会。数据来源于公开网络，仅供参考。</p>
+</footer>
+
+<script>
+const DATA = [
+  {
+    id: 1,
+    tag: 'money',
+    title: '2026年AI信息差赚钱三大路径：从AI福利侦察员到垂直行业顾问',
+    summary: '路径一：AI工具福利侦察员，整理主流AI工具省钱手册即可变现。路径二：垂直行业AI落地顾问，帮传统企业部署AI工具，部署费3000-20000元，月管理费1000-3000元。路径三：AI信息差内容创作者，深耕细分方向持续输出建立个人IP。',
+    source: '字节跳动青年营',
+    url: 'https://youthcamp.bytedance.com/post/7612205707503616026',
+    date: '2026-06-20',
+    isNew: true
+  },
+  {
+    id: 2,
+    tag: 'money',
+    title: '跨境信息差套利：国内内卷品换个包装在海外TikTok/Temu上成新奇特爆款',
+    summary: '真正的高手玩的是时间差和认知差。跨境领域里，国内已卷不动的产品换个包装、换个语言环境，在海外TikTok或Temu上可能成为新奇特。核心不在于货，而在于对海外流行趋势的敏锐度。每天花半小时刷Reddit、TikTok评论区发现趋势，月翻几倍的案例比比皆是。',
+    source: '点子哥',
+    url: 'https://www.dianzige.com/nccy/9461.html',
+    date: '2026-06-18',
+    isNew: true
+  },
+  {
+    id: 3,
+    tag: 'immigration',
+    title: '欧盟设立第三国遣返中心：移民政策全面右转，拘留期最长30个月',
+    summary: '欧盟就收紧移民政策达成协议，计划在欧洲以外设立遣返中心。新规允许扣押无证移民身份证件，拘留期最长30个月，驱逐后禁入年限从5年延长至10-20年。斯洛文尼亚媒体称欧盟移民政策正在向右转。',
+    source: '环球时报',
+    url: 'https://news.youth.cn/gj/202606/t20260605_16698378.htm',
+    date: '2026-06-05',
+    isNew: false
+  },
+  {
+    id: 4,
+    tag: 'immigration',
+    title: '美国移民政策重大调整：境内申请绿卡需返回本国递交，科技行业受冲击最大',
+    summary: 'USCIS发布新政策备忘录，要求身处美国境内的绿卡申请人返回本国递交申请。2023财年117万新绿卡中60万通过境内调整身份获得，新政将直接冲击这一渠道。USCIS发言人澄清有"国家利益"例外，但具体标准未明确。',
+    source: '第一财经',
+    url: 'https://news.youth.cn/gj/202605/t20260527_16682453.htm',
+    date: '2026-05-27',
+    isNew: false
+  },
+  {
+    id: 5,
+    tag: 'immigration',
+    title: '加拿大2026年移民政策变化：省提名配额缩减，法语移民优先',
+    summary: '加拿大2026年移民计划出现重大调整。省提名(PNP)配额同比缩减约20%，联邦快速通道(Express Entry)更倾向法语申请人和特定职业技能类别。魁北克以外的法语移民目标翻倍。建议有移民意向者关注法语加分路径和紧缺职业清单。',
+    source: 'GoFar Global',
+    url: 'https://www.gofarglobal.com/news/canada-immigration-changes-2026',
+    date: '2026-06-15',
+    isNew: true
+  },
+  {
+    id: 6,
+    tag: 'immigration',
+    title: '澳大利亚2026-27财年移民配额出炉：技术移民占比提升至72%',
+    summary: '澳大利亚公布2026-27财年永久移民计划，总配额19.5万，其中技术移民占比提升至72%（约14万）。护理、IT、工程类专业继续优先，偏远地区签证配额增加15%。打工度假签证年龄上限放宽至38岁。',
+    source: '澳大利亚移民局',
+    url: 'https://immi.homeaffairs.gov.au',
+    date: '2026-06-22',
+    isNew: true
+  },
+  {
+    id: 7,
+    tag: 'money',
+    title: '加密货币信息套利：2026年超10亿美元交易利用信息优势抢先布局',
+    summary: '2026年调查发现超10亿美元交易在重大地缘政治公告前精准布局。信息套利(Information Arbitrage)正在重新定义加密和全球市场的盈利模式——核心优势是"比别人先知道"。链上数据分析、流动性信号和监管动态成为关键工具。',
+    source: 'The Bit Gazette',
+    url: 'https://thebitgazette.com/information-arbitrage-is-cryptos-most-powerful-trading-strategy-its-also-its-most-controversial',
+    date: '2026-06-10',
+    isNew: false
+  },
+  {
+    id: 8,
+    tag: 'tech',
+    title: '2026下半年AI Agent创业窗口：Karpathy提出"Agentic Engineering"新范式',
+    summary: 'AI工具信息差窗口期仅6-18个月（对比移动互联网的3-5年大幅缩短）。Karpathy的"Agentic Engineering"概念目前只有少数人知道，预计明年将普及。发现机会的能力 × AI执行速度 = 2026年真正的核心竞争力。',
+    source: '字节跳动青年营',
+    url: 'https://youthcamp.bytedance.com/post/7612205707503616026',
+    date: '2026-06-19',
+    isNew: true
+  },
+  {
+    id: 9,
+    tag: 'arbitrage',
+    title: '政策规则红利：城市落户新政与行业补贴的信息差生意',
+    summary: '特定城市的落户新政、特定行业的补贴申请流程，普通人根本懒得研究几百页文件。但中介或专业机构一旦吃透规则，就能提供"代跑腿+规划"服务，收几千元服务费，成本几乎为零。这种高认知差的轻资产模式正在2026年爆发。',
+    source: '点子哥',
+    url: 'https://www.dianzige.com/nccy/9461.html',
+    date: '2026-06-16',
+    isNew: false
+  },
+  {
+    id: 10,
+    tag: 'life',
+    title: '数字游民签证爆发：全球超60个国家推出远程工作签证，税率低至0%',
+    summary: '截至2026年中，全球超60个国家推出数字游民签证(Digital Nomad Visa)。葡萄牙D8签证、西班牙数字游民签证、迪拜远程工作签证最受欢迎。阿联酋、克罗地亚等国提供0%个人所得税优惠。月收入要求普遍在2000-5000欧元之间。',
+    source: 'NomadList',
+    url: 'https://nomadlist.com',
+    date: '2026-06-23',
+    isNew: true
+  },
+  {
+    id: 11,
+    tag: 'money',
+    title: '2026年政策补贴红利：各国新能源、AI创业补贴汇总',
+    summary: '日本经济产业省推出AI创业补贴最高5000万日元。新加坡EDB提供科技初创企业前三年免企业所得税。德国为绿色科技创业提供最高30万欧元无偿资助。中国多个城市对AI、新能源企业提供租金减免+税收返还。信息差在于：知道这些政策并会申请的人极少。',
+    source: '综合整理',
+    url: '',
+    date: '2026-06-21',
+    isNew: true
+  },
+  {
+    id: 12,
+    tag: 'tech',
+    title: 'Apple Vision Pro 2 发布：空间计算时代全面到来，催生新职业',
+    summary: 'Apple Vision Pro 2于2026年6月WWDC发布，重量减轻40%，价格降至2499美元。空间计算应用生态爆发，催生"空间UI设计师""3D内容创作者""空间体验顾问"等新职业，时薪可达100-300美元。提前布局者将获得巨大的先发优势。',
+    source: 'Apple Newsroom',
+    url: 'https://www.apple.com/newsroom',
+    date: '2026-06-24',
+    isNew: true
+  }
+];
+
+let activeCat = 'all';
+let searchTerm = '';
+
+function renderCards() {
+  const grid = document.getElementById('feedGrid');
+  let filtered = DATA;
+
+  if (activeCat !== 'all') {
+    filtered = filtered.filter(d => d.tag === activeCat);
+  }
+  if (searchTerm) {
+    const s = searchTerm.toLowerCase();
+    filtered = filtered.filter(d =>
+      d.title.toLowerCase().includes(s) ||
+      d.summary.toLowerCase().includes(s) ||
+      d.tag.toLowerCase().includes(s)
+    );
+  }
+
+  document.getElementById('totalCount').textContent = filtered.length;
+  document.getElementById('todayCount').textContent = DATA.filter(d => d.isNew).length;
+  document.getElementById('resultHint').textContent = filtered.length ? `共 ${filtered.length} 条` : '';
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(d => {
+    const tagClass = {
+      money: 'tag-money',
+      immigration: 'tag-immigration',
+      tech: 'tag-tech',
+      arbitrage: 'tag-arbitrage',
+      life: 'tag-life'
+    }[d.tag];
+    const tagLabel = {
+      money: '赚钱机会',
+      immigration: '移民政策',
+      tech: '科技前沿',
+      arbitrage: '信息套利',
+      life: '海外生活'
+    }[d.tag];
+    const newBadge = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
+    const urlAttr = d.url ? `href="${d.url}" target="_blank" rel="noopener"` : 'style="color:#566170;cursor:default"';
+
+    return `
+      <div class="card" data-cat="${d.tag}">
+        <span class="card-tag ${tagClass}">${tagLabel}${newBadge}</span>
+        <h3>${d.title}</h3>
+        <p>${d.summary}</p>
+        <div class="meta">
+          <span>${d.source} · ${d.date}</span>
+          ${d.url ? `<a class="source-link" href="${d.url}" target="_blank" rel="noopener">查看来源 →</a>` : '<span style="color:#566170">综合整理</span>'}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Category filter
+document.getElementById('categoryFilters').addEventListener('click', e => {
+  if (!e.target.classList.contains('cat-btn')) return;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeCat = e.target.dataset.cat;
+  renderCards();
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.trim();
+  renderCards();
+});
+
+// Init
+renderCards();
+</script>
+</body>
+</html>
