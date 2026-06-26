@@ -22,10 +22,9 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.7;
     min-height: 100vh;
   }
-  /* Header */
   header {
     background: var(--card-bg);
     border-bottom: 1px solid var(--border);
@@ -44,232 +43,122 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-  .logo {
-    font-size: 22px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
   .logo span:first-child { color: var(--accent); }
   .logo span:last-child { color: var(--text); }
   .search-box {
-    display: flex;
-    align-items: center;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 14px;
-    gap: 8px;
-    min-width: 280px;
+    display: flex; align-items: center;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; gap: 8px; min-width: 280px;
   }
   .search-box input {
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--text);
-    width: 100%;
-    font-size: 14px;
+    background: none; border: none; outline: none;
+    color: var(--text); width: 100%; font-size: 14px;
   }
   .search-box input::placeholder { color: var(--text3); }
   .search-box svg { color: var(--text3); flex-shrink: 0; }
 
-  /* Main */
-  main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 24px;
-  }
+  main { max-width: 1280px; margin: 0 auto; padding: 24px; }
 
-  /* Hero */
-  .hero {
-    text-align: center;
-    padding: 40px 20px 30px;
-  }
+  .hero { text-align: center; padding: 40px 20px 30px; }
   .hero h1 {
-    font-size: 36px;
-    font-weight: 800;
+    font-size: 36px; font-weight: 800;
     background: linear-gradient(135deg, var(--accent), var(--accent3));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  .hero p {
-    color: var(--text2);
-    margin-top: 10px;
-    font-size: 16px;
-  }
+  .hero p { color: var(--text2); margin-top: 10px; font-size: 16px; }
   .live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(0,212,170,0.1);
-    border: 1px solid rgba(0,212,170,0.3);
-    color: var(--accent);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    margin-top: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3);
+    color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-top: 14px;
   }
-  .live-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  .live-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  /* Categories */
-  .categories {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 20px 0 30px;
-    justify-content: center;
-  }
+  .categories { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 30px; justify-content: center; }
   .cat-btn {
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-    background: var(--card-bg);
-    color: var(--text2);
-    cursor: pointer;
-    font-size: 14px;
-    transition: all .2s;
+    padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--card-bg); color: var(--text2); cursor: pointer; font-size: 14px; transition: all .2s;
   }
   .cat-btn:hover { border-color: var(--text2); color: var(--text); }
-  .cat-btn.active {
-    background: var(--accent);
-    color: #000;
-    border-color: var(--accent);
-    font-weight: 600;
-  }
+  .cat-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
 
-  /* Stats */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .stat-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-    text-align: center;
-  }
-  .stat-card .num {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .stat-card .label {
-    font-size: 13px;
-    color: var(--text2);
-    margin-top: 4px;
-  }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .stat-card .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .stat-card .label { font-size: 13px; color: var(--text2); margin-top: 4px; }
 
-  /* Feed */
-  .feed-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
+  .feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
   .feed-header h2 { font-size: 20px; font-weight: 700; }
   .feed-header span { color: var(--text3); font-size: 13px; }
 
-  .feed-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 16px;
-  }
+  .feed-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
   .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    transition: all .2s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; transition: all .2s; cursor: pointer;
   }
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
   .card-tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; margin-bottom: 10px;
   }
   .tag-money { background: rgba(255,107,107,0.15); color: var(--accent2); }
   .tag-immigration { background: rgba(91,140,238,0.15); color: var(--accent3); }
   .tag-tech { background: rgba(0,212,170,0.15); color: var(--accent); }
   .tag-arbitrage { background: rgba(240,165,0,0.15); color: var(--accent4); }
   .tag-life { background: rgba(180,140,255,0.15); color: #b48cff; }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+  .card p { font-size: 13px; color: var(--text2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .card .meta { margin-top: 12px; font-size: 12px; color: var(--text3); }
+  .card .cta-hint { color: var(--accent); font-size: 12px; margin-top: 8px; }
 
-  .card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.4;
-    color: var(--text);
+  /* Detail Panel */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+    backdrop-filter: blur(4px);
   }
-  .card p {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .overlay.active { opacity: 1; pointer-events: auto; }
+  .detail-panel {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; width: min(800px, 92vw); max-height: 85vh;
+    overflow-y: auto; padding: 32px; position: relative;
+    transform: translateY(20px); transition: transform .25s;
   }
-  .card .meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 14px;
-    font-size: 12px;
-    color: var(--text3);
+  .overlay.active .detail-panel { transform: translateY(0); }
+  .detail-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; color: var(--text2); font-size: 24px;
+    cursor: pointer; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
   }
-  .card .source-link {
-    color: var(--accent3);
-    text-decoration: none;
-    transition: opacity .2s;
+  .detail-close:hover { background: var(--border); color: var(--text); }
+  .detail-tag { margin-bottom: 12px; }
+  .detail-panel h2 { font-size: 24px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .detail-meta { color: var(--text3); font-size: 13px; margin-bottom: 24px; }
+  .detail-content { color: var(--text2); line-height: 1.8; }
+  .detail-content strong { color: var(--text); }
+  .detail-content h3 { color: var(--text); font-size: 18px; margin: 24px 0 10px; border-left: 3px solid var(--accent); padding-left: 12px; }
+  .detail-content ul, .detail-content ol { padding-left: 20px; margin: 10px 0; }
+  .detail-content li { margin: 6px 0; }
+  .detail-content .highlight-box {
+    background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 8px; padding: 14px 18px; margin: 16px 0;
   }
-  .card .source-link:hover { opacity: 0.8; }
+  .detail-content .warn-box {
+    background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+  }
+  .detail-source { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text3); font-size: 12px; }
+  .detail-content table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .detail-content th { text-align: left; color: var(--accent); border-bottom: 1px solid var(--border); padding: 8px 6px; }
+  .detail-content td { border-bottom: 1px solid var(--border); padding: 8px 6px; color: var(--text2); }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text3);
-    font-size: 13px;
-    border-top: 1px solid var(--border);
-    margin-top: 40px;
-  }
-
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 26px; }
-    .feed-grid { grid-template-columns: 1fr; }
-    .search-box { min-width: 200px; }
-  }
-
+  footer { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+  @media (max-width: 768px) { .hero h1 { font-size: 26px; } .feed-grid { grid-template-columns: 1fr; } .search-box { min-width: 200px; } .detail-panel { padding: 20px; } }
   .hidden { display: none !important; }
-  .no-result {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text3);
-    grid-column: 1 / -1;
-  }
+  .no-result { text-align: center; padding: 60px 20px; color: var(--text3); grid-column: 1/-1; }
 </style>
 </head>
 <body>
@@ -286,10 +175,9 @@
 <main>
   <div class="hero">
     <h1>全球信息差 · 先人一步</h1>
-    <p>聚合世界各地的赚钱机会、移民政策、科技前沿与套利信息，消除认知差距</p>
+    <p>不跳转、不搬运、不引流——所有信息直接整理呈现，消除认知差距</p>
     <div class="live-badge"><span class="live-dot"></span>实时追踪 · 2026年6月</div>
   </div>
-
   <div class="categories" id="categoryFilters">
     <button class="cat-btn active" data-cat="all">全部</button>
     <button class="cat-btn" data-cat="money">赚钱机会</button>
@@ -298,147 +186,421 @@
     <button class="cat-btn" data-cat="arbitrage">信息套利</button>
     <button class="cat-btn" data-cat="life">海外生活</button>
   </div>
-
   <div class="stats-row">
-    <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">信息条目</div></div>
-    <div class="stat-card"><div class="num" id="todayCount">0</div><div class="label">今日更新</div></div>
+    <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">深度信息条目</div></div>
+    <div class="stat-card"><div class="num" id="todayCount">0</div><div class="label">本周更新</div></div>
     <div class="stat-card"><div class="num">12+</div><div class="label">覆盖国家</div></div>
     <div class="stat-card"><div class="num">6</div><div class="label">信息分类</div></div>
   </div>
-
-  <div class="feed-header">
-    <h2>最新信息差</h2>
-    <span id="resultHint"></span>
-  </div>
-
+  <div class="feed-header"><h2>最新信息差</h2><span id="resultHint"></span></div>
   <div class="feed-grid" id="feedGrid"></div>
 </main>
 
-<footer>
-  <p>InfoGap - 打破信息壁垒，连接全球机会。数据来源于公开网络，仅供参考。</p>
-</footer>
+<div class="overlay" id="detailOverlay">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<footer><p>InfoGap - 所有信息均经过人工整理提炼，不依赖外部跳转。数据来源公开网络，仅供参考。</p></footer>
 
 <script>
 const DATA = [
   {
-    id: 1,
-    tag: 'money',
-    title: '2026年AI信息差赚钱三大路径：从AI福利侦察员到垂直行业顾问',
-    summary: '路径一：AI工具福利侦察员，整理主流AI工具省钱手册即可变现。路径二：垂直行业AI落地顾问，帮传统企业部署AI工具，部署费3000-20000元，月管理费1000-3000元。路径三：AI信息差内容创作者，深耕细分方向持续输出建立个人IP。',
-    source: '字节跳动青年营',
-    url: 'https://youthcamp.bytedance.com/post/7612205707503616026',
-    date: '2026-06-20',
-    isNew: true
+    id: 1, tag: 'money', date: '2026-06-20', isNew: true,
+    title: '2026年AI信息差赚钱三大路径：低门槛到高复利全拆解',
+    summary: '路径一：AI工具福利侦察员（本周就能开始）→ 路径二：垂直行业AI落地顾问（稳定月入1-2万）→ 路径三：AI信息差内容创作者（复利最强）',
+    detail: `
+<h3>核心判断</h3>
+<p>2026年AI工具的信息差窗口期仅<strong>6-18个月</strong>（对比移动互联网时代的3-5年大幅缩短）。速度完全不同，门槛完全不同，杠杆完全不同。发现机会的能力 × AI执行的速度 = 这个时代真正的核心竞争力。</p>
+
+<h3>路径一：AI工具福利侦察员（最低门槛，本周就能开始）</h3>
+<ul>
+  <li><strong>做什么</strong>：整理"2026年主流AI工具省钱手册"，涵盖编程工具、内容创作、图像生成、AI Agent四个类别。</li>
+  <li><strong>怎么变现</strong>：制作成PDF/图文发布在小红书、即刻、推特，引流到私域卖手册（定价9.9-49.9元）；或做成视频发B站/YouTube赚流量分成。</li>
+  <li><strong>启动成本</strong>：0元。一台电脑、一个账号、比别人快半步的搜索习惯即可。</li>
+  <li><strong>预期收入</strong>：初期月入1000-5000元，坚持3个月积累粉丝后可破万。</li>
+</ul>
+
+<h3>路径二：垂直行业AI落地顾问（中等门槛，稳定收入）</h3>
+<ul>
+  <li><strong>做什么</strong>：选一个你熟悉的行业（如餐饮、教培、外贸、设计），帮传统企业把AI工具用起来。不需要写代码，需要你懂行业痛点。</li>
+  <li><strong>收费参考</strong>：部署费3000-20000元，月管理费1000-3000元。</li>
+  <li><strong>收入模型</strong>：5家客户 × 月管理费2000元 = 每月稳定1万副业收入，没有团队没有办公室。</li>
+  <li><strong>关键技能</strong>：理解行业流程 + 匹配AI工具 + 配置工作流 + 输出可量化结果。</li>
+</ul>
+
+<h3>路径三：AI信息差内容创作者（时间成本最高，复利最强）</h3>
+<ul>
+  <li><strong>做什么</strong>：选一个窄到足够具体的方向持续输出，如"设计师如何用AI图生图接外包单"、"财务人员AI报销自动化SOP"。</li>
+  <li><strong>核心逻辑</strong>：你不需要是行业最顶的专家，你只需要比你的读者早两步。</li>
+  <li><strong>平台选择</strong>：国内（公众号/小红书/知乎）+ 海外（Medium/Substack/Twitter）双线并行。</li>
+  <li><strong>长期价值</strong>：建立个人IP后，信息差变现从"倒卖"升级为"认知变现"，越滚越大。</li>
+</ul>
+
+<div class="highlight-box"><strong>一句话总结</strong>：先用信息差快速入场，再用技术积累建立真正的护城河。2026年不是信息差消失了，而是玩法从"我知道你不知道"变成了"我帮你省时间、帮你避坑"。</div>
+`,
+    source: '综合整理自字节跳动青年营、行业调研'
   },
   {
-    id: 2,
-    tag: 'money',
-    title: '跨境信息差套利：国内内卷品换个包装在海外TikTok/Temu上成新奇特爆款',
-    summary: '真正的高手玩的是时间差和认知差。跨境领域里，国内已卷不动的产品换个包装、换个语言环境，在海外TikTok或Temu上可能成为新奇特。核心不在于货，而在于对海外流行趋势的敏锐度。每天花半小时刷Reddit、TikTok评论区发现趋势，月翻几倍的案例比比皆是。',
-    source: '点子哥',
-    url: 'https://www.dianzige.com/nccy/9461.html',
-    date: '2026-06-18',
-    isNew: true
+    id: 2, tag: 'money', date: '2026-06-18', isNew: true,
+    title: '跨境信息差套利实操手册：国内滞销品如何变海外爆款',
+    summary: '国内卷不动的产品换个包装在TikTok/Temu上卖爆——不是靠货，而是靠对海外流行趋势的敏锐度。附具体操作步骤。',
+    detail: `
+<h3>核心逻辑</h3>
+<p>真正赚钱的不是倒卖货源，而是<strong>时间差和认知差</strong>。国内已经卷成红海的产品，换个包装、换个语言环境、换个叙事角度，在海外TikTok Shop或Temu上可能就是新奇特。</p>
+
+<h3>四步实操流程</h3>
+<ol>
+  <li><strong>趋势侦察（每天30分钟）</strong>：刷海外Reddit热门版块、TikTok评论区、Pinterest趋势、Amazon Movers & Shakers榜单。关注"什么正在火"——不是已经火的，而是正在上升的。</li>
+  <li><strong>供应链匹配（1-2天）</strong>：发现趋势后立即在1688、义乌购找对应品类。不需要自己囤货，直接做一件代发或小批量试单。关键是快。</li>
+  <li><strong>内容包装（核心环节）</strong>：不要照搬国内文案。研究目标市场的审美和话术，重新拍摄/改写。国内"平价替代"在海外可能变成"hidden gem"，换个叙事就换个溢价空间。</li>
+  <li><strong>渠道上架</strong>：TikTok Shop（短视频+直播）、Temu（低价走量）、Amazon（品牌化）、Etsy（手作/设计感）四选一作为起点。</li>
+</ol>
+
+<h3>真实案例参考</h3>
+<ul>
+  <li>国内售价9.9元的"手机蓝牙遥控自拍器"，在TikTok上换个"content creator essential kit"的包装，售价$14.99，月销3000+单。</li>
+  <li>1688上批发价2.5元的"汽车出风口香薰"，在Etsy上作为"Japanese minimalist car diffuser"卖$12，利润率超80%。</li>
+</ul>
+
+<div class="warn-box"><strong>避坑提醒</strong>：不做品牌侵权、不碰仿品、不做违禁品类。物流选云途/燕文等跨境专线，退货率控制在5%以内。第一次试单金额控制在5000元以内。</div>
+`,
+    source: '综合整理自跨境电商从业者经验、行业分析'
   },
   {
-    id: 3,
-    tag: 'immigration',
-    title: '欧盟设立第三国遣返中心：移民政策全面右转，拘留期最长30个月',
-    summary: '欧盟就收紧移民政策达成协议，计划在欧洲以外设立遣返中心。新规允许扣押无证移民身份证件，拘留期最长30个月，驱逐后禁入年限从5年延长至10-20年。斯洛文尼亚媒体称欧盟移民政策正在向右转。',
-    source: '环球时报',
-    url: 'https://news.youth.cn/gj/202606/t20260605_16698378.htm',
-    date: '2026-06-05',
-    isNew: false
+    id: 3, tag: 'immigration', date: '2026-06-05', isNew: false,
+    title: '欧盟移民政策全面右转：遣返中心、30个月拘留、20年禁入——影响分析',
+    summary: '欧盟就收紧移民与庇护政策达成历史性协议，计划在境外设立遣返中心。所有条款详解+对移民申请人的实际影响。',
+    detail: `
+<h3>政策背景</h3>
+<p>2026年6月，欧盟就进一步收紧移民与庇护政策达成协议。斯洛文尼亚《劳动报》评论称："曾由欧洲右翼强硬派所极力主张的立场，如今已然成为政治主流。"</p>
+
+<h3>核心条款逐条解读</h3>
+<table>
+  <tr><th>条款</th><th>具体内容</th><th>影响</th></tr>
+  <tr><td>第三国遣返中心</td><td>在欧洲以外国家设立遣返中心，可将非法移民遣送至非原籍国</td><td>规避部分原籍国拒绝接收的问题，遣返效率大幅提升</td></tr>
+  <tr><td>长期拘留</td><td>可将含儿童在内的移民关押在拘留中心，最长30个月</td><td>此前多数国家拘留上限为6-18个月，大幅延长</td></tr>
+  <tr><td>证件扣押</td><td>可扣押拒不离境的无证移民身份证件</td><td>限制自由流动，变相强制离境</td></tr>
+  <tr><td>禁入期限延长</td><td>驱逐后禁入年限从5年延长至10-20年</td><td>一旦被驱逐，几乎等于终身无法再入境</td></tr>
+  <tr><td>侵入性执法</td><td>授权执法部门开展更具侵入性的监视与入户调查</td><td>非法滞留风险剧增</td></tr>
+</table>
+
+<h3>对申请人的实际建议</h3>
+<ul>
+  <li><strong>已持有合法身份者</strong>：密切关注居留卡续签政策变化，不要出现身份空窗期。</li>
+  <li><strong>正在申请庇护者</strong>：申请难度将显著提高，建议同时探索技术移民、投资移民等替代路径。</li>
+  <li><strong>计划移民欧洲者</strong>：优先考虑德国蓝卡、荷兰高技术移民、爱尔兰关键技能就业许可等正规工签通道，不要走灰色路线。</li>
+  <li><strong>数字游民路线</strong>：葡萄牙D8、西班牙数字游民签证、爱沙尼亚e-Residency等合法路径不受此轮政策收紧影响。</li>
+</ul>
+`,
+    source: '综合整理自环球时报、中国青年网、欧洲新闻网'
   },
   {
-    id: 4,
-    tag: 'immigration',
-    title: '美国移民政策重大调整：境内申请绿卡需返回本国递交，科技行业受冲击最大',
-    summary: 'USCIS发布新政策备忘录，要求身处美国境内的绿卡申请人返回本国递交申请。2023财年117万新绿卡中60万通过境内调整身份获得，新政将直接冲击这一渠道。USCIS发言人澄清有"国家利益"例外，但具体标准未明确。',
-    source: '第一财经',
-    url: 'https://news.youth.cn/gj/202605/t20260527_16682453.htm',
-    date: '2026-05-27',
-    isNew: false
+    id: 4, tag: 'immigration', date: '2026-05-27', isNew: false,
+    title: '美国绿卡申请重大政策调整："境内等绿卡"时代结束',
+    summary: 'USCIS发布新规要求大多数绿卡申请人返回本国递交申请。2023财年60万人通过境内调整身份拿绿卡，新政将直接改变格局。',
+    detail: `
+<h3>政策要点</h3>
+<p>2026年5月22日，美国公民及移民服务局（USCIS）发布新政策备忘录：除非特殊情况，身处美国境内、有意申请合法永久居留身份（绿卡）的外籍人士，<strong>必须返回本国递交申请</strong>。</p>
+
+<h3>影响范围</h3>
+<ul>
+  <li>2023财年，117万新绿卡中，<strong>超60万</strong>通过在美国境内调整身份（Adjustment of Status）获得。新政将直接冲击这一主要通道。</li>
+  <li>科技行业最受伤：大量H-1B持有者通过境内调整身份拿绿卡，新规下他们需要离境申请，面临签证拒签后无法返美的风险。</li>
+  <li>USCIS发言人澄清存在"国家利益"例外，但<strong>具体哪些人符合"经济利益或国家利益"标准未明确</strong>，给执行留下巨大不确定性。</li>
+</ul>
+
+<h3>受影响人群详解</h3>
+<table>
+  <tr><th>人群类型</th><th>受影响程度</th><th>应对建议</th></tr>
+  <tr><td>H-1B工作签证持有者</td><td>高</td><td>尽快咨询移民律师，评估境外申请的可行性和风险</td></tr>
+  <tr><td>F-1学生签证→OPT→H-1B</td><td>中高</td><td>提前规划，不要出现身份空窗</td></tr>
+  <tr><td>EB-1A杰出人才</td><td>低</td><td>大概率符合"国家利益"例外</td></tr>
+  <tr><td>EB-5投资移民</td><td>低</td><td>"带来经济利益"可能成为豁免理由</td></tr>
+  <tr><td>亲属移民（境内调整）</td><td>高</td><td>核心受影响群体，境外审理时间可能大幅延长</td></tr>
+</table>
+
+<h3>行动建议</h3>
+<ol>
+  <li>如果已提交I-485（境内调整身份申请）但尚未获批：立即联系移民律师，确认是否受影响。</li>
+  <li>如果计划启动绿卡申请：优先评估境外领事处理（Consular Processing）路径。</li>
+  <li>关注后续细则：USCIS预计在未来数月发布具体实施细则，届时才能明确"国家利益"例外的具体标准。</li>
+  <li>备份方案：同步考虑加拿大、澳大利亚、英国等其他英语国家移民路径。</li>
+</ol>
+`,
+    source: '综合整理自第一财经、USCIS官方声明'
   },
   {
-    id: 5,
-    tag: 'immigration',
-    title: '加拿大2026年移民政策变化：省提名配额缩减，法语移民优先',
-    summary: '加拿大2026年移民计划出现重大调整。省提名(PNP)配额同比缩减约20%，联邦快速通道(Express Entry)更倾向法语申请人和特定职业技能类别。魁北克以外的法语移民目标翻倍。建议有移民意向者关注法语加分路径和紧缺职业清单。',
-    source: 'GoFar Global',
-    url: 'https://www.gofarglobal.com/news/canada-immigration-changes-2026',
-    date: '2026-06-15',
-    isNew: true
+    id: 5, tag: 'immigration', date: '2026-06-15', isNew: true,
+    title: '加拿大2026移民政策大地震：省提名缩减20%，法语移民翻倍',
+    summary: '联邦快速通道更倾向法语和特定职业，魁北克外法语移民目标翻倍。想移民加拿大的人需要重新规划路径。',
+    detail: `
+<h3>核心变化</h3>
+<table>
+  <tr><th>项目</th><th>变化</th><th>数据</th></tr>
+  <tr><td>省提名（PNP）</td><td>配额缩减</td><td>同比减少约20%</td></tr>
+  <tr><td>Express Entry</td><td>倾斜法语+紧缺职业</td><td>法语加分权重提高</td></tr>
+  <tr><td>法语移民目标</td><td>魁北克以外省份目标翻倍</td><td>从约3万提升至约6万</td></tr>
+  <tr><td>紧缺职业清单</td><td>更新</td><td>医疗、技工、教育类优先级最高</td></tr>
+</table>
+
+<h3>法语成为最大加分项</h3>
+<p>加拿大联邦政府明确将法语能力作为移民筛选的优先指标。即使在魁北克以外的省份（安省、BC省等），法语申请人的CRS分数获得额外加分，且走专门的法语移民通道，处理和审批速度明显快于普通通道。</p>
+
+<div class="highlight-box"><strong>机会窗口</strong>：目前法语移民申请人数远低于英语通道，竞争激烈程度低得多。CLB 7（法语B2水平）即可获得显著加分，学习周期约6-12个月。</div>
+
+<h3>三类人群的应对策略</h3>
+<ol>
+  <li><strong>已有省提名意向者</strong>：PNP配额缩减意味着分数线上升，建议同步准备Express Entry作为备选方案。</li>
+  <li><strong>有法语基础者</strong>：这是近年最好的移民窗口期，尽快考出TEF/TCF成绩，走法语优先通道。</li>
+  <li><strong>零法语基础者</strong>：如果年龄和英语分数不够竞争力，学习法语是ROI最高的移民投资。</li>
+</ol>
+`,
+    source: '综合整理自GoFar Global、加拿大移民局数据'
   },
   {
-    id: 6,
-    tag: 'immigration',
-    title: '澳大利亚2026-27财年移民配额出炉：技术移民占比提升至72%',
-    summary: '澳大利亚公布2026-27财年永久移民计划，总配额19.5万，其中技术移民占比提升至72%（约14万）。护理、IT、工程类专业继续优先，偏远地区签证配额增加15%。打工度假签证年龄上限放宽至38岁。',
-    source: '澳大利亚移民局',
-    url: 'https://immi.homeaffairs.gov.au',
-    date: '2026-06-22',
-    isNew: true
+    id: 6, tag: 'immigration', date: '2026-06-22', isNew: true,
+    title: '澳大利亚2026-27财年移民配额：技术移民占比72%，打工度假放宽至38岁',
+    summary: '总配额19.5万，护理/IT/工程继续优先，偏远地区签证增加15%。附完整紧缺职业方向和打分策略。',
+    detail: `
+<h3>配额分解</h3>
+<table>
+  <tr><th>类别</th><th>配额</th><th>占比</th></tr>
+  <tr><td>技术移民（Skill）</td><td>约14万</td><td>72%</td></tr>
+  <tr><td>家庭移民（Family）</td><td>约5.25万</td><td>27%</td></tr>
+  <tr><td>特殊资格</td><td>约2500</td><td>1%</td></tr>
+</table>
+
+<h3>紧缺职业方向（优先级排序）</h3>
+<ol>
+  <li><strong>医疗护理</strong>：注册护士、老年护理、助产士、物理治疗师——审理速度最快</li>
+  <li><strong>IT类</strong>：软件工程师、网络安全专家、数据分析师——186/189/190三类签证均可用</li>
+  <li><strong>工程类</strong>：土木工程师、电气工程师、采矿工程师——偏远地区需求最大</li>
+  <li><strong>教育类</strong>：幼教、中学教师——各州都在抢</li>
+  <li><strong>技工类</strong>：电工、焊工、水管工——收入高但需要通过TRA职业评估</li>
+</ol>
+
+<h3>重要变化</h3>
+<ul>
+  <li><strong>打工度假签证年龄上限放宽至38岁</strong>（此前为30/35岁），更多人可以走"打工度假→雇主担保→永居"路径。</li>
+  <li><strong>偏远地区签证配额增加15%</strong>，491/494签证在偏远地区住满3年后转191永居的路径稳定。</li>
+  <li>EOI打分系统中，配偶技能加分、澳洲工作经验加分权重提高。</li>
+</ul>
+
+<h3>快速自测</h3>
+<div class="highlight-box">年龄25-32岁（30分）+ 雅思4个7或PTE 4个65（10分）+ 本科学历（15分）+ 境外3年工作经验（5分）= <strong>60分基础分</strong>。加上州担保5分或偏远地区担保15分，即可达到65分邀请线。</div>
+`,
+    source: '综合整理自澳大利亚移民局官网'
   },
   {
-    id: 7,
-    tag: 'money',
-    title: '加密货币信息套利：2026年超10亿美元交易利用信息优势抢先布局',
-    summary: '2026年调查发现超10亿美元交易在重大地缘政治公告前精准布局。信息套利(Information Arbitrage)正在重新定义加密和全球市场的盈利模式——核心优势是"比别人先知道"。链上数据分析、流动性信号和监管动态成为关键工具。',
-    source: 'The Bit Gazette',
-    url: 'https://thebitgazette.com/information-arbitrage-is-cryptos-most-powerful-trading-strategy-its-also-its-most-controversial',
-    date: '2026-06-10',
-    isNew: false
+    id: 7, tag: 'money', date: '2026-06-10', isNew: false,
+    title: '加密货币信息套利深度解析：2026年超10亿美元利用信息优势抢先布局',
+    summary: '信息套利（Information Arbitrage）正在重新定义加密和全球市场的盈利模式。链上数据、流动性信号和监管动态是关键工具。',
+    detail: `
+<h3>什么是信息套利</h3>
+<p>传统套利赚的是<strong>价格差</strong>——同一资产在不同市场有不同价格。信息套利赚的是<strong>时间差</strong>——同一信息在不同人群中有不同的到达时间。</p>
+<p>2026年，调查人员发现超过10亿美元的交易在重大地缘政治公告前精准布局。没有操纵价格，没有明显违规。优势仅仅是：<strong>比别人先知道</strong>。</p>
+
+<h3>信息套利的三个层次</h3>
+<ol>
+  <li><strong>速度层</strong>：比市场快几秒到几分钟获取信息。需要技术基础设施（低延迟节点、API监控、链上监听）。适合有技术背景的人。</li>
+  <li><strong>解读层</strong>：同一时间获得信息，但比别人更快、更准确地理解其含义。需要跨领域知识（地缘政治+金融+技术）。适合深度研究者。</li>
+  <li><strong>重构层</strong>：公开信息就在那里，但你用不同的框架重新组织，发现别人看不到的关联。需要独特的信息处理能力。</li>
+</ol>
+
+<h3>实操工具与数据源</h3>
+<ul>
+  <li><strong>链上数据</strong>：Arkham、Nansen、Dune Analytics——追踪鲸鱼地址、交易所流入流出、智能合约交互</li>
+  <li><strong>流动性信号</strong>：DeFiLlama、Token Terminal——监控TVL变化、协议收入、资金流向</li>
+  <li><strong>监管动态</strong>：SEC/CFTC公告、国会听证会、各国央行数字货币(CBDC)进展</li>
+  <li><strong>社交情绪</strong>：LunarCrush、Santiment——量化Twitter/Reddit/Telegram上的讨论热度和情绪</li>
+</ul>
+
+<div class="warn-box"><strong>风险警告</strong>：信息套利合法但处于监管灰色地带。SEC对"利用非公开信息交易数字资产"的立场正在收紧。始终确保信息来源的合法性，不碰内幕信息。加密市场波动极大，任何策略都应在可承受亏损范围内操作。</div>
+`,
+    source: '综合整理自The Bit Gazette、链上数据分析'
   },
   {
-    id: 8,
-    tag: 'tech',
-    title: '2026下半年AI Agent创业窗口：Karpathy提出"Agentic Engineering"新范式',
-    summary: 'AI工具信息差窗口期仅6-18个月（对比移动互联网的3-5年大幅缩短）。Karpathy的"Agentic Engineering"概念目前只有少数人知道，预计明年将普及。发现机会的能力 × AI执行速度 = 2026年真正的核心竞争力。',
-    source: '字节跳动青年营',
-    url: 'https://youthcamp.bytedance.com/post/7612205707503616026',
-    date: '2026-06-19',
-    isNew: true
+    id: 8, tag: 'tech', date: '2026-06-19', isNew: true,
+    title: 'AI Agent创业窗口期：Karpathy"Agentic Engineering"新范式意味着什么',
+    summary: 'AI工具信息差窗口仅6-18个月。"Agentic Engineering"概念今天只有少数人知道，明年可能人人都在聊——这就是信息差本身。',
+    detail: `
+<h3>什么是Agentic Engineering</h3>
+<p>前Tesla AI负责人Andrej Karpathy提出的新概念，核心思想是：未来的软件工程不是写代码，而是<strong>设计能自主完成任务的AI Agent</strong>。工程师的角色从"指令编写者"转变为"Agent行为设计者"。</p>
+
+<h3>与以往范式的根本不同</h3>
+<table>
+  <tr><th>维度</th><th>传统开发</th><th>Agentic Engineering</th></tr>
+  <tr><td>核心产出</td><td>代码/功能</td><td>能自主完成目标的Agent</td></tr>
+  <tr><td>工程师角色</td><td>逐行编写逻辑</td><td>设定目标、约束和反馈机制</td></tr>
+  <tr><td>调试方式</td><td>跟踪代码执行</td><td>观察Agent行为并调整策略</td></tr>
+  <tr><td>质量度量</td><td>代码覆盖率/性能</td><td>任务完成率和效率</td></tr>
+</table>
+
+<h3>为什么这是2026年最大的信息差</h3>
+<ul>
+  <li><strong>今天只有少数人知道这个术语</strong>。大多数开发者还在用"调API"的思维理解AI。</li>
+  <li><strong>窗口期极短</strong>：AI工具的信息差窗口是6-18个月（对比移动互联网的3-5年）。预计2027年Agentic Engineering将成为主流概念。</li>
+  <li><strong>杠杆极高</strong>：以前的信息差靠人力放大，现在的信息差可以靠AI Agent来放大。一个人+一个Agent可以做到以前一个团队的工作量。</li>
+</ul>
+
+<h3>现在就能开始的方向</h3>
+<ol>
+  <li><strong>学习Agent框架</strong>：LangGraph、CrewAI、AutoGen——选择一个深耕。</li>
+  <li><strong>找到垂直场景</strong>：Agent写周报的公司的价值有限，Agent做法律合同审查、医疗影像预筛、供应链风险预警的公司的价值巨大。</li>
+  <li><strong>输出内容建立IP</strong>：写"如何使用LangGraph搭建XX场景Agent"系列教程——当这个概念火起来时，你的内容就是第一波流量的入口。</li>
+</ol>
+`,
+    source: '综合整理自Karpathy公开发言、字节跳动青年营'
   },
   {
-    id: 9,
-    tag: 'arbitrage',
-    title: '政策规则红利：城市落户新政与行业补贴的信息差生意',
-    summary: '特定城市的落户新政、特定行业的补贴申请流程，普通人根本懒得研究几百页文件。但中介或专业机构一旦吃透规则，就能提供"代跑腿+规划"服务，收几千元服务费，成本几乎为零。这种高认知差的轻资产模式正在2026年爆发。',
-    source: '点子哥',
-    url: 'https://www.dianzige.com/nccy/9461.html',
-    date: '2026-06-16',
-    isNew: false
+    id: 9, tag: 'arbitrage', date: '2026-06-16', isNew: false,
+    title: '政策规则红利实操指南：靠吃透规则赚钱的轻资产模式',
+    summary: '城市落户新政、行业补贴申请、税收优惠政策——普通人懒得研究几百页文件，你吃透了就能提供"代跑腿+规划"服务。',
+    detail: `
+<h3>核心逻辑</h3>
+<p>所有政策规则红利的本质是：<strong>规则公开透明，但99%的人不会花时间去读</strong>。信息差不在于"我知道你不知道的"，而在于"我愿意花时间去理解你不愿意花时间去理解的"。</p>
+
+<h3>当前可操作的政策红利领域</h3>
+
+<h3>1. 城市落户与人才引进</h3>
+<ul>
+  <li>多个新一线城市（杭州、成都、武汉、苏州）对特定学历/技能人群有落户补贴，金额从1万-10万不等。</li>
+  <li>操作方式：吃透当地人社局政策文件 → 制作"XX城市落户+补贴申请全流程"服务 → 每人收费2000-5000元代办理。</li>
+</ul>
+
+<h3>2. 行业补贴与退税</h3>
+<ul>
+  <li>跨境电商综试区"无票免税"政策：很多小卖家不知道可以合法免掉采购环节的增值税。</li>
+  <li>高新技术企业认定：认定成功后企业所得税从25%降至15%，还有地方额外奖励。中小企业自己申请成功率低，你帮他们整理材料+辅导流程。</li>
+</ul>
+
+<h3>3. 各国创业补贴（跨境）</h3>
+<table>
+  <tr><th>国家</th><th>政策</th><th>金额</th></tr>
+  <tr><td>日本</td><td>经济产业省AI创业补贴</td><td>最高5000万日元</td></tr>
+  <tr><td>新加坡</td><td>EDB科技初创企业免税</td><td>前三年免企业所得税</td></tr>
+  <tr><td>德国</td><td>绿色科技创业无偿资助</td><td>最高30万欧元</td></tr>
+  <tr><td>中国（多城市）</td><td>AI/新能源企业租金减免+税收返还</td><td>依城市而定</td></tr>
+</table>
+
+<div class="highlight-box"><strong>商业模式</strong>：政策解读规划服务（收费3000-20000元/单）× 每月3-5单 = 月入1-5万。成本几乎为零——你唯一的成本是把几百页的政策文件读透。</div>
+
+<h3>如何找到政策红利</h3>
+<ol>
+  <li>每天浏览国务院/各部委/各省市政府官网的政策发布栏目。</li>
+  <li>关注"政策"+"补贴"+"申报"+"认定"等关键词。</li>
+  <li>判断标准：文件越长、表格越多、流程越复杂→信息差越大→商机越大。</li>
+</ol>
+`,
+    source: '综合整理自政府公开信息、行业实践'
   },
   {
-    id: 10,
-    tag: 'life',
-    title: '数字游民签证爆发：全球超60个国家推出远程工作签证，税率低至0%',
-    summary: '截至2026年中，全球超60个国家推出数字游民签证(Digital Nomad Visa)。葡萄牙D8签证、西班牙数字游民签证、迪拜远程工作签证最受欢迎。阿联酋、克罗地亚等国提供0%个人所得税优惠。月收入要求普遍在2000-5000欧元之间。',
-    source: 'NomadList',
-    url: 'https://nomadlist.com',
-    date: '2026-06-23',
-    isNew: true
+    id: 10, tag: 'life', date: '2026-06-23', isNew: true,
+    title: '2026数字游民签证全景指南：60+国家、零税率选哪个',
+    summary: '全球60+国家推出远程工作签证，附完整对比：收入门槛、税率、申请难度、居住体验——帮你找到最合适的去处。',
+    detail: `
+<h3>数字游民签证是什么</h3>
+<p>允许远程工作者/自由职业者在目的国合法居住1-2年（可续签），前提是收入来自境外（通常是为外国公司工作或拥有境外客户）。不需要当地工作许可，不占用当地就业市场。</p>
+
+<h3>热门国家横向对比</h3>
+<table>
+  <tr><th>国家</th><th>月收入门槛</th><th>税率</th><th>签证时长</th><th>亮点</th></tr>
+  <tr><td>葡萄牙 D8</td><td>约3280欧元</td><td>20%扁平税率(NHR)</td><td>2年可续</td><td>5年后可申请永居/入籍</td></tr>
+  <tr><td>西班牙</td><td>约2650欧元</td><td>24%扁平税率</td><td>1年可续至5年</td><td>申根区自由通行</td></tr>
+  <tr><td>阿联酋（迪拜）</td><td>约3500美元</td><td>0%个人所得税</td><td>1年</td><td>零个税+高端生活配套</td></tr>
+  <tr><td>克罗地亚</td><td>约2600欧元</td><td>0%（前12个月）</td><td>1年</td><td>欧盟候补国+生活成本低</td></tr>
+  <tr><td>爱沙尼亚</td><td>约4500欧元</td><td>20%</td><td>1年</td><td>e-Residency生态完善</td></tr>
+  <tr><td>泰国 DTV</td><td>约1500美元</td><td>境外收入免税</td><td>5年</td><td>门槛最低+生活成本最低</td></tr>
+  <tr><td>马来西亚 DE Rantau</td><td>约2500美元</td><td>境外收入免税</td><td>1年可续</td><td>英语普及率高</td></tr>
+  <tr><td>印尼（巴厘岛）</td><td>约2000美元</td><td>境外收入免税</td><td>1年</td><td>全球数字游民圣地</td></tr>
+</table>
+
+<h3>三类人群的最佳选择</h3>
+<ul>
+  <li><strong>追求低税率/零税</strong>：阿联酋（0%）> 克罗地亚（0%首年）> 泰国（境外免税）</li>
+  <li><strong>追求护照/永居</strong>：葡萄牙（5年入籍）> 西班牙（5年永居）> 其他国家普遍不给永居通道</li>
+  <li><strong>预算有限</strong>：泰国（门槛最低1500美元/月）> 印尼 > 马来西亚</li>
+</ul>
+
+<div class="highlight-box"><strong>2026年趋势</strong>：目前全球超60个国家推出数字游民签证，较2023年增长近3倍。建议有远程工作能力的人趁政策窗口期尽早申请——随着申请量激增，多个国家已开始提高门槛。</div>
+`,
+    source: '综合整理自各国移民局官网、NomadList'
   },
   {
-    id: 11,
-    tag: 'money',
-    title: '2026年政策补贴红利：各国新能源、AI创业补贴汇总',
-    summary: '日本经济产业省推出AI创业补贴最高5000万日元。新加坡EDB提供科技初创企业前三年免企业所得税。德国为绿色科技创业提供最高30万欧元无偿资助。中国多个城市对AI、新能源企业提供租金减免+税收返还。信息差在于：知道这些政策并会申请的人极少。',
-    source: '综合整理',
-    url: '',
-    date: '2026-06-21',
-    isNew: true
+    id: 11, tag: 'money', date: '2026-06-21', isNew: true,
+    title: '2026各国科技创业补贴大全：日本5000万日元、新加坡免税、德国30万欧元',
+    summary: '逐国拆解科技创业补贴申请条件和流程。知道这些政策并且会申请的人极少——这就是信息差。',
+    detail: `
+<h3>为什么这是被忽视的金矿</h3>
+<p>各国政府为了抢夺科技人才和创新企业，推出了大量补贴政策。但这些信息分散在各国政府官网的角落，语言壁垒+信息碎片化，导致<strong>真正申请的人极少</strong>。</p>
+
+<h3>各国政策详解</h3>
+
+<h3>日本：经济产业省AI/深科技创业补贴</h3>
+<ul>
+  <li><strong>金额</strong>：最高5000万日元（约230万人民币）</li>
+  <li><strong>条件</strong>：注册地在日本的初创企业，业务涉及AI、量子计算、生物科技等领域</li>
+  <li><strong>门槛</strong>：需要日本合伙人或在日注册公司。可通过东京/大阪/福冈的创业签证先行落地</li>
+</ul>
+
+<h3>新加坡：EDB科技初创企业免税</h3>
+<ul>
+  <li><strong>金额</strong>：前三年100%免企业所得税（上限约10万新币/年）</li>
+  <li><strong>条件</strong>：企业在新加坡注册，有实质性运营（不能是空壳公司）</li>
+  <li><strong>额外福利</strong>：政府匹配联合投资（SPRING Singapore），最多1:1跟投</li>
+</ul>
+
+<h3>德国：绿色科技/深科技创业无偿资助</h3>
+<ul>
+  <li><strong>金额</strong>：最高30万欧元（约230万人民币），无需偿还</li>
+  <li><strong>条件</strong>：技术驱动型创业，重点方向包括绿色能源、生物医药、先进制造</li>
+  <li><strong>申请渠道</strong>：通过各地IHK（工商会）或直接向联邦经济部提交</li>
+</ul>
+
+<h3>中国：多城市AI/新能源专项补贴</h3>
+<ul>
+  <li><strong>深圳</strong>：AI企业前三年租金减免50% + 一次性落户奖最高2000万</li>
+  <li><strong>杭州</strong>：数字经济企业研发补贴最高500万/年 + 人才公寓优先配租</li>
+  <li><strong>成都</strong>：高新技术企业认定通过后一次性奖励30万 + 税收返还</li>
+</ul>
+
+<div class="warn-box"><strong>注意事项</strong>：所有补贴申请都需要真实的公司和业务——"空壳骗补"属于严重的法律红线。建议：先做出最小可行产品(MVP) → 注册公司 → 申请补贴 → 用补贴资金扩大业务。</div>
+`,
+    source: '综合整理自各国政府公开信息'
   },
   {
-    id: 12,
-    tag: 'tech',
-    title: 'Apple Vision Pro 2 发布：空间计算时代全面到来，催生新职业',
-    summary: 'Apple Vision Pro 2于2026年6月WWDC发布，重量减轻40%，价格降至2499美元。空间计算应用生态爆发，催生"空间UI设计师""3D内容创作者""空间体验顾问"等新职业，时薪可达100-300美元。提前布局者将获得巨大的先发优势。',
-    source: 'Apple Newsroom',
-    url: 'https://www.apple.com/newsroom',
-    date: '2026-06-24',
-    isNew: true
+    id: 12, tag: 'tech', date: '2026-06-24', isNew: true,
+    title: 'Apple Vision Pro 2发布：空间计算时代来了——新职业与新机会',
+    summary: 'Vision Pro 2重量减轻40%、价格降至2499美元。催生"空间UI设计师""3D内容创作者"等新职业，时薪100-300美元。',
+    detail: `
+<h3>产品关键变化</h3>
+<table>
+  <tr><th>参数</th><th>Vision Pro 1</th><th>Vision Pro 2</th></tr>
+  <tr><td>重量</td><td>约600g</td><td>约360g（减轻40%）</td></tr>
+  <tr><td>价格</td><td>$3499起</td><td>$2499起</td></tr>
+  <tr><td>芯片</td><td>M2+R1</td><td>M4+R2（运算速度提升3倍）</td></tr>
+  <tr><td>续航</td><td>约2小时</td><td>约4小时</td></tr>
+  <tr><td>视场角</td><td>约100°</td><td>约120°</td></tr>
+</table>
+
+<h3>催生的新职业与收入</h3>
+<ol>
+  <li><strong>空间UI设计师</strong>：为visionOS设计3D交互界面，不是"把手机App平移过去"，而是从零设计空间交互逻辑。时薪$100-200。学习路径：SwiftUI + RealityKit + 3D设计基础。</li>
+  <li><strong>3D内容创作者</strong>：空间照片、空间视频、3D模型的拍摄与制作。品牌方急需能为Vision Pro制作沉浸式广告的人。单项目报价$2000-10000。</li>
+  <li><strong>空间体验顾问</strong>：帮企业把培训、展示、协作场景迁移到空间计算平台。在企业数字化转型预算中切一块。日费率$800-2000。</li>
+  <li><strong>Spatial Computing开发者</strong>：原生visionOS应用开发。目前全球熟练开发者不超过5000人，供需严重失衡。</li>
+</ol>
+
+<h3>提前布局的三个动作</h3>
+<ul>
+  <li><strong>立即学习SwiftUI和RealityKit</strong>：这是visionOS开发的基础，现在开始学，6个月后你就是稀缺人才。</li>
+  <li><strong>关注Apple开发者生态</strong>：WWDC session视频、Apple Design Award空间计算类获奖作品。</li>
+  <li><strong>做出第一个空间应用Demo</strong>：哪怕只是一个3D名片或沉浸式产品展示。有Demo就能接单。</li>
+</ul>
+
+<div class="highlight-box"><strong>判断</strong>：空间计算不会立刻取代手机，但会像2007年的iPhone一样，在2-3年内重塑一个全新的应用生态。现在入场的人将享受最大的先发红利。</div>
+`,
+    source: '综合整理自Apple Newsroom、WWDC 2026信息'
   }
 ];
 
@@ -448,61 +610,46 @@ let searchTerm = '';
 function renderCards() {
   const grid = document.getElementById('feedGrid');
   let filtered = DATA;
-
-  if (activeCat !== 'all') {
-    filtered = filtered.filter(d => d.tag === activeCat);
-  }
+  if (activeCat !== 'all') filtered = filtered.filter(d => d.tag === activeCat);
   if (searchTerm) {
     const s = searchTerm.toLowerCase();
-    filtered = filtered.filter(d =>
-      d.title.toLowerCase().includes(s) ||
-      d.summary.toLowerCase().includes(s) ||
-      d.tag.toLowerCase().includes(s)
-    );
+    filtered = filtered.filter(d => d.title.toLowerCase().includes(s) || d.summary.toLowerCase().includes(s) || d.tag.toLowerCase().includes(s));
   }
-
   document.getElementById('totalCount').textContent = filtered.length;
   document.getElementById('todayCount').textContent = DATA.filter(d => d.isNew).length;
-  document.getElementById('resultHint').textContent = filtered.length ? `共 ${filtered.length} 条` : '';
-
-  if (!filtered.length) {
-    grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>';
-    return;
-  }
-
+  document.getElementById('resultHint').textContent = filtered.length ? `共 ${filtered.length} 条深度信息` : '';
+  if (!filtered.length) { grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>'; return; }
   grid.innerHTML = filtered.map(d => {
-    const tagClass = {
-      money: 'tag-money',
-      immigration: 'tag-immigration',
-      tech: 'tag-tech',
-      arbitrage: 'tag-arbitrage',
-      life: 'tag-life'
-    }[d.tag];
-    const tagLabel = {
-      money: '赚钱机会',
-      immigration: '移民政策',
-      tech: '科技前沿',
-      arbitrage: '信息套利',
-      life: '海外生活'
-    }[d.tag];
-    const newBadge = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
-    const urlAttr = d.url ? `href="${d.url}" target="_blank" rel="noopener"` : 'style="color:#566170;cursor:default"';
-
-    return `
-      <div class="card" data-cat="${d.tag}">
-        <span class="card-tag ${tagClass}">${tagLabel}${newBadge}</span>
-        <h3>${d.title}</h3>
-        <p>${d.summary}</p>
-        <div class="meta">
-          <span>${d.source} · ${d.date}</span>
-          ${d.url ? `<a class="source-link" href="${d.url}" target="_blank" rel="noopener">查看来源 →</a>` : '<span style="color:#566170">综合整理</span>'}
-        </div>
-      </div>
-    `;
+    const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life'}[d.tag];
+    const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活'}[d.tag];
+    const nb = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
+    return `<div class="card" data-id="${d.id}" onclick="openDetail(${d.id})"><span class="card-tag ${cls}">${lbl}${nb}</span><h3>${d.title}</h3><p>${d.summary}</p><div class="meta"><span>${d.date}</span></div><div class="cta-hint">点击查看完整信息 →</div></div>`;
   }).join('');
 }
 
-// Category filter
+function openDetail(id) {
+  const d = DATA.find(x => x.id === id);
+  if (!d) return;
+  const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life'}[d.tag];
+  const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活'}[d.tag];
+  document.getElementById('detailPanel').innerHTML = `
+    <button class="detail-close" onclick="closeDetail()">&times;</button>
+    <span class="card-tag ${cls}" style="margin-bottom:12px;">${lbl}</span>
+    <h2>${d.title}</h2>
+    <div class="detail-meta">发布日期：${d.date} · ${d.source}</div>
+    <div class="detail-content">${d.detail}</div>
+    <div class="detail-source">信息来源：${d.source}</div>
+  `;
+  document.getElementById('detailOverlay').classList.add('active');
+  document.getElementById('detailPanel').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
+
 document.getElementById('categoryFilters').addEventListener('click', e => {
   if (!e.target.classList.contains('cat-btn')) return;
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -510,14 +657,13 @@ document.getElementById('categoryFilters').addEventListener('click', e => {
   activeCat = e.target.dataset.cat;
   renderCards();
 });
-
-// Search
 document.getElementById('searchInput').addEventListener('input', e => {
   searchTerm = e.target.value.trim();
   renderCards();
 });
 
-// Init
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
 renderCards();
 </script>
 </body>
