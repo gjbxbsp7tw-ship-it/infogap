@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>InfoGap - 全球信息差聚合平台</title>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --card-bg: #131820;
+    --border: #1e2836;
+    --accent: #00d4aa;
+    --accent2: #ff6b6b;
+    --accent3: #5b8cee;
+    --accent4: #f0a500;
+    --text: #cdd6e0;
+    --text2: #8b949e;
+    --text3: #566170;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span:first-child { color: var(--accent); }
+  .logo span:last-child { color: var(--text); }
+  .search-box {
+    display: flex; align-items: center;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 14px; gap: 8px; min-width: 280px;
+  }
+  .search-box input {
+    background: none; border: none; outline: none;
+    color: var(--text); width: 100%; font-size: 14px;
+  }
+  .search-box input::placeholder { color: var(--text3); }
+  .search-box svg { color: var(--text3); flex-shrink: 0; }
+
+  main { max-width: 1280px; margin: 0 auto; padding: 24px; }
+
+  .hero { text-align: center; padding: 40px 20px 30px; }
+  .hero h1 {
+    font-size: 36px; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero p { color: var(--text2); margin-top: 10px; font-size: 16px; }
+  .live-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.3);
+    color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-top: 14px;
+  }
+  .live-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .categories { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 30px; justify-content: center; }
+  .cat-btn {
+    padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border);
+    background: var(--card-bg); color: var(--text2); cursor: pointer; font-size: 14px; transition: all .2s;
+  }
+  .cat-btn:hover { border-color: var(--text2); color: var(--text); }
+  .cat-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .stat-card .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .stat-card .label { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+  .feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .feed-header h2 { font-size: 20px; font-weight: 700; }
+  .feed-header span { color: var(--text3); font-size: 13px; }
+
+  .feed-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; transition: all .2s; cursor: pointer;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+  .card-tag {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; margin-bottom: 10px;
+  }
+  .tag-money { background: rgba(255,107,107,0.15); color: var(--accent2); }
+  .tag-immigration { background: rgba(91,140,238,0.15); color: var(--accent3); }
+  .tag-tech { background: rgba(0,212,170,0.15); color: var(--accent); }
+  .tag-arbitrage { background: rgba(240,165,0,0.15); color: var(--accent4); }
+  .tag-life { background: rgba(180,140,255,0.15); color: #b48cff; }
+  .tag-breakthrough { background: rgba(0,200,83,0.15); color: #00c853; }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+  .card p { font-size: 13px; color: var(--text2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .card .meta { margin-top: 12px; font-size: 12px; color: var(--text3); }
+  .card .cta-hint { color: var(--accent); font-size: 12px; margin-top: 8px; }
+
+  /* Detail Panel */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .25s;
+    backdrop-filter: blur(4px);
+  }
+  .overlay.active { opacity: 1; pointer-events: auto; }
+  .detail-panel {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 16px; width: min(800px, 92vw); max-height: 85vh;
+    overflow-y: auto; padding: 32px; position: relative;
+    transform: translateY(20px); transition: transform .25s;
+  }
+  .overlay.active .detail-panel { transform: translateY(0); }
+  .detail-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; color: var(--text2); font-size: 24px;
+    cursor: pointer; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+  }
+  .detail-close:hover { background: var(--border); color: var(--text); }
+  .detail-tag { margin-bottom: 12px; }
+  .detail-panel h2 { font-size: 24px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .detail-meta { color: var(--text3); font-size: 13px; margin-bottom: 24px; }
+  .detail-content { color: var(--text2); line-height: 1.8; }
+  .detail-content strong { color: var(--text); }
+  .detail-content h3 { color: var(--text); font-size: 18px; margin: 24px 0 10px; border-left: 3px solid var(--accent); padding-left: 12px; }
+  .detail-content ul, .detail-content ol { padding-left: 20px; margin: 10px 0; }
+  .detail-content li { margin: 6px 0; }
+  .detail-content .highlight-box {
+    background: rgba(0,212,170,0.08); border: 1px solid rgba(0,212,170,0.2);
+    border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+  }
+  .detail-content .warn-box {
+    background: rgba(255,107,107,0.08); border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 8px; padding: 14px 18px; margin: 16px 0;
+  }
+  .detail-source { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text3); font-size: 12px; }
+  .detail-content table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13px; }
+  .detail-content th { text-align: left; color: var(--accent); border-bottom: 1px solid var(--border); padding: 8px 6px; }
+  .detail-content td { border-bottom: 1px solid var(--border); padding: 8px 6px; color: var(--text2); }
+
+  footer { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+  @media (max-width: 768px) { .hero h1 { font-size: 26px; } .feed-grid { grid-template-columns: 1fr; } .search-box { min-width: 200px; } .detail-panel { padding: 20px; } }
+  .hidden { display: none !important; }
+  .no-result { text-align: center; padding: 60px 20px; color: var(--text3); grid-column: 1/-1; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo"><span>Info</span><span>Gap</span></div>
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="搜索信息差关键词...">
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>全球信息差 · 先人一步</h1>
+    <p>不跳转、不搬运、不引流——所有信息直接整理呈现，消除认知差距</p>
+    <div class="live-badge"><span class="live-dot"></span>实时追踪 · 2026年6月 · 297条深度信息</div>
+  </div>
+  <div class="categories" id="categoryFilters">
+    <button class="cat-btn active" data-cat="all">全部</button>
+    <button class="cat-btn" data-cat="money">赚钱机会</button>
+    <button class="cat-btn" data-cat="immigration">移民政策</button>
+    <button class="cat-btn" data-cat="tech">科技前沿</button>
+    <button class="cat-btn" data-cat="arbitrage">信息套利</button>
+    <button class="cat-btn" data-cat="life">海外生活</button>
+    <button class="cat-btn" data-cat="breakthrough">市场破局</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="totalCount">297</div><div class="label">深度信息条目</div></div>
+    <div class="stat-card"><div class="num" id="todayCount">297</div><div class="label">本周更新</div></div>
+    <div class="stat-card"><div class="num">50+</div><div class="label">覆盖国家</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="label">信息分类</div></div>
+  </div>
+  <div class="feed-header"><h2>最新信息差</h2><span id="resultHint"></span></div>
+  <div class="feed-grid" id="feedGrid"></div>
+</main>
+
+<div class="overlay" id="detailOverlay">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<footer><p>InfoGap - 所有信息均经过人工整理提炼，不依赖外部跳转。数据来源公开网络，仅供参考。</p></footer>
+
+<script>
+const DATA = [
+  {
+    id: 1, tag: 'money', date: '2026-06-29', isNew: true,
+    title: 'AI提示工程师：零代码入行红利岗位',
+    summary: '不要求写代码设计精准指令让AI输出。数据标注、AI绘画定制、企业AI流程优化岗位缺口巨大，兼职月入过万已成常态。',
+    detail: `<h3>AI提示工程师：零代码入行红利岗位</h3><ul><li>2026年AI工具全面渗透各行业，大多数人不知道如何「调教」AI</li>
+<li>企业愿花高价请提示工程师做内部AI流程优化</li>
+<li>零代码门槛：会设计指令即可，一张AI认证比学历更有竞争力</li>
+<li>接单渠道：Upwork/Fiverr/猪八戒/一品威客</li>
+<li>垂直领域(法律/医疗AI提示)专家时薪$100+</li></ul>`,
+    source: '综合整理自公开信息'
+  },
+  {
+    id: 2, tag: 'money', date: '2026-06-29', isNew: true,
+    title: '闲置物品循环经济：从闲鱼倒卖到翻新出海',
+    summary: '翻盖手机、旧CCD相机在国外是抢手货，国内库存尾货在非洲是香饽饽。启动资金几千元，利润5-20倍。',
+    detail: `<h3>闲置物品循环经济：从闲鱼倒卖到翻新出海</h3><ul><li>翻盖手机：国内¥5-20回收→非洲$15-40出售</li>
+<li>CCD老相机：¥50-200→欧美$80-300</li>
+<li>二奢箱包：从闲鱼/日本拍卖行回收→鉴定翻新→加价出售</li>
+<li>1688批量采购尾货→Shopee/Lazada/非洲批发商</li>
+<li>单品利润¥500-10,000，月入¥5,000-50,000</li></ul>`,
+    source: '综合整理自公开信息'
+  },
+  {
+    id: 3, tag: 'money', date: '2026-06-29', isNew: true,
+    title: '在线知识付费：把你的经验封装成产品',
+    summary: '会Excel/懂考研/擅长收纳——只要经验能帮人省时间就能卖。边际成本趋近零的「睡后收入」模型。',
+    detail: `<h3>在线知识付费：把你的经验封装成产品</h3><ul><li>Excel技巧课：录播+模板，月入¥5,000-30,000</li>
+<li>考研规划咨询：1v1+社群，月入¥8,000-50,000</li>
+<li>AI使用教学：录播+社群，月入¥10,000-100,000</li>
+<li>工具：小鹅通/知识星球/小报童降低技术门槛</li>
+<li>一套课程卖1000次与1次成本几乎相同</li></ul>`,
+    source: '综合整理自公开信息'
+  },
+];
+
+function renderCards() {
+  const grid = document.getElementById('feedGrid');
+  let filtered = DATA;
+  if (typeof activeCat !== 'undefined' && activeCat !== 'all') filtered = filtered.filter(d => d.tag === activeCat);
+  if (typeof searchTerm !== 'undefined' && searchTerm) {
+    const s = searchTerm.toLowerCase();
+    filtered = filtered.filter(d => d.title.toLowerCase().includes(s) || d.summary.toLowerCase().includes(s) || d.tag.toLowerCase().includes(s));
+  }
+  document.getElementById('totalCount').textContent = filtered.length;
+  document.getElementById('todayCount').textContent = DATA.filter(d => d.isNew).length;
+  document.getElementById('resultHint').textContent = filtered.length ? '共 ' + filtered.length + ' 条深度信息' : '';
+  if (!filtered.length) { grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>'; return; }
+  grid.innerHTML = filtered.map(d => {
+    const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+    const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
+    const nb = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
+    return '<div class="card" data-id="' + d.id + '" onclick="openDetail(' + d.id + ')"><span class="card-tag ' + cls + '">' + lbl + nb + '</span><h3>' + d.title + '</h3><p>' + d.summary + '</p><div class="meta"><span>' + d.date + '</span></div><div class="cta-hint">点击查看完整信息 →</div></div>';
+  }).join('');
+}
+
+function openDetail(id) {
+  const d = DATA.find(x => x.id === id);
+  if (!d) return;
+  const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+  const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
+  document.getElementById('detailPanel').innerHTML = '<button class="detail-close" onclick="closeDetail()">&times;</button><span class="card-tag ' + cls + '" style="margin-bottom:12px;">' + lbl + '</span><h2>' + d.title + '</h2><div class="detail-meta">发布日期：' + d.date + ' · ' + d.source + '</div><div class="detail-content">' + d.detail + '</div><div class="detail-source">信息来源：' + d.source + '</div>';
+  document.getElementById('detailOverlay').classList.add('active');
+  document.getElementById('detailPanel').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
+document.getElementById('categoryFilters').addEventListener('click', e => {
+  if (!e.target.classList.contains('cat-btn')) return;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeCat = e.target.dataset.cat;
+  renderCards();
+});
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.trim();
+  renderCards();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+renderCards();
+
+</script>
+</body>
+</html>
