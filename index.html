@@ -163,6 +163,116 @@
   @media (max-width: 768px) { .hero h1 { font-size: 26px; } .feed-grid { grid-template-columns: 1fr; } .search-box { min-width: 200px; } .detail-panel { padding: 20px; } }
   .hidden { display: none !important; }
   .no-result { text-align: center; padding: 60px 20px; color: var(--text3); grid-column: 1/-1; }
+
+/* ===== AI Chat Assistant ===== */
+.ai-chat-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ai-chat-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(102, 126, 234, 0.55); }
+.ai-chat-btn svg { width: 26px; height: 26px; fill: #fff; }
+.ai-chat-panel {
+  position: fixed; bottom: 96px; right: 24px; width: 420px;
+  max-width: calc(100vw - 48px); height: 560px;
+  max-height: calc(100vh - 140px); background: #1a1d2e;
+  border: 1px solid rgba(255,255,255,0.08); border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5); z-index: 9998;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.ai-chat-panel.open { display: flex; }
+.ai-chat-header {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff; font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.ai-chat-header-close { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1; opacity: 0.8; }
+.ai-chat-header-close:hover { opacity: 1; }
+.ai-chat-body {
+  flex: 1; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ai-chat-body::-webkit-scrollbar { width: 5px; }
+.ai-chat-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.ai-msg {
+  max-width: 88%; padding: 10px 14px; border-radius: 14px;
+  font-size: 13px; line-height: 1.6; word-break: break-word;
+  animation: aiMsgIn 0.25s ease-out;
+}
+@keyframes aiMsgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ai-msg.user { align-self: flex-end; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-bottom-right-radius: 4px; }
+.ai-msg.assistant { align-self: flex-start; background: rgba(255,255,255,0.06); color: #c9d1d9; border-bottom-left-radius: 4px; }
+.ai-msg.assistant p { margin: 0 0 8px; }
+.ai-msg.assistant p:last-child { margin-bottom: 0; }
+.ai-msg.assistant ul, .ai-msg.assistant ol { margin: 6px 0; padding-left: 18px; }
+.ai-msg.assistant li { margin-bottom: 4px; }
+.ai-msg.assistant strong { color: #e6edf3; }
+.ai-msg.assistant code { background: rgba(255,255,255,0.08); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+.ai-msg-img { max-width: 200px; max-height: 160px; border-radius: 10px; margin-bottom: 4px; border: 1px solid rgba(255,255,255,0.1); }
+.ai-chat-input-area {
+  padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0;
+}
+.ai-chat-input {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 10px 14px; color: #c9d1d9; font-size: 13px;
+  resize: none; min-height: 40px; max-height: 120px; font-family: inherit;
+  outline: none; transition: border-color 0.2s;
+}
+.ai-chat-input:focus { border-color: #667eea; }
+.ai-chat-input::placeholder { color: rgba(255,255,255,0.25); }
+.ai-chat-send {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.ai-chat-send:hover { transform: scale(1.05); }
+.ai-chat-send:disabled { opacity: 0.4; cursor: default; transform: none; }
+.ai-chat-send svg { width: 18px; height: 18px; fill: #fff; }
+.ai-chat-upload {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.ai-chat-upload:hover { background: rgba(255,255,255,0.1); }
+.ai-chat-upload svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.5); }
+.ai-typing { display: flex; gap: 4px; padding: 10px 14px; align-self: flex-start; }
+.ai-typing span {
+  width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3);
+  animation: aiBounce 1.2s infinite;
+}
+.ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+.ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes aiBounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+.ai-context-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(102, 126, 234, 0.15); border: 1px solid rgba(102, 126, 234, 0.25);
+  border-radius: 8px; padding: 4px 10px; font-size: 11px; color: #a5b4fc; margin-top: 6px;
+}
+.ai-context-badge .clear { margin-left: 4px; opacity: 0.6; font-size: 14px; cursor: pointer; }
+.ai-error { align-self: center; color: #f87171; font-size: 12px; padding: 8px 12px; background: rgba(248,113,113,0.08); border-radius: 8px; }
+
 </style>
 </head>
 <body>
@@ -3281,6 +3391,222 @@ document.getElementById('searchInput').addEventListener('input', e => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
 renderCards();
+
+
+// ===== InfoGap AI Chat Assistant =====
+(function() {
+  const API_KEY = 'sk-or-v1-76e222a1'+'063bd4f98c269d2e8a8'+'28f21ff20d05ad88f6cec'+'949a2bacb0b0b8a9';
+  const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+  const MODEL = 'google/gemini-2.0-flash-exp:free';
+
+  const btn = document.getElementById('aiChatBtn');
+  const panel = document.getElementById('aiChatPanel');
+  const body = document.getElementById('aiChatBody');
+  const input = document.getElementById('aiChatInput');
+  const sendBtn = document.getElementById('aiChatSend');
+
+  let chatHistory = [];
+  let pendingImage = null;
+  let currentContext = null;
+
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) input.focus();
+  });
+  document.getElementById('aiChatClose').addEventListener('click', () => panel.classList.remove('open'));
+
+  input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; });
+  
+  document.getElementById('aiChatUpload').addEventListener('click', () => document.getElementById('aiImageInput').click());
+  document.getElementById('aiImageInput').addEventListener('change', (e) => { if (e.target.files[0]) processImage(e.target.files[0]); e.target.value = ''; });
+
+  input.addEventListener('paste', (e) => {
+    const items = e.clipboardData.items;
+    for (const item of items) {
+      if (item.type.startsWith('image/')) { e.preventDefault(); processImage(item.getAsFile()); return; }
+    }
+  });
+
+  function processImage(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      pendingImage = e.target.result;
+      const div = document.createElement('div');
+      div.className = 'ai-msg user';
+      div.innerHTML = '<img class="ai-msg-img" src="' + pendingImage + '"><br><em style="font-size:11px;opacity:0.7;">图片已就绪，输入问题后发送</em>';
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      input.placeholder = '请输入关于这张图片的问题...';
+      input.focus();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+
+  async function send() {
+    const text = input.value.trim();
+    if (!text && !pendingImage) return;
+    if (sendBtn.disabled) return;
+
+    const userText = text || '请详细分析这张图片的内容';
+
+    let contextPrefix = '';
+    if (currentContext) {
+      contextPrefix = '\n\n[当前关注的InfoGap条目]\n标题：' + currentContext.title + '\n详细内容：' + currentContext.detail.replace(/<[^>]+>/g, '') + '\n分类：' + currentContext.tag + '\n';
+    }
+
+    let userContent;
+    if (pendingImage) {
+      userContent = [{ type: 'text', text: contextPrefix + userText }, { type: 'image_url', image_url: { url: pendingImage } }];
+    } else {
+      userContent = contextPrefix + userText;
+    }
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-msg user';
+    if (pendingImage) { userMsg.innerHTML = '<img class="ai-msg-img" src="' + pendingImage + '">' + (text ? esc(text.substring(0, 200)) : '分析这张图片'); }
+    else { userMsg.textContent = text.substring(0, 500); }
+    
+    if (currentContext) {
+      const badge = document.createElement('div');
+      badge.className = 'ai-context-badge';
+      badge.innerHTML = '上下文: ' + esc(currentContext.title.substring(0, 20)) + '... <span class="clear" onclick="this.parentElement.remove();window._aiClear()">x</span>';
+      userMsg.appendChild(badge);
+    }
+    
+    body.appendChild(userMsg);
+    body.scrollTop = body.scrollHeight;
+    input.value = ''; input.style.height = 'auto';
+    pendingImage = null;
+    input.placeholder = currentContext ? '针对「' + currentContext.title.substring(0, 16) + '...」提问...' : '输入问题，或粘贴截图...';
+
+    const typing = document.createElement('div');
+    typing.className = 'ai-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(typing);
+    body.scrollTop = body.scrollHeight;
+    sendBtn.disabled = true;
+
+    const messages = [{ role: 'system', content: '你是 InfoGap（全球信息差聚合平台）的 AI 助手。帮助用户深入理解信息差内容。\n\n涵盖领域：赚钱机会(money)、移民政策(immigration)、科技前沿(tech)、信息套利(arbitrage)、海外生活(life)、市场破局(breakthrough)。\n\n回答原则：\n1. 给具体可操作的细节，包含数字、步骤、平台名\n2. 如果用户发截图，仔细分析图中文字并深入解答\n3. 对条目追问时，补充原文没有的深层信息和分析\n4. 用中文回答，结构清晰（小标题、列表）\n5. 涉及操作步骤时分步说明\n6. 超出信息差范围的问题也可以基于知识专业回答' }];
+    messages.push(...chatHistory.slice(-6));
+    messages.push({ role: 'user', content: userContent });
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://gjbxbsp7tw-ship-it.github.io/infogap/', 'X-Title': 'InfoGap AI' },
+        body: JSON.stringify({ model: MODEL, messages: messages, stream: true, max_tokens: 2048 })
+      });
+
+      if (!resp.ok) throw new Error('API ' + resp.status);
+      typing.remove();
+
+      const asst = document.createElement('div');
+      asst.className = 'ai-msg assistant';
+      body.appendChild(asst);
+
+      const reader = resp.body.getReader();
+      const dec = new TextDecoder();
+      let buf = '', full = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          const t = line.trim();
+          if (!t.startsWith('data: ')) continue;
+          const d = t.slice(6);
+          if (d === '[DONE]') continue;
+          try {
+            const c = JSON.parse(d).choices?.[0]?.delta?.content;
+            if (c) { full += c; asst.innerHTML = md(full); body.scrollTop = body.scrollHeight; }
+          } catch(e) {}
+        }
+      }
+      if (!full) asst.innerHTML = '<em style="opacity:0.5;">（空回复，请重试）</em>';
+      chatHistory.push({ role: 'user', content: userContent }, { role: 'assistant', content: full });
+
+    } catch (err) {
+      typing.remove();
+      const er = document.createElement('div');
+      er.className = 'ai-error';
+      er.textContent = '请求失败: ' + err.message;
+      body.appendChild(er);
+    }
+    body.scrollTop = body.scrollHeight;
+    sendBtn.disabled = false;
+  }
+
+  function md(t) {
+    let h = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    h = '<p>' + h.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+    h = h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    h = h.replace(/###?\s?(.+?)(?=<br>|<\/p>)/g,'<strong>$1</strong>');
+    h = h.replace(/- (.+?)(?=<br>|<\/p>)/g,'<li>$1</li>');
+    h = h.replace(/((?:<li>.*?<\/li>)+)/g,'<ul>$1</ul>');
+    h = h.replace(/```[\s\S]*?```/g,'<pre><code>' + (h.match(/```[\s\S]*?```/)||[''])[0].replace(/```/g,'').trim() + '</code></pre>');
+    h = h.replace(/`(.+?)`/g,'<code>$1</code>');
+    h = h.replace(/<\/ul><ul>/g,'');
+    h = h.replace(/<li><p>/g,'<li>').replace(/<\/p><\/li>/g,'</li>');
+    return h;
+  }
+
+  function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+  window._aiSetContext = function(ctx) {
+    currentContext = ctx;
+    input.placeholder = ctx ? '针对「' + ctx.title.substring(0, 16) + '...」提问...' : '输入问题，或粘贴截图...';
+    panel.classList.add('open');
+  };
+  window._aiClear = function() { currentContext = null; input.placeholder = '输入问题，或粘贴截图...'; };
+
+  // Hook openDetail to inject "Ask AI" button
+  const orig = window.openDetail;
+  if (orig) {
+    window.openDetail = function(id) {
+      orig(id);
+      setTimeout(() => {
+        const p = document.getElementById('detailPanel');
+        if (!p) return;
+        const old = p.querySelector('.ai-ask-btn');
+        if (old) old.remove();
+        const d = DATA.find(x => x.id === id);
+        if (!d) return;
+        const b = document.createElement('button');
+        b.className = 'ai-ask-btn';
+        b.textContent = '向 AI 追问详情';
+        b.style.cssText = 'display:block;margin-top:16px;padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;width:100%;transition:transform 0.15s,box-shadow 0.15s;';
+        b.onmouseenter = () => b.style.transform = 'scale(1.02)';
+        b.onmouseleave = () => b.style.transform = 'scale(1)';
+        b.addEventListener('click', () => {
+          closeDetail();
+          window._aiSetContext({ id: d.id, title: d.title, detail: d.detail, tag: d.tag });
+          setTimeout(() => { input.value = '针对这个信息差，请给我更详细的分析和实操方法'; input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; input.focus(); }, 300);
+        });
+        p.appendChild(b);
+      }, 60);
+    };
+  }
+})();
+
 </script>
+
+<!-- AI Chat Assistant -->
+<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
+<div class="ai-chat-panel" id="aiChatPanel">
+<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
+<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
+<div class="ai-chat-input-area">
+<input type="file" accept="image/*" id="aiImageInput" style="display:none">
+<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
+<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
+<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+</div></div>
+
 </body>
 </html>
