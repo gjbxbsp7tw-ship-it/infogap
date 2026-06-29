@@ -814,8 +814,8 @@ function renderCards() {
   document.getElementById('resultHint').textContent = filtered.length ? `共 ${filtered.length} 条深度信息` : '';
   if (!filtered.length) { grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>'; return; }
   grid.innerHTML = filtered.map(d => {
-    const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life'}[d.tag];
-    const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活'}[d.tag];
+    const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+    const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
     const nb = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
     return `<div class="card" data-id="${d.id}" onclick="openDetail(${d.id})"><span class="card-tag ${cls}">${lbl}${nb}</span><h3>${d.title}</h3><p>${d.summary}</p><div class="meta"><span>${d.date}</span></div><div class="cta-hint">点击查看完整信息 →</div></div>`;
   }).join('');
@@ -824,8 +824,8 @@ function renderCards() {
 function openDetail(id) {
   const d = DATA.find(x => x.id === id);
   if (!d) return;
-  const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life'}[d.tag];
-  const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活'}[d.tag];
+  const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+  const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
   document.getElementById('detailPanel').innerHTML = `
     <button class="detail-close" onclick="closeDetail()">&times;</button>
     <span class="card-tag ${cls}" style="margin-bottom:12px;">${lbl}</span>
