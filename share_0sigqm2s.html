@@ -329,6 +329,28 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
+<div id="pwdOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f172a;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+<div style="text-align:center;padding:40px;">
+<div style="font-size:48px;margin-bottom:20px;">🔒</div>
+<h2 style="color:#e2e8f0;margin:0 0 8px;font-size:20px;">此页面已加密</h2>
+<p style="color:#64748b;margin:0 0 24px;font-size:14px;">请输入密码查看内容</p>
+<input id="pwdInput" type="password" placeholder="输入密码..." style="width:260px;padding:12px 16px;border-radius:10px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;font-size:15px;outline:none;text-align:center;" onkeydown="if(event.key==='Enter')checkPwd()">
+<div id="pwdError" style="color:#ef4444;font-size:13px;margin-top:12px;display:none;">密码错误，请重试</div>
+<button onclick="checkPwd()" style="margin-top:16px;padding:10px 32px;border-radius:10px;border:none;background:#00d4aa;color:#000;font-size:14px;font-weight:600;cursor:pointer;">解锁</button>
+</div>
+</div>
+<script>
+function checkPwd(){
+var p=document.getElementById('pwdInput').value;
+if(p==='QWE123.--98IO'){
+document.getElementById('pwdOverlay').style.display='none';
+document.body.style.overflow='';
+}else{
+document.getElementById('pwdError').style.display='block';
+document.getElementById('pwdInput').value='';
+}}
+document.body.style.overflow='hidden';
+</script>
 <header>
   <div class="header-inner">
     <div class="logo"><span>Info</span><span>Gap</span></div>
