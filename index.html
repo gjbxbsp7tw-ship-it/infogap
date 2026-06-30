@@ -289,9 +289,10 @@
 }
 .news-filter-btn:hover { border-color: var(--accent); color: var(--text); }
 .news-filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-.news-time { display: inline-flex; align-items: center; gap: 4px; color: var(--accent3); font-size: 11px; margin-top: 8px; }
-.news-time svg { width: 12px; height: 12px; }
-.news-source { color: var(--text3); font-size: 11px; }
+/* 新闻卡片元信息行：来源靠左，时间靠右 */
+.news-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; color: var(--text3); font-size: 11px; }
+.news-source { color: var(--text3); }
+.news-time { color: var(--text3); }
 .news-loading { text-align: center; padding: 40px; color: var(--text3); grid-column: 1/-1; }
 .news-updated { text-align: right; color: var(--text3); font-size: 11px; margin-bottom: 8px; }
 
@@ -3422,14 +3423,15 @@ function renderNewsCards() {
     return;
   }
   grid.innerHTML = newsData.map(function(d, i) {
+    var titleText = d.title_cn || d.title || '';
+    var descText = d.description_cn || d.description || '';
     var pubDate = d.pubDate ? new Date(d.pubDate).toLocaleString('zh-CN', { hour12: false }) : '';
     return '<div class="card" onclick="window.open(\'' + d.link + '\',\'_blank\')">'
       + '<span class="card-tag tag-news">全球新闻</span>'
-      + '<h3>' + d.title + '</h3>'
-      + '<p>' + (d.description || '') + '</p>'
-      + '<div class="news-time"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> ' + pubDate + '</div>'
-      + '<div class="news-source" style="margin-top:4px;">来源：' + (d.source || '未知') + '</div>'
-      + '<div class="cta-hint">在新标签页阅读全文 →</div>'
+      + '<h3>' + titleText + '</h3>'
+      + '<p>' + descText + '</p>'
+      + '<div class="news-meta"><span class="news-source">来源：' + (d.source || '未知') + '</span><span class="news-time">' + pubDate + '</span></div>'
+      + '<div class="cta-hint">在新标签页阅读原文 →</div>'
       + '</div>';
   }).join('');
 }
