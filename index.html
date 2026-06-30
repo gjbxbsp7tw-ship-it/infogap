@@ -3359,7 +3359,7 @@ const DATA = [
 
 
 // ===== Global News =====
-const NEWS_WORKER = 'https://infogap-proxy.1031351890.workers.dev/news';
+const NEWS_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/news';
 let newsData = [];
 let newsCountry = 'US';
 let newsLoading = false;
@@ -3401,14 +3401,14 @@ async function fetchNews(country) {
   var grid = document.getElementById('feedGrid');
   grid.innerHTML = '<div class="news-loading">正在加载最新新闻...</div>';
   try {
-    var resp = await fetch(NEWS_WORKER + '?country=' + country);
+    var resp = await fetch(NEWS_BASE + '/' + country + '.json');
     var data = await resp.json();
-    if (data.error) throw new Error(data.error);
+    if (!data.items) throw new Error('No news data');
     newsData = data.items || [];
     document.getElementById('resultHint').textContent = '更新于 ' + new Date(data.updated).toLocaleString('zh-CN');
     renderNewsCards();
   } catch (e) {
-    grid.innerHTML = '<div class="news-loading">加载失败：' + e.message + '，<a href="javascript:fetchNews('' + country + '')" style="color:var(--accent)">点击重试</a></div>';
+    grid.innerHTML = '<div class="news-loading">加载失败：' + e.message + '，<a href="javascript:fetchNews(\'' + country + '\')" style="color:var(--accent)">点击重试</a></div>';
   }
   newsLoading = false;
 }
