@@ -3423,7 +3423,7 @@ function renderNewsCards() {
   }
   grid.innerHTML = newsData.map(function(d, i) {
     var pubDate = d.pubDate ? new Date(d.pubDate).toLocaleString('zh-CN', { hour12: false }) : '';
-    return '<div class="card" onclick="window.open('' + d.link + '','_blank')">'
+    return '<div class="card" onclick="window.open(\'' + d.link + '\',\'_blank\')">'
       + '<span class="card-tag tag-news">全球新闻</span>'
       + '<h3>' + d.title + '</h3>'
       + '<p>' + (d.description || '') + '</p>'
