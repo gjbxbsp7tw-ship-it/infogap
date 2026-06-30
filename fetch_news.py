@@ -1,8 +1,10 @@
-"""Fetch global news from Google News RSS and save as JSON."""
+"""Fetch global news from Google News RSS, translate to Chinese, save as JSON."""
 import feedparser
 import json
 import os
+import re
 from datetime import datetime
+from deep_translator import GoogleTranslator
 
 COUNTRIES = {
     'US': 'https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en',
@@ -26,6 +28,18 @@ COUNTRIES = {
     'TR': 'https://news.google.com/rss?hl=tr&gl=TR&ceid=TR:tr',
 }
 
+
+def translate_text(text):
+    """Translate text to Chinese, return original on failure."""
+    if not text or not text.strip():
+        return text
+    try:
+        result = GoogleTranslator(source='auto', target='zh-CN').translate(text)
+        return result if result else text
+    except Exception:
+        return text
+
+
 os.makedirs('news', exist_ok=True)
 
 for code, url in COUNTRIES.items():
@@ -33,24 +47,35 @@ for code, url in COUNTRIES.items():
         feed = feedparser.parse(url)
         items = []
         for entry in feed.entries[:20]:
+            title = entry.get('title', '')
+            summary = entry.get('summary', '')
+            desc_clean = re.sub(r'<[^>]+>', '', summary).strip()[:300]
+            if not desc_clean:
+                desc_clean = summary[:300]
+
+            title_cn = translate_text(title)
+            description_cn = translate_text(desc_clean)
+
             items.append({
-                'title': entry.get('title', ''),
+                'title': title,
+                'title_cn': title_cn,
                 'link': entry.get('link', ''),
-                'published': entry.get('published', ''),
+                'pubDate': entry.get('published', ''),
                 'source': entry.get('source', {}).get('title', '') if hasattr(entry, 'source') else '',
-                'summary': entry.get('summary', '')[:300],
+                'description': desc_clean,
+                'description_cn': description_cn,
             })
-        
+
         data = {
             'country': code,
             'updated': datetime.utcnow().isoformat() + 'Z',
             'count': len(items),
             'items': items,
         }
-        
+
         with open(f'news/{code}.json', 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False)
-        
+
         print(f'{code}: {len(items)} items')
     except Exception as e:
         print(f'{code}: ERROR - {e}')
