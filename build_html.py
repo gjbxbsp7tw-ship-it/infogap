@@ -20,13 +20,10 @@ news_css = """
 }
 .news-filter-btn:hover { border-color: var(--accent); color: var(--text); }
 .news-filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-/* 新闻卡片元信息行：来源靠左，时间靠右 */
+/* 新闻卡片元信息行：复用 .card .meta 风格，来源靠左、时间靠右 */
 .news-meta {
   display: flex; justify-content: space-between; align-items: center;
-  margin-top: 12px; color: var(--text3); font-size: 11px;
 }
-.news-source { color: var(--text3); }
-.news-time { color: var(--text3); }
 .news-loading { text-align: center; padding: 40px; color: var(--text3); grid-column: 1/-1; }
 .news-updated { text-align: right; color: var(--text3); font-size: 11px; margin-bottom: 8px; }
 """
@@ -121,7 +118,7 @@ function renderNewsCards() {
       + '<span class="card-tag tag-news">全球新闻</span>'
       + '<h3>' + titleText + '</h3>'
       + '<p>' + descText + '</p>'
-      + '<div class="news-meta"><span class="news-source">来源：' + (d.source || '未知') + '</span><span class="news-time">' + pubDate + '</span></div>'
+      + '<div class="meta news-meta"><span>来源：' + (d.source || '未知') + '</span><span>' + pubDate + '</span></div>'
       + '<div class="cta-hint">在新标签页阅读原文 →</div>'
       + '</div>';
   }).join('');
