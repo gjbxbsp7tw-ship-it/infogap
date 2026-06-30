@@ -273,6 +273,28 @@
 .ai-context-badge .clear { margin-left: 4px; opacity: 0.6; font-size: 14px; cursor: pointer; }
 .ai-error { align-self: center; color: #f87171; font-size: 12px; padding: 8px 12px; background: rgba(248,113,113,0.08); border-radius: 8px; }
 
+
+/* ===== Global News ===== */
+.tag-news { background: rgba(0,212,170,0.15); color: var(--accent); }
+.news-filters {
+  display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 24px;
+  padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border);
+  border-radius: 12px; align-items: center;
+}
+.news-filters-label { color: var(--text3); font-size: 13px; margin-right: 4px; white-space: nowrap; }
+.news-filter-btn {
+  padding: 5px 12px; border-radius: 16px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px;
+  transition: all .15s; white-space: nowrap;
+}
+.news-filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.news-filter-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.news-time { display: inline-flex; align-items: center; gap: 4px; color: var(--accent3); font-size: 11px; margin-top: 8px; }
+.news-time svg { width: 12px; height: 12px; }
+.news-source { color: var(--text3); font-size: 11px; }
+.news-loading { text-align: center; padding: 40px; color: var(--text3); grid-column: 1/-1; }
+.news-updated { text-align: right; color: var(--text3); font-size: 11px; margin-bottom: 8px; }
+
 </style>
 </head>
 <body>
@@ -300,7 +322,9 @@
     <button class="cat-btn" data-cat="arbitrage">信息套利</button>
     <button class="cat-btn" data-cat="life">海外生活</button>
     <button class="cat-btn" data-cat="breakthrough">市场破局</button>
+    <button class="cat-btn" data-cat="news">全球新闻</button>
   </div>
+  <div class="news-filters" id="newsFilters" style="display:none;"><span class="news-filters-label">选择国家/地区：</span><span id="newsCountryBtns"></span></div>
   <div class="stats-row">
     <div class="stat-card"><div class="num" id="totalCount">297</div><div class="label">深度信息条目</div></div>
     <div class="stat-card"><div class="num" id="todayCount">297</div><div class="label">本周更新</div></div>
@@ -3333,8 +3357,104 @@ const DATA = [
   }
 ];
 
+
+// ===== Global News =====
+const NEWS_WORKER = 'https://infogap-proxy.1031351890.workers.dev/news';
+let newsData = [];
+let newsCountry = 'US';
+let newsLoading = false;
+
+const NEWS_COUNTRIES = [
+  { code: 'US', name: '美国' },
+  { code: 'GB', name: '英国' },
+  { code: 'CN', name: '中国' },
+  { code: 'JP', name: '日本' },
+  { code: 'KR', name: '韩国' },
+  { code: 'DE', name: '德国' },
+  { code: 'FR', name: '法国' },
+  { code: 'IN', name: '印度' },
+  { code: 'BR', name: '巴西' },
+  { code: 'AU', name: '澳大利亚' },
+  { code: 'CA', name: '加拿大' },
+  { code: 'RU', name: '俄罗斯' },
+  { code: 'IT', name: '意大利' },
+  { code: 'ES', name: '西班牙' },
+  { code: 'MX', name: '墨西哥' },
+  { code: 'SG', name: '新加坡' },
+  { code: 'AE', name: '阿联酋' },
+  { code: 'ZA', name: '南非' },
+  { code: 'TR', name: '土耳其' },
+];
+
+function renderCountryFilters() {
+  var html = NEWS_COUNTRIES.map(function(c) {
+    var active = c.code === newsCountry ? ' active' : '';
+    return '<button class="news-filter-btn' + active + '" data-country="' + c.code + '">' + c.name + '</button>';
+  }).join('');
+  document.getElementById('newsCountryBtns').innerHTML = html;
+}
+
+async function fetchNews(country) {
+  if (newsLoading) return;
+  newsLoading = true;
+  newsCountry = country;
+  var grid = document.getElementById('feedGrid');
+  grid.innerHTML = '<div class="news-loading">正在加载最新新闻...</div>';
+  try {
+    var resp = await fetch(NEWS_WORKER + '?country=' + country);
+    var data = await resp.json();
+    if (data.error) throw new Error(data.error);
+    newsData = data.items || [];
+    document.getElementById('resultHint').textContent = '更新于 ' + new Date(data.updated).toLocaleString('zh-CN');
+    renderNewsCards();
+  } catch (e) {
+    grid.innerHTML = '<div class="news-loading">加载失败：' + e.message + '，<a href="javascript:fetchNews('' + country + '')" style="color:var(--accent)">点击重试</a></div>';
+  }
+  newsLoading = false;
+}
+
+function renderNewsCards() {
+  var grid = document.getElementById('feedGrid');
+  document.getElementById('totalCount').textContent = newsData.length;
+  document.getElementById('todayCount').textContent = newsData.length;
+  if (!newsData.length) {
+    grid.innerHTML = '<div class="no-result">暂无新闻数据</div>';
+    return;
+  }
+  grid.innerHTML = newsData.map(function(d, i) {
+    var pubDate = d.pubDate ? new Date(d.pubDate).toLocaleString('zh-CN', { hour12: false }) : '';
+    return '<div class="card" onclick="window.open('' + d.link + '','_blank')">'
+      + '<span class="card-tag tag-news">全球新闻</span>'
+      + '<h3>' + d.title + '</h3>'
+      + '<p>' + (d.description || '') + '</p>'
+      + '<div class="news-time"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> ' + pubDate + '</div>'
+      + '<div class="news-source" style="margin-top:4px;">来源：' + (d.source || '未知') + '</div>'
+      + '<div class="cta-hint">在新标签页阅读全文 →</div>'
+      + '</div>';
+  }).join('');
+}
+
+document.getElementById('newsCountryBtns').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('news-filter-btn')) return;
+  var country = e.target.dataset.country;
+  if (!country) return;
+  document.querySelectorAll('.news-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  fetchNews(country);
+});
+
 function renderCards() {
-  const grid = document.getElementById('feedGrid');
+  var grid = document.getElementById('feedGrid');
+  var filtersDiv = document.getElementById('newsFilters');
+  // 全球新闻走独立渲染
+  if (activeCat === 'news') {
+    if (filtersDiv) filtersDiv.style.display = 'flex';
+    renderCountryFilters();
+    if (!newsData.length) { fetchNews(newsCountry); }
+    else { renderNewsCards(); }
+    return;
+  }
+  if (filtersDiv) filtersDiv.style.display = 'none';
   let filtered = DATA;
   if (activeCat !== 'all') filtered = filtered.filter(d => d.tag === activeCat);
   if (searchTerm) {
