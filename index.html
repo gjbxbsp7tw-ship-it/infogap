@@ -224,7 +224,16 @@
 
 #detailChart { width: 100% !important; }
 
+/* ===== Global News ===== */
+.news-filters { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; align-items: center; }
+.news-filters-label { color: var(--text3); font-size: 13px; margin-right: 8px; }
+.news-country-btn { padding: 4px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
+.news-country-btn:hover { border-color: var(--accent); color: var(--text); }
+.news-country-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.news-card { border-left: 3px solid #667eea; }
+.tag-news { background: rgba(102,126,234,0.15); color: #667eea; }
 
+/* ===== AI Chat ===== */
 .ai-chat-btn {
   position: fixed;
   bottom: 24px;
@@ -261,83 +270,61 @@
   flex-shrink: 0;
 }
 .ai-chat-header-close { background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 0 4px; line-height: 1; opacity: 0.8; }
+.ai-chat-header-close:hover { opacity: 1; }
 .ai-chat-body {
   flex: 1; overflow-y: auto; padding: 14px;
   display: flex; flex-direction: column; gap: 10px;
 }
 .ai-chat-body::-webkit-scrollbar { width: 5px; }
+.ai-chat-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
 .ai-chat-input-area {
-  padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.06);
-  display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0;
+  padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: flex-end; gap: 8px; flex-shrink: 0;
+  background: #12141f;
 }
 .ai-chat-input {
-  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px; padding: 10px 14px; color: #c9d1d9; font-size: 13px;
-  resize: none; min-height: 40px; max-height: 120px; font-family: inherit;
-  outline: none; transition: border-color 0.2s;
+  flex: 1; background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+  color: #e0e0e0; padding: 10px 14px; font-size: 13px;
+  resize: none; outline: none; font-family: inherit;
+  min-height: 40px; max-height: 120px; line-height: 1.5;
 }
 .ai-chat-input:focus { border-color: #667eea; }
 .ai-chat-send {
-  width: 40px; height: 40px; border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none; cursor: pointer; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.15s, opacity 0.15s;
+  border: none; border-radius: 10px; width: 40px; height: 40px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: opacity 0.2s;
 }
-.ai-chat-send:hover { transform: scale(1.05); }
+.ai-chat-send:hover { opacity: 0.85; }
 .ai-chat-send svg { width: 18px; height: 18px; fill: #fff; }
-.ai-chat-upload {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-  cursor: pointer; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
 .ai-msg {
   max-width: 88%; padding: 10px 14px; border-radius: 14px;
   font-size: 13px; line-height: 1.6; word-break: break-word;
   animation: aiMsgIn 0.25s ease-out;
 }
-.ai-msg.user { align-self: flex-end; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; border-bottom-right-radius: 4px; }
-.ai-msg.assistant { align-self: flex-start; background: rgba(255,255,255,0.06); color: #c9d1d9; border-bottom-left-radius: 4px; }
-.ai-msg-img { max-width: 200px; max-height: 160px; border-radius: 10px; margin-bottom: 4px; border: 1px solid rgba(255,255,255,0.1); }
-.ai-typing { display: flex; gap: 4px; padding: 10px 14px; align-self: flex-start; }
-.ai-typing span {
-  width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3);
-  animation: aiBounce 1.2s infinite;
+.ai-msg.user { align-self: flex-end; background: #667eea; color: #fff; border-bottom-right-radius: 4px; }
+.ai-msg.assistant { align-self: flex-start; background: rgba(255,255,255,0.06); color: #e0e0e0; border-bottom-left-radius: 4px; }
+.ai-msg-img { max-width: 100%; border-radius: 8px; margin-top: 6px; }
+.ai-typing { align-self: flex-start; padding: 10px 14px; display: flex; gap: 4px; }
+.ai-typing span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); animation: aiBounce 1.4s infinite ease-in-out both; }
+.ai-typing span:nth-child(1) { animation-delay: -0.32s; }
+.ai-typing span:nth-child(2) { animation-delay: -0.16s; }
+.ai-error { align-self: center; color: #ff6b6b; font-size: 12px; padding: 8px; }
+.ai-ask-btn {
+  display: inline-block; margin-top: 6px; padding: 4px 10px;
+  background: rgba(102,126,234,0.15); color: #667eea;
+  border: 1px solid rgba(102,126,234,0.25); border-radius: 8px;
+  font-size: 12px; cursor: pointer; transition: background 0.15s;
 }
-.ai-error { align-self: center; color: #f87171; font-size: 12px; padding: 8px 12px; background: rgba(248,113,113,0.08); border-radius: 8px; }
-.ai-ask-btn');
-        if (old) old.remove();
-        const d = DATA.find(x => x.id === id);
-        if (!d) return;
-        const b = document.createElement('button');
-        b.className = 'ai-ask-btn';
-        b.textContent = '向 AI 追问详情';
-        b.style.cssText = 'display:block;margin-top:16px;padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;width:100%;transition:transform 0.15s,box-shadow 0.15s;';
-        b.onmouseenter = () => b.style.transform = 'scale(1.02)';
-        b.onmouseleave = () => b.style.transform = 'scale(1)';
-        b.addEventListener('click', () => {
-          closeDetail();
-          window._aiSetContext({ id: d.id, title: d.title, detail: d.detail, tag: d.tag });
-          setTimeout(() => { input.value = '针对这个信息差，请给我更详细的分析和实操方法'; input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; input.focus(); }, 300);
-        }
+.ai-ask-btn:hover { background: rgba(102,126,234,0.25); }
 .ai-context-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  background: rgba(102, 126, 234, 0.15); border: 1px solid rgba(102, 126, 234, 0.25);
-  border-radius: 8px; padding: 4px 10px; font-size: 11px; color: #a5b4fc; margin-top: 6px;
+  display: inline-block; margin-bottom: 6px; padding: 3px 8px;
+  background: rgba(102,126,234,0.1); border-radius: 6px;
+  font-size: 11px; color: #667eea;
 }
-
-
-/* ===== Global News ===== */
-.news-filters { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; align-items: center; }
-.news-filters.active { display: flex; }
-.news-filters-label { color: var(--text3); font-size: 13px; margin-right: 8px; }
-.news-country-btn { padding: 4px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
-.news-country-btn:hover { border-color: var(--accent); color: var(--text); }
-.news-country-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
-.news-card { border-left: 3px solid #667eea; }
-.tag-news { background: rgba(102,126,234,0.15); color: #667eea; }
+@keyframes aiMsgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes aiBounce { 0%,80%,100% { transform: scale(0); } 40% { transform: scale(1); } }
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -404,17 +391,15 @@ document.body.style.overflow='hidden';
     <div class="rates-prediction" id="ratesPrediction"></div>
   </div>
 
-
-  <div class="news-filters" id="newsFilters" style="display:none;">
-    <span class="news-filters-label">选择国家/地区：</span>
-    <span id="newsCountryBtns"></span>
-  </div>
-
   <div class="stats-row">
     <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">深度信息条目</div></div>
     <div class="stat-card"><div class="num" id="todayCount">0</div><div class="label">本周更新</div></div>
     <div class="stat-card"><div class="num">12+</div><div class="label">覆盖国家</div></div>
     <div class="stat-card"><div class="num">7</div><div class="label">信息分类</div></div>
+  </div>
+  <div class="news-filters" id="newsFilters" style="display:none;">
+    <span class="news-filters-label">选择国家/地区：</span>
+    <span id="newsCountryBtns"></span>
   </div>
     <div class="city-table-container" id="cityTableContainer">
     <div class="city-view-toggle">
@@ -3458,8 +3443,8 @@ const DATA = [
 <li>趋势：从「大众化规模生产」→「个性化按需生产」——供应链大重构</li></ul>`,
     source: '综合整理自公开信息'
   }
-];
-
+]
+;
 
 // ===== Global News =====
 const NEWS_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/news';
@@ -3513,6 +3498,235 @@ async function renderNewsCards(country) {
 
 (function(){ renderNewsCountryBtns(); })();
 
+let activeCat = 'all';
+
+// 本周精选（基于 ISO 周数确定性选取5条）
+var _weekNum = (function(){ var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+3-(d.getDay()+6)%7); var jan1=new Date(d.getFullYear(),0,1); return Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7); })();
+var _weeklyPicks = (function(w){ var picks=[]; var used={}; var seed=w*13+7; for(var i=0;i<5;i++){ seed=(seed*1103515245+12345)&0x7fffffff; var idx=seed%297+1; if(!used[idx]){ picks.push(idx); used[idx]=true; } } return picks; })(_weekNum);
+
+let searchTerm = '';
+
+
+// ===== Global Rates =====
+const RATES_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/rates';
+let ratesData = null;
+let ratesChart = null;
+let selectedRateCurrency = 'USD';
+
+const CURRENCY_NAMES = {"USD":"美元","EUR":"欧元","JPY":"日元","GBP":"英镑","AUD":"澳元","CAD":"加元","CHF":"瑞郎","HKD":"港元","KRW":"韩元","SGD":"新元","NZD":"纽元","THB":"泰铢"};
+
+async function fetchRates() {
+  try {
+    var resp = await fetch(RATES_BASE + '/cny_rates.json');
+    ratesData = await resp.json();
+    renderRatesUI();
+  } catch(e) {
+    document.getElementById('ratesSummary').innerHTML = '<div class="rates-loading">汇率数据加载失败：' + e.message + '</div>';
+  }
+}
+
+function renderRatesUI() {
+  var currencies = Object.keys(ratesData.latest);
+  var btnHtml = currencies.map(function(c) {
+    var active = c === selectedRateCurrency ? ' active' : '';
+    return '<button class="rates-currency-btn' + active + '" data-currency="' + c + '">' + (CURRENCY_NAMES[c] || c) + '</button>';
+  }).join('');
+  document.getElementById('ratesCurrencySelector').innerHTML = btnHtml;
+  renderRatesSummary();
+  renderRatesChart();
+  renderRatesPrediction();
+}
+
+function renderRatesSummary() {
+  var currencies = Object.keys(ratesData.latest);
+  var html = currencies.map(function(c) {
+    var rate = ratesData.latest[c];
+    var history = ratesData.history;
+    var prevRate = null;
+    if (history.length >= 2) {
+      var prev = history[history.length - 2];
+      if (prev && prev.rates && prev.rates[c]) prevRate = prev.rates[c];
+    }
+    var changeHtml = '';
+    if (prevRate) {
+      var changePct = ((rate - prevRate) / prevRate * 100).toFixed(2);
+      var cls = changePct >= 0 ? 'rate-up' : 'rate-down';
+      var sign = changePct >= 0 ? '+' : '';
+      changeHtml = '<div class="rate-change ' + cls + '">' + sign + changePct + '% (月)</div>';
+    }
+    return '<div class="rate-card">'
+      + '<div class="currency-code">' + c + '</div>'
+      + '<div class="currency-name">' + (CURRENCY_NAMES[c] || c) + '</div>'
+      + '<div class="rate-value">' + rate.toFixed(4) + '</div>'
+      + changeHtml
+      + '</div>';
+  }).join('');
+  document.getElementById('ratesSummary').innerHTML = html;
+}
+
+function renderRatesChart() {
+  var ctx = document.getElementById('ratesChart').getContext('2d');
+  if (ratesChart) ratesChart.destroy();
+  var history = ratesData.history;
+  var labels = history.map(function(h) { return h.date.substring(0, 7); });
+  var data = history.map(function(h) { return h.rates[selectedRateCurrency] || null; });
+  var sma = [];
+  for (var i = 0; i < data.length; i++) {
+    if (i < 2) { sma.push(null); continue; }
+    sma.push((data[i] + data[i-1] + data[i-2]) / 3);
+  }
+  var n = data.length;
+  var sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  var validN = 0;
+  for (var i = 0; i < n; i++) {
+    if (data[i] === null) continue;
+    sumX += i; sumY += data[i]; sumXY += i * data[i]; sumX2 += i * i;
+    validN++;
+  }
+  var slope = (validN * sumXY - sumX * sumY) / (validN * sumX2 - sumX * sumX);
+  var intercept = (sumY - slope * sumX) / validN;
+  var predictLabels = [];
+  var predictData = [];
+  var lastDate = new Date(history[history.length-1].date);
+  for (var i = 1; i <= 3; i++) {
+    var nextMonth = new Date(lastDate);
+    nextMonth.setMonth(nextMonth.getMonth() + i);
+    var dateStr = nextMonth.toISOString().substring(0, 7);
+    predictLabels.push(dateStr);
+    predictData.push(intercept + slope * (n + i));
+  }
+  var residuals = [];
+  for (var i = 0; i < n; i++) {
+    if (data[i] === null) continue;
+    var predicted = intercept + slope * i;
+    residuals.push(Math.abs(data[i] - predicted));
+  }
+  residuals.sort(function(a,b) { return a - b; });
+  var mad = residuals[Math.floor(residuals.length / 2)] * 1.4826;
+  var upper = predictData.map(function(v) { return v + mad * 1.5; });
+  var lower = predictData.map(function(v) { return v - mad * 1.5; });
+  ratesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.concat(predictLabels),
+      datasets: [
+        { label: '实际汇率', data: data.concat(Array(predictLabels.length).fill(null)), borderColor: '#00d4aa', backgroundColor: 'rgba(0,212,170,0.1)', fill: true, tension: 0.3, pointRadius: 2, borderWidth: 2 },
+        { label: '3月均线', data: sma.concat(Array(predictLabels.length).fill(null)), borderColor: '#60a5fa', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, fill: false },
+        { label: '趋势预测', data: Array(labels.length).fill(null).concat(predictData), borderColor: '#f59e0b', borderWidth: 2, borderDash: [6,3], pointRadius: 3, pointBackgroundColor: '#f59e0b', fill: false },
+        { label: '预测上界', data: Array(labels.length).fill(null).concat(upper), borderColor: 'rgba(245,158,11,0.3)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+        { label: '预测下界', data: Array(labels.length).fill(null).concat(lower), borderColor: 'rgba(245,158,11,0.3)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#94a3b8', usePointStyle: true, padding: 20, font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + (ctx.parsed.y ? ctx.parsed.y.toFixed(4) : 'N/A'); } } }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', maxTicksLimit: 12, font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.1)' } },
+        y: { ticks: { color: '#64748b', font: { size: 10 }, callback: function(v) { return v.toFixed(4); } }, grid: { color: 'rgba(148,163,184,0.1)' } }
+      }
+    }
+  });
+}
+
+function renderRatesPrediction() {
+  var history = ratesData.history;
+  var data = history.map(function(h) { return h.rates[selectedRateCurrency]; }).filter(function(v) { return v !== null && v !== undefined; });
+  var n = data.length;
+  var sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  for (var i = 0; i < n; i++) { sumX += i; sumY += data[i]; sumXY += i * data[i]; sumX2 += i * i; }
+  var slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  var recentAvg = 0, olderAvg = 0;
+  var halfN = Math.floor(n / 2);
+  for (var i = halfN; i < n; i++) recentAvg += data[i];
+  for (var i = 0; i < halfN; i++) olderAvg += data[i];
+  recentAvg /= (n - halfN); olderAvg /= halfN;
+  var trendPct = ((recentAvg - olderAvg) / olderAvg * 100);
+  var currencyName = CURRENCY_NAMES[selectedRateCurrency] || selectedRateCurrency;
+  var trendTag, trendLabel;
+  if (trendPct > 1) { trendTag = 'pred-bullish'; trendLabel = '看涨'; }
+  else if (trendPct < -1) { trendTag = 'pred-bearish'; trendLabel = '看跌'; }
+  else { trendTag = 'pred-neutral'; trendLabel = '震荡'; }
+  var latestRate = ratesData.latest[selectedRateCurrency];
+  var predictRate = latestRate * (1 + trendPct / 100 / 3);
+  var html = '<h3>趋势预测与分析 <span class="pred-tag ' + trendTag + '">' + trendLabel + '</span></h3>';
+  html += '<p>';
+  html += '<strong>' + currencyName + '（' + selectedRateCurrency + '）</strong>近半年较前半年变动 <strong>' + (trendPct > 0 ? '+' : '') + trendPct.toFixed(2) + '%</strong>。<br>';
+  html += '当前汇率：<strong>1 CNY = ' + latestRate.toFixed(4) + ' ' + selectedRateCurrency + '</strong>。<br>';
+  if (Math.abs(trendPct) > 0.5) {
+    html += '基于线性回归模型，未来1个月预计汇率约 <strong>' + predictRate.toFixed(4) + '</strong>，';
+    html += '整体呈<span class="' + trendTag + '">' + trendLabel + '</span>趋势。<br>';
+  } else {
+    html += '近期走势平稳，预计未来1个月维持窄幅震荡。<br>';
+  }
+  var factors = getCurrencyFactors(selectedRateCurrency);
+  html += '<br><strong>影响因素：</strong><br>' + factors;
+  html += '</p>';
+  document.getElementById('ratesPrediction').innerHTML = html;
+}
+
+function getCurrencyFactors(code) {
+  var factors = {
+    'USD': '美联储货币政策（利率决议、缩表进程）、美国通胀数据（CPI/PCE）、中美贸易关系、美国大选及财政政策走向。',
+    'EUR': '欧央行利率政策、欧元区通胀与经济增长数据、能源价格（天然气）、地缘政治风险（乌克兰局势）。',
+    'JPY': '日本央行货币政策正常化进程（YCC调整）、日美利差、日本通胀数据、全球避险情绪。',
+    'GBP': '英国央行利率决策、英国经济数据（GDP/CPI）、脱欧后贸易协定进展、英国财政政策。',
+    'AUD': '澳洲联储利率政策、大宗商品价格（铁矿石/煤炭）、中国经济数据（最大贸易伙伴）、全球风险偏好。',
+    'CAD': '加拿大央行利率决策、原油价格、加拿大经济数据、美加贸易关系。',
+    'CHF': '瑞士央行政策利率、全球避险需求、瑞士通胀水平、欧元区经济溢出效应。',
+    'HKD': '联系汇率制度（7.75-7.85区间）、美联储政策传导、香港经济与房市、内地与香港资本流动。',
+    'KRW': '韩国央行利率、半导体出口数据、中美贸易摩擦间接影响、韩元国际化程度。',
+    'SGD': '新加坡金管局汇率政策（NEER篮子）、新加坡经济增速、区域贸易环境、全球金融中心地位。',
+    'NZD': '新西兰联储利率、乳制品出口价格、全球农业大宗商品走势、亚太区域经济。',
+    'THB': '泰国央行利率、旅游业恢复程度、出口数据、东南亚地缘政治、泰铢国际化。'
+  };
+  return factors[code] || '该货币受全球经济环境、本国央行政策及贸易状况综合影响。';
+}
+
+document.getElementById('ratesCurrencySelector').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('rates-currency-btn')) return;
+  var currency = e.target.dataset.currency;
+  if (!currency) return;
+  document.querySelectorAll('.rates-currency-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  selectedRateCurrency = currency;
+  renderRatesChart();
+  renderRatesPrediction();
+});
+
+
+// ===== City Compare Data =====
+var CITY_DATA = [
+  {rank:1,city:'东京',cost:12000,visa:'中等',safety:92,internet:180,community:'大',desc:'亚洲最宜居城市之一，交通便利，美食丰富'},
+  {rank:2,city:'曼谷',cost:6000,visa:'容易',safety:78,internet:150,community:'大',desc:'数字游民天堂，生活成本低，签证灵活'},
+  {rank:3,city:'吉隆坡',cost:5000,visa:'容易',safety:75,internet:120,community:'大',desc:'MM2H签证友好，英语普及率高，多元文化'},
+  {rank:4,city:'新加坡',cost:18000,visa:'较难',safety:95,internet:250,community:'大',desc:'金融中心，安全顶级，但生活成本极高'},
+  {rank:5,city:'迪拜',cost:15000,visa:'中等',safety:90,internet:200,community:'中',desc:'零税收，奢华生活，远程工作签证友好'},
+  {rank:6,city:'里斯本',cost:9000,visa:'容易',safety:85,internet:160,community:'小',desc:'D7签证热门，气候宜人，欧洲性价比之王'},
+  {rank:7,city:'巴厘岛',cost:4500,visa:'容易',safety:72,internet:100,community:'中',desc:'数字游民圣地，第二家园签证即将推出'},
+  {rank:8,city:'墨西哥城',cost:7000,visa:'容易',safety:62,internet:130,community:'中',desc:'北美时区优势，文化丰富，临时居留签证简单'},
+  {rank:9,city:'胡志明市',cost:4000,visa:'中等',safety:70,internet:110,community:'中',desc:'东南亚新兴数字游民中心，成本极低'},
+  {rank:10,city:'布达佩斯',cost:7500,visa:'容易',safety:82,internet:170,community:'小',desc:'申根区，白卡签证友好，温泉之都'},
+  {rank:11,city:'清迈',cost:3500,visa:'容易',safety:80,internet:100,community:'中',desc:'数字游民经典之选，生活节奏慢，成本极低'},
+  {rank:12,city:'第比利斯',cost:4000,visa:'容易',safety:76,internet:90,community:'小',desc:'格鲁吉亚1年免签，加密货币友好，欧亚交汇'}
+];
+
+function renderCityTable(sortBy, sortDir) {
+  var sorted = CITY_DATA.slice();
+  sorted.sort(function(a,b) {
+    var va = a[sortBy], vb = b[sortBy];
+    if (typeof va === 'number') return sortDir === 'asc' ? va - vb : vb - va;
+    return sortDir === 'asc' ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
+  var html = sorted.map(function(c) {
+    var costClass = c.cost < 5000 ? 'cost-low' : c.cost < 10000 ? 'cost-mid' : 'cost-high';
+    return '<tr><td class="city-rank">' + c.rank + '</td><td class="city-name">' + c.city + '</td><td class="' + costClass + '">¥' + c.cost.toLocaleString() + '</td><td>' + c.visa + '</td><td>' + c.safety + '/100</td><td>' + c.internet + '</td><td>' + c.community + '</td></tr>';
+  }).join('');
+  document.getElementById('cityTableBody').innerHTML = html;
+}
 
 function renderCards() {
   var grid = document.getElementById('feedGrid');
@@ -3666,15 +3880,13 @@ document.getElementById('categoryFilters').addEventListener('click', e => {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   activeCat = e.target.dataset.cat;
-  // Handle news filters visibility
-  if (activeCat === 'news') {
-    document.getElementById('newsFilters').style.display = 'flex';
-  } else {
-    document.getElementById('newsFilters').style.display = 'none';
-  }
+  // News visibility toggle
+  var nf = document.getElementById('newsFilters');
+  if (activeCat === 'news') { if (nf) nf.style.display = 'flex'; }
+  else { if (nf) nf.style.display = 'none'; }
   renderCards();
 });
-
+  
 // City table sort event
 document.getElementById('cityTable').addEventListener('click', function(e) {
   var th = e.target.closest('th');
@@ -3925,7 +4137,6 @@ renderCards();
 })();
 </script>
 
-
 <!-- AI Chat Assistant -->
 <button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
 <div class="ai-chat-panel" id="aiChatPanel">
@@ -3937,21 +4148,6 @@ renderCards();
 <textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
 <button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
 </div></div>
-
-
-<!-- AI Chat Assistant -->
-<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
-<div class="ai-chat-panel" id="aiChatPanel">
-<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
-<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
-<div class="ai-chat-input-area">
-<input type="file" accept="image/*" id="aiImageInput" style="display:none">
-<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
-<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
-<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
-</div></div>
-
-
 
 </body>
 </html>
