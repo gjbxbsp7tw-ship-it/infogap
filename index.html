@@ -4168,8 +4168,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(
 renderCards();
 </script>
 <script>window.addEventListener("resize",function(){if(ratesChart&&document.getElementById("ratesDashboard").classList.contains("active")){ratesChart.resize();}});</script>
-};
-</script>
 
 <!-- AI Chat Assistant -->
 <button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
@@ -4498,5 +4496,7 @@ window._aiCreateDetailChat = function(container, d) {
 
   dSend.addEventListener('click', detailSend);
   dInput.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); detailSend(); } });
+};
+</script>
 </body>
 </html>
