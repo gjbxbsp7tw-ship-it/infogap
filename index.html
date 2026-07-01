@@ -3485,7 +3485,8 @@ async function fetchNews(country) {
   try {
     var resp = await fetch(NEWS_BASE + '/' + country + '.json');
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    return await resp.json();
+    var data = await resp.json();
+    return data.items || data || [];
   } catch(e) {
     console.error('News fetch error:', e);
     return [];
