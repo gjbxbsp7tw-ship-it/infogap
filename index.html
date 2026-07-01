@@ -4168,6 +4168,21 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(
 renderCards();
 </script>
 <script>window.addEventListener("resize",function(){if(ratesChart&&document.getElementById("ratesDashboard").classList.contains("active")){ratesChart.resize();}});</script>
+};
+</script>
+
+<!-- AI Chat Assistant -->
+<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
+<div class="ai-chat-panel" id="aiChatPanel">
+<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
+<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
+<div class="ai-chat-input-area">
+<input type="file" accept="image/*" id="aiImageInput" style="display:none">
+<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
+<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
+<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+</div></div>
+
 <script>
 // ===== InfoGap AI Chat Assistant =====
 (function() {
@@ -4483,20 +4498,5 @@ window._aiCreateDetailChat = function(container, d) {
 
   dSend.addEventListener('click', detailSend);
   dInput.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); detailSend(); } });
-};
-</script>
-
-<!-- AI Chat Assistant -->
-<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
-<div class="ai-chat-panel" id="aiChatPanel">
-<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
-<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
-<div class="ai-chat-input-area">
-<input type="file" accept="image/*" id="aiImageInput" style="display:none">
-<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
-<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
-<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
-</div></div>
-
 </body>
 </html>
