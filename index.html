@@ -164,7 +164,67 @@
   .hidden { display: none !important; }
   .no-result { text-align: center; padding: 60px 20px; color: var(--text3); grid-column: 1/-1; }
 
-/* ===== AI Chat Assistant ===== */
+/* ===== Global Rates ===== */
+.rates-dashboard { display: none; }
+.rates-dashboard.active { display: block; }
+.rates-summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.rate-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: all .2s; }
+.rate-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,212,170,0.1); }
+.rate-card .currency-code { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+.rate-card .currency-name { font-size: 13px; color: var(--text2); margin-bottom: 8px; }
+.rate-card .rate-value { font-size: 24px; font-weight: 700; color: var(--text); }
+.rate-card .rate-change { font-size: 12px; margin-top: 6px; }
+.rate-up { color: #22c55e; }
+.rate-down { color: #ef4444; }
+.rates-chart-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.rates-chart-container h3 { margin: 0 0 16px; font-size: 16px; color: var(--text); }
+.rates-chart-wrapper { position: relative; width: 100%; height: 400px; }
+.rates-currency-selector { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.rates-currency-btn { padding: 4px 10px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
+.rates-currency-btn:hover { border-color: var(--accent); color: var(--text); }
+.rates-currency-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.rates-prediction { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+.rates-prediction h3 { margin: 0 0 12px; font-size: 16px; color: var(--text); }
+.rates-prediction p { color: var(--text2); font-size: 14px; line-height: 1.8; }
+.rates-prediction .pred-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-right: 6px; }
+.pred-bullish { background: rgba(34,197,94,0.15); color: #22c55e; }
+.pred-bearish { background: rgba(239,68,68,0.15); color: #ef4444; }
+.pred-neutral { background: rgba(148,163,184,0.15); color: #94a3b8; }
+.rates-loading { text-align: center; padding: 40px; color: var(--text3); }
+
+
+/* ===== Trend Badge ===== */
+.trend-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 8px; font-weight: 600; }
+.trend-hot { background: rgba(239,68,68,0.12); color: #ef4444; }
+.trend-rising { background: rgba(245,158,11,0.12); color: #f59e0b; }
+.trend-stable { background: rgba(34,197,94,0.12); color: #22c55e; }
+.pick-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; margin-left: 8px; background: rgba(168,85,247,0.15); color: #a855f7; font-weight: 600; }
+
+/* ===== City Compare Table ===== */
+.city-table-container { display: none; margin-bottom: 24px; }
+.city-table-container.active { display: block; }
+.city-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.city-table th { text-align: left; padding: 10px 12px; color: var(--text2); font-weight: 600; border-bottom: 2px solid var(--border); cursor: pointer; user-select: none; white-space: nowrap; }
+.city-table th:hover { color: var(--accent); }
+.city-table th .sort-arrow { margin-left: 4px; font-size: 10px; }
+.city-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+.city-table tr:hover td { background: rgba(0,212,170,0.03); }
+.city-table .city-rank { color: var(--accent); font-weight: 700; font-size: 14px; }
+.city-table .city-name { font-weight: 600; }
+.city-table .cost-low { color: #22c55e; }
+.city-table .cost-mid { color: #f59e0b; }
+.city-table .cost-high { color: #ef4444; }
+.city-view-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+.city-view-btn { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
+.city-view-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.city-view-btn:hover { border-color: var(--accent); }
+
+.cat-btn-pick { border-color: rgba(168,85,247,0.4); }
+.cat-btn-pick.active { background: #a855f7; color: #fff; border-color: #a855f7; }
+
+#detailChart { width: 100% !important; }
+
+
 .ai-chat-btn {
   position: fixed;
   bottom: 24px;
@@ -272,6 +332,17 @@
 }
 .ai-context-badge .clear { margin-left: 4px; opacity: 0.6; font-size: 14px; cursor: pointer; }
 .ai-error { align-self: center; color: #f87171; font-size: 12px; padding: 8px 12px; background: rgba(248,113,113,0.08); border-radius: 8px; }
+
+
+/* ===== Global News ===== */
+.news-filters { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; align-items: center; }
+.news-filters.active { display: flex; }
+.news-filters-label { color: var(--text3); font-size: 13px; margin-right: 8px; }
+.news-country-btn { padding: 4px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
+.news-country-btn:hover { border-color: var(--accent); color: var(--text); }
+.news-country-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.news-card { border-left: 3px solid #667eea; }
+.tag-news { background: rgba(102,126,234,0.15); color: #667eea; }
 
 </style>
 </head>
@@ -3355,6 +3426,60 @@ const DATA = [
   }
 ];
 
+// ===== Global News =====
+const NEWS_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/news';
+const COUNTRY_NAMES = {"US":"美国","CN":"中国","JP":"日本","GB":"英国","DE":"德国","FR":"法国","KR":"韩国","AU":"澳大利亚","CA":"加拿大","IN":"印度","IT":"意大利","ES":"西班牙","BR":"巴西","MX":"墨西哥","RU":"俄罗斯","TR":"土耳其","SG":"新加坡","ZA":"南非","AE":"阿联酋"};
+
+async function fetchNews(country) {
+  try {
+    var resp = await fetch(NEWS_BASE + '/' + country + '.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.json();
+  } catch(e) {
+    console.error('News fetch error:', e);
+    return [];
+  }
+}
+
+function renderNewsCountryBtns() {
+  var countries = Object.keys(COUNTRY_NAMES);
+  var html = countries.map(function(c) {
+    var active = c === 'US' ? ' active' : '';
+    return '<button class="news-country-btn' + active + '" data-country="' + c + '">' + COUNTRY_NAMES[c] + '</button>';
+  }).join('');
+  var el = document.getElementById('newsCountryBtns');
+  if (el) el.innerHTML = html;
+}
+
+var currentNewsCountry = 'US';
+async function renderNewsCards(country) {
+  currentNewsCountry = country;
+  var grid = document.getElementById('feedGrid');
+  grid.innerHTML = '<div class="no-result" style="padding:40px;text-align:center;color:var(--text3);">加载中...</div>';
+  var newsData = await fetchNews(country);
+  document.getElementById('totalCount').textContent = newsData.length;
+  document.getElementById('todayCount').textContent = newsData.length;
+  document.getElementById('resultHint').textContent = COUNTRY_NAMES[country] + '新闻 · 共 ' + newsData.length + ' 条';
+  
+  if (!newsData.length) {
+    grid.innerHTML = '<div class="no-result">暂无' + (COUNTRY_NAMES[country] || country) + '的新闻数据</div>';
+    return;
+  }
+  
+  grid.innerHTML = newsData.slice(0, 20).map(function(n, i) {
+    var title = n.title || '无标题';
+    var source = n.source || '';
+    var date = n.publishedAt ? n.publishedAt.substring(0, 10) : '';
+    var desc = n.description || '';
+    if (desc.length > 120) desc = desc.substring(0, 120) + '...';
+    var url = n.url || '#';
+    return '<div class="card news-card"><span class="card-tag tag-news">' + (COUNTRY_NAMES[country] || country) + '新闻</span><h3><a href="' + url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + title + '</a></h3><p>' + desc + '</p><div class="meta"><span>' + source + '</span><span>' + date + '</span></div></div>';
+  }).join('');
+}
+
+// Initialize news country buttons on page load
+(function(){ renderNewsCountryBtns(); })();
+
 function renderCards() {
   const grid = document.getElementById('feedGrid');
   let filtered = DATA;
@@ -3403,16 +3528,49 @@ document.getElementById('categoryFilters').addEventListener('click', e => {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
   e.target.classList.add('active');
   activeCat = e.target.dataset.cat;
-  renderCards();
+  
+// News country button click
+document.getElementById('newsCountryBtns').addEventListener('click', function(e) {
+  var btn = e.target.closest('.news-country-btn');
+  if (!btn) return;
+  document.querySelectorAll('.news-country-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderNewsCards(btn.dataset.country);
+});
+
+renderCards();
+
 });
 document.getElementById('searchInput').addEventListener('input', e => {
   searchTerm = e.target.value.trim();
-  renderCards();
+  
+// News country button click
+document.getElementById('newsCountryBtns').addEventListener('click', function(e) {
+  var btn = e.target.closest('.news-country-btn');
+  if (!btn) return;
+  document.querySelectorAll('.news-country-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderNewsCards(btn.dataset.country);
+});
+
+renderCards();
+
 });
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
+
+// News country button click
+document.getElementById('newsCountryBtns').addEventListener('click', function(e) {
+  var btn = e.target.closest('.news-country-btn');
+  if (!btn) return;
+  document.querySelectorAll('.news-country-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderNewsCards(btn.dataset.country);
+});
+
 renderCards();
+
 
 
 // ===== InfoGap AI Chat Assistant =====
@@ -3629,6 +3787,1446 @@ renderCards();
 <textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
 <button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
 </div></div>
+
+
+<!-- AI Chat Assistant -->
+<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
+<div class="ai-chat-panel" id="aiChatPanel">
+<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
+<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
+<div class="ai-chat-input-area">
+<input type="file" accept="image/*" id="aiImageInput" style="display:none">
+<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
+<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
+<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+</div></div>
+
+
+</body>
+</html>
+
+/* ===== Global News ===== */
+.news-filters { display: none; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; align-items: center; }
+.news-filters.active { display: flex; }
+.news-filters-label { color: var(--text3); font-size: 13px; margin-right: 8px; }
+.news-country-btn { padding: 4px 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--bg); color: var(--text2); cursor: pointer; font-size: 12px; transition: all .15s; }
+.news-country-btn:hover { border-color: var(--accent); color: var(--text); }
+.news-country-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.news-card { border-left: 3px solid #667eea; }
+.tag-news { background: rgba(102,126,234,0.15); color: #667eea; }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div id="pwdOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0f172a;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">
+<div style="text-align:center;padding:40px;">
+<div style="font-size:48px;margin-bottom:20px;">🔒</div>
+<h2 style="color:#e2e8f0;margin:0 0 8px;font-size:20px;">此页面已加密</h2>
+<p style="color:#64748b;margin:0 0 24px;font-size:14px;">请输入密码查看内容</p>
+<input id="pwdInput" type="password" placeholder="输入密码..." style="width:260px;padding:12px 16px;border-radius:10px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;font-size:15px;outline:none;text-align:center;" onkeydown="if(event.key==='Enter')checkPwd()">
+<div id="pwdError" style="color:#ef4444;font-size:13px;margin-top:12px;display:none;">密码错误，请重试</div>
+<button onclick="checkPwd()" style="margin-top:16px;padding:10px 32px;border-radius:10px;border:none;background:#00d4aa;color:#000;font-size:14px;font-weight:600;cursor:pointer;">解锁</button>
+</div>
+</div>
+<script>
+function checkPwd(){
+var p=document.getElementById('pwdInput').value;
+if(p==='QWE123.--98IO'){
+document.getElementById('pwdOverlay').style.display='none';
+document.body.style.overflow='';
+}else{
+document.getElementById('pwdError').style.display='block';
+document.getElementById('pwdInput').value='';
+}}
+document.body.style.overflow='hidden';
+</script>
+<header>
+  <div class="header-inner">
+    <div class="logo"><span>Info</span><span>Gap</span></div>
+    <div class="search-box">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="搜索信息差关键词...">
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>全球信息差 · 先人一步</h1>
+    <p>不跳转、不搬运、不引流——所有信息直接整理呈现，消除认知差距</p>
+    <div class="live-badge"><span class="live-dot"></span>实时追踪 · 2026年6月</div>
+  </div>
+  <div class="categories" id="categoryFilters">
+    <button class="cat-btn active" data-cat="all">全部</button>
+    <button class="cat-btn" data-cat="money">赚钱机会</button>
+    <button class="cat-btn" data-cat="immigration">移民政策</button>
+    <button class="cat-btn" data-cat="tech">科技前沿</button>
+    <button class="cat-btn" data-cat="arbitrage">信息套利</button>
+    <button class="cat-btn" data-cat="life">海外生活</button>
+    <button class="cat-btn" data-cat="breakthrough">市场破局</button>
+    <button class="cat-btn" data-cat="news">全球新闻</button>
+    <button class="cat-btn" data-cat="rates">全球汇率</button>
+    <button class="cat-btn cat-btn-pick" data-cat="pick">本周精选</button>
+  </div>
+    <div class="rates-dashboard" id="ratesDashboard">
+    <div class="rates-chart-container">
+      <h3>人民币汇率走势（近3年）</h3>
+      <div class="rates-currency-selector" id="ratesCurrencySelector"></div>
+      <div class="rates-chart-wrapper"><canvas id="ratesChart"></canvas></div>
+    </div>
+    <h3 style="margin-bottom:12px;color:var(--text);">最新汇率（1 CNY = ）</h3>
+    <div class="rates-summary" id="ratesSummary"></div>
+    <div class="rates-prediction" id="ratesPrediction"></div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num" id="totalCount">0</div><div class="label">深度信息条目</div></div>
+    <div class="stat-card"><div class="num" id="todayCount">0</div><div class="label">本周更新</div></div>
+    <div class="stat-card"><div class="num">12+</div><div class="label">覆盖国家</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="label">信息分类</div></div>
+  </div>
+    <div class="city-table-container" id="cityTableContainer">
+    <div class="city-view-toggle">
+      <button class="city-view-btn active" data-view="table">📋 表格对比</button>
+      <button class="city-view-btn" data-view="card">🃏 卡片视图</button>
+    </div>
+    <table class="city-table" id="cityTable">
+      <thead>
+        <tr>
+          <th data-sort="rank">排名 <span class="sort-arrow">▼</span></th>
+          <th data-sort="city">城市</th>
+          <th data-sort="cost">月生活成本(CNY)</th>
+          <th data-sort="visa">签证难度</th>
+          <th data-sort="safety">安全指数</th>
+          <th data-sort="internet">网速(Mbps)</th>
+          <th data-sort="community">华人社区</th>
+        </tr>
+      </thead>
+      <tbody id="cityTableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="feed-header"><h2>最新信息差</h2><span id="resultHint"></span></div>
+  <div class="feed-grid" id="feedGrid"></div>
+</main>
+
+<div class="overlay" id="detailOverlay">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<footer><p>InfoGap - 所有信息均经过人工整理提炼，不依赖外部跳转。数据来源公开网络，仅供参考。</p></footer>
+
+<script>
+const DATA = [
+  {
+    id: 1, tag: 'money', date: '2026-06-20', isNew: true,
+    title: '2026年AI信息差赚钱三大路径：低门槛到高复利全拆解',
+    summary: '路径一：AI工具福利侦察员（本周就能开始）→ 路径二：垂直行业AI落地顾问（稳定月入1-2万）→ 路径三：AI信息差内容创作者（复利最强）',
+    detail: `
+<h3>核心判断</h3>
+<p>2026年AI工具的信息差窗口期仅<strong>6-18个月</strong>（对比移动互联网时代的3-5年大幅缩短）。速度完全不同，门槛完全不同，杠杆完全不同。发现机会的能力 × AI执行的速度 = 这个时代真正的核心竞争力。</p>
+
+<h3>路径一：AI工具福利侦察员（最低门槛，本周就能开始）</h3>
+<ul>
+  <li><strong>做什么</strong>：整理"2026年主流AI工具省钱手册"，涵盖编程工具、内容创作、图像生成、AI Agent四个类别。</li>
+  <li><strong>怎么变现</strong>：制作成PDF/图文发布在小红书、即刻、推特，引流到私域卖手册（定价9.9-49.9元）；或做成视频发B站/YouTube赚流量分成。</li>
+  <li><strong>启动成本</strong>：0元。一台电脑、一个账号、比别人快半步的搜索习惯即可。</li>
+  <li><strong>预期收入</strong>：初期月入1000-5000元，坚持3个月积累粉丝后可破万。</li>
+</ul>
+
+<h3>路径二：垂直行业AI落地顾问（中等门槛，稳定收入）</h3>
+<ul>
+  <li><strong>做什么</strong>：选一个你熟悉的行业（如餐饮、教培、外贸、设计），帮传统企业把AI工具用起来。不需要写代码，需要你懂行业痛点。</li>
+  <li><strong>收费参考</strong>：部署费3000-20000元，月管理费1000-3000元。</li>
+  <li><strong>收入模型</strong>：5家客户 × 月管理费2000元 = 每月稳定1万副业收入，没有团队没有办公室。</li>
+  <li><strong>关键技能</strong>：理解行业流程 + 匹配AI工具 + 配置工作流 + 输出可量化结果。</li>
+</ul>
+
+<h3>路径三：AI信息差内容创作者（时间成本最高，复利最强）</h3>
+<ul>
+  <li><strong>做什么</strong>：选一个窄到足够具体的方向持续输出，如"设计师如何用AI图生图接外包单"、"财务人员AI报销自动化SOP"。</li>
+  <li><strong>核心逻辑</strong>：你不需要是行业最顶的专家，你只需要比你的读者早两步。</li>
+  <li><strong>平台选择</strong>：国内（公众号/小红书/知乎）+ 海外（Medium/Substack/Twitter）双线并行。</li>
+  <li><strong>长期价值</strong>：建立个人IP后，信息差变现从"倒卖"升级为"认知变现"，越滚越大。</li>
+</ul>
+
+<div class="highlight-box"><strong>一句话总结</strong>：先用信息差快速入场，再用技术积累建立真正的护城河。2026年不是信息差消失了，而是玩法从"我知道你不知道"变成了"我帮你省时间、帮你避坑"。</div>
+`,
+    source: '综合整理自字节跳动青年营、行业调研'
+  },
+  {
+    id: 2, tag: 'money', date: '2026-06-18', isNew: true,
+    title: '跨境信息差套利实操手册：国内滞销品如何变海外爆款',
+    summary: '国内卷不动的产品换个包装在TikTok/Temu上卖爆——不是靠货，而是靠对海外流行趋势的敏锐度。附具体操作步骤。',
+    detail: `
+<h3>核心逻辑</h3>
+<p>真正赚钱的不是倒卖货源，而是<strong>时间差和认知差</strong>。国内已经卷成红海的产品，换个包装、换个语言环境、换个叙事角度，在海外TikTok Shop或Temu上可能就是新奇特。</p>
+
+<h3>四步实操流程</h3>
+<ol>
+  <li><strong>趋势侦察（每天30分钟）</strong>：刷海外Reddit热门版块、TikTok评论区、Pinterest趋势、Amazon Movers & Shakers榜单。关注"什么正在火"——不是已经火的，而是正在上升的。</li>
+  <li><strong>供应链匹配（1-2天）</strong>：发现趋势后立即在1688、义乌购找对应品类。不需要自己囤货，直接做一件代发或小批量试单。关键是快。</li>
+  <li><strong>内容包装（核心环节）</strong>：不要照搬国内文案。研究目标市场的审美和话术，重新拍摄/改写。国内"平价替代"在海外可能变成"hidden gem"，换个叙事就换个溢价空间。</li>
+  <li><strong>渠道上架</strong>：TikTok Shop（短视频+直播）、Temu（低价走量）、Amazon（品牌化）、Etsy（手作/设计感）四选一作为起点。</li>
+</ol>
+
+<h3>真实案例参考</h3>
+<ul>
+  <li>国内售价9.9元的"手机蓝牙遥控自拍器"，在TikTok上换个"content creator essential kit"的包装，售价$14.99，月销3000+单。</li>
+  <li>1688上批发价2.5元的"汽车出风口香薰"，在Etsy上作为"Japanese minimalist car diffuser"卖$12，利润率超80%。</li>
+</ul>
+
+<div class="warn-box"><strong>避坑提醒</strong>：不做品牌侵权、不碰仿品、不做违禁品类。物流选云途/燕文等跨境专线，退货率控制在5%以内。第一次试单金额控制在5000元以内。</div>
+`,
+    source: '综合整理自跨境电商从业者经验、行业分析'
+  },
+  {
+    id: 3, tag: 'immigration', date: '2026-06-05', isNew: false,
+    title: '欧盟移民政策全面右转：遣返中心、30个月拘留、20年禁入——影响分析',
+    summary: '欧盟就收紧移民与庇护政策达成历史性协议，计划在境外设立遣返中心。所有条款详解+对移民申请人的实际影响。',
+    detail: `
+<h3>政策背景</h3>
+<p>2026年6月，欧盟就进一步收紧移民与庇护政策达成协议。斯洛文尼亚《劳动报》评论称："曾由欧洲右翼强硬派所极力主张的立场，如今已然成为政治主流。"</p>
+
+<h3>核心条款逐条解读</h3>
+<table>
+  <tr><th>条款</th><th>具体内容</th><th>影响</th></tr>
+  <tr><td>第三国遣返中心</td><td>在欧洲以外国家设立遣返中心，可将非法移民遣送至非原籍国</td><td>规避部分原籍国拒绝接收的问题，遣返效率大幅提升</td></tr>
+  <tr><td>长期拘留</td><td>可将含儿童在内的移民关押在拘留中心，最长30个月</td><td>此前多数国家拘留上限为6-18个月，大幅延长</td></tr>
+  <tr><td>证件扣押</td><td>可扣押拒不离境的无证移民身份证件</td><td>限制自由流动，变相强制离境</td></tr>
+  <tr><td>禁入期限延长</td><td>驱逐后禁入年限从5年延长至10-20年</td><td>一旦被驱逐，几乎等于终身无法再入境</td></tr>
+  <tr><td>侵入性执法</td><td>授权执法部门开展更具侵入性的监视与入户调查</td><td>非法滞留风险剧增</td></tr>
+</table>
+
+<h3>对申请人的实际建议</h3>
+<ul>
+  <li><strong>已持有合法身份者</strong>：密切关注居留卡续签政策变化，不要出现身份空窗期。</li>
+  <li><strong>正在申请庇护者</strong>：申请难度将显著提高，建议同时探索技术移民、投资移民等替代路径。</li>
+  <li><strong>计划移民欧洲者</strong>：优先考虑德国蓝卡、荷兰高技术移民、爱尔兰关键技能就业许可等正规工签通道，不要走灰色路线。</li>
+  <li><strong>数字游民路线</strong>：葡萄牙D8、西班牙数字游民签证、爱沙尼亚e-Residency等合法路径不受此轮政策收紧影响。</li>
+</ul>
+`,
+    source: '综合整理自环球时报、中国青年网、欧洲新闻网'
+  },
+  {
+    id: 4, tag: 'immigration', date: '2026-05-27', isNew: false,
+    title: '美国绿卡申请重大政策调整："境内等绿卡"时代结束',
+    summary: 'USCIS发布新规要求大多数绿卡申请人返回本国递交申请。2023财年60万人通过境内调整身份拿绿卡，新政将直接改变格局。',
+    detail: `
+<h3>政策要点</h3>
+<p>2026年5月22日，美国公民及移民服务局（USCIS）发布新政策备忘录：除非特殊情况，身处美国境内、有意申请合法永久居留身份（绿卡）的外籍人士，<strong>必须返回本国递交申请</strong>。</p>
+
+<h3>影响范围</h3>
+<ul>
+  <li>2023财年，117万新绿卡中，<strong>超60万</strong>通过在美国境内调整身份（Adjustment of Status）获得。新政将直接冲击这一主要通道。</li>
+  <li>科技行业最受伤：大量H-1B持有者通过境内调整身份拿绿卡，新规下他们需要离境申请，面临签证拒签后无法返美的风险。</li>
+  <li>USCIS发言人澄清存在"国家利益"例外，但<strong>具体哪些人符合"经济利益或国家利益"标准未明确</strong>，给执行留下巨大不确定性。</li>
+</ul>
+
+<h3>受影响人群详解</h3>
+<table>
+  <tr><th>人群类型</th><th>受影响程度</th><th>应对建议</th></tr>
+  <tr><td>H-1B工作签证持有者</td><td>高</td><td>尽快咨询移民律师，评估境外申请的可行性和风险</td></tr>
+  <tr><td>F-1学生签证→OPT→H-1B</td><td>中高</td><td>提前规划，不要出现身份空窗</td></tr>
+  <tr><td>EB-1A杰出人才</td><td>低</td><td>大概率符合"国家利益"例外</td></tr>
+  <tr><td>EB-5投资移民</td><td>低</td><td>"带来经济利益"可能成为豁免理由</td></tr>
+  <tr><td>亲属移民（境内调整）</td><td>高</td><td>核心受影响群体，境外审理时间可能大幅延长</td></tr>
+</table>
+
+<h3>行动建议</h3>
+<ol>
+  <li>如果已提交I-485（境内调整身份申请）但尚未获批：立即联系移民律师，确认是否受影响。</li>
+  <li>如果计划启动绿卡申请：优先评估境外领事处理（Consular Processing）路径。</li>
+  <li>关注后续细则：USCIS预计在未来数月发布具体实施细则，届时才能明确"国家利益"例外的具体标准。</li>
+  <li>备份方案：同步考虑加拿大、澳大利亚、英国等其他英语国家移民路径。</li>
+</ol>
+`,
+    source: '综合整理自第一财经、USCIS官方声明'
+  },
+  {
+    id: 5, tag: 'immigration', date: '2026-06-15', isNew: true,
+    title: '加拿大2026移民政策大地震：省提名缩减20%，法语移民翻倍',
+    summary: '联邦快速通道更倾向法语和特定职业，魁北克外法语移民目标翻倍。想移民加拿大的人需要重新规划路径。',
+    detail: `
+<h3>核心变化</h3>
+<table>
+  <tr><th>项目</th><th>变化</th><th>数据</th></tr>
+  <tr><td>省提名（PNP）</td><td>配额缩减</td><td>同比减少约20%</td></tr>
+  <tr><td>Express Entry</td><td>倾斜法语+紧缺职业</td><td>法语加分权重提高</td></tr>
+  <tr><td>法语移民目标</td><td>魁北克以外省份目标翻倍</td><td>从约3万提升至约6万</td></tr>
+  <tr><td>紧缺职业清单</td><td>更新</td><td>医疗、技工、教育类优先级最高</td></tr>
+</table>
+
+<h3>法语成为最大加分项</h3>
+<p>加拿大联邦政府明确将法语能力作为移民筛选的优先指标。即使在魁北克以外的省份（安省、BC省等），法语申请人的CRS分数获得额外加分，且走专门的法语移民通道，处理和审批速度明显快于普通通道。</p>
+
+<div class="highlight-box"><strong>机会窗口</strong>：目前法语移民申请人数远低于英语通道，竞争激烈程度低得多。CLB 7（法语B2水平）即可获得显著加分，学习周期约6-12个月。</div>
+
+<h3>三类人群的应对策略</h3>
+<ol>
+  <li><strong>已有省提名意向者</strong>：PNP配额缩减意味着分数线上升，建议同步准备Express Entry作为备选方案。</li>
+  <li><strong>有法语基础者</strong>：这是近年最好的移民窗口期，尽快考出TEF/TCF成绩，走法语优先通道。</li>
+  <li><strong>零法语基础者</strong>：如果年龄和英语分数不够竞争力，学习法语是ROI最高的移民投资。</li>
+</ol>
+`,
+    source: '综合整理自GoFar Global、加拿大移民局数据'
+  },
+  {
+    id: 6, tag: 'immigration', date: '2026-06-22', isNew: true,
+    title: '澳大利亚2026-27财年移民配额：技术移民占比72%，打工度假放宽至38岁',
+    summary: '总配额19.5万，护理/IT/工程继续优先，偏远地区签证增加15%。附完整紧缺职业方向和打分策略。',
+    detail: `
+<h3>配额分解</h3>
+<table>
+  <tr><th>类别</th><th>配额</th><th>占比</th></tr>
+  <tr><td>技术移民（Skill）</td><td>约14万</td><td>72%</td></tr>
+  <tr><td>家庭移民（Family）</td><td>约5.25万</td><td>27%</td></tr>
+  <tr><td>特殊资格</td><td>约2500</td><td>1%</td></tr>
+</table>
+
+<h3>紧缺职业方向（优先级排序）</h3>
+<ol>
+  <li><strong>医疗护理</strong>：注册护士、老年护理、助产士、物理治疗师——审理速度最快</li>
+  <li><strong>IT类</strong>：软件工程师、网络安全专家、数据分析师——186/189/190三类签证均可用</li>
+  <li><strong>工程类</strong>：土木工程师、电气工程师、采矿工程师——偏远地区需求最大</li>
+  <li><strong>教育类</strong>：幼教、中学教师——各州都在抢</li>
+  <li><strong>技工类</strong>：电工、焊工、水管工——收入高但需要通过TRA职业评估</li>
+</ol>
+
+<h3>重要变化</h3>
+<ul>
+  <li><strong>打工度假签证年龄上限放宽至38岁</strong>（此前为30/35岁），更多人可以走"打工度假→雇主担保→永居"路径。</li>
+  <li><strong>偏远地区签证配额增加15%</strong>，491/494签证在偏远地区住满3年后转191永居的路径稳定。</li>
+  <li>EOI打分系统中，配偶技能加分、澳洲工作经验加分权重提高。</li>
+</ul>
+
+<h3>快速自测</h3>
+<div class="highlight-box">年龄25-32岁（30分）+ 雅思4个7或PTE 4个65（10分）+ 本科学历（15分）+ 境外3年工作经验（5分）= <strong>60分基础分</strong>。加上州担保5分或偏远地区担保15分，即可达到65分邀请线。</div>
+`,
+    source: '综合整理自澳大利亚移民局官网'
+  },
+  {
+    id: 7, tag: 'money', date: '2026-06-10', isNew: false,
+    title: '加密货币信息套利深度解析：2026年超10亿美元利用信息优势抢先布局',
+    summary: '信息套利（Information Arbitrage）正在重新定义加密和全球市场的盈利模式。链上数据、流动性信号和监管动态是关键工具。',
+    detail: `
+<h3>什么是信息套利</h3>
+<p>传统套利赚的是<strong>价格差</strong>——同一资产在不同市场有不同价格。信息套利赚的是<strong>时间差</strong>——同一信息在不同人群中有不同的到达时间。</p>
+<p>2026年，调查人员发现超过10亿美元的交易在重大地缘政治公告前精准布局。没有操纵价格，没有明显违规。优势仅仅是：<strong>比别人先知道</strong>。</p>
+
+<h3>信息套利的三个层次</h3>
+<ol>
+  <li><strong>速度层</strong>：比市场快几秒到几分钟获取信息。需要技术基础设施（低延迟节点、API监控、链上监听）。适合有技术背景的人。</li>
+  <li><strong>解读层</strong>：同一时间获得信息，但比别人更快、更准确地理解其含义。需要跨领域知识（地缘政治+金融+技术）。适合深度研究者。</li>
+  <li><strong>重构层</strong>：公开信息就在那里，但你用不同的框架重新组织，发现别人看不到的关联。需要独特的信息处理能力。</li>
+</ol>
+
+<h3>实操工具与数据源</h3>
+<ul>
+  <li><strong>链上数据</strong>：Arkham、Nansen、Dune Analytics——追踪鲸鱼地址、交易所流入流出、智能合约交互</li>
+  <li><strong>流动性信号</strong>：DeFiLlama、Token Terminal——监控TVL变化、协议收入、资金流向</li>
+  <li><strong>监管动态</strong>：SEC/CFTC公告、国会听证会、各国央行数字货币(CBDC)进展</li>
+  <li><strong>社交情绪</strong>：LunarCrush、Santiment——量化Twitter/Reddit/Telegram上的讨论热度和情绪</li>
+</ul>
+
+<div class="warn-box"><strong>风险警告</strong>：信息套利合法但处于监管灰色地带。SEC对"利用非公开信息交易数字资产"的立场正在收紧。始终确保信息来源的合法性，不碰内幕信息。加密市场波动极大，任何策略都应在可承受亏损范围内操作。</div>
+`,
+    source: '综合整理自The Bit Gazette、链上数据分析'
+  },
+  {
+    id: 8, tag: 'tech', date: '2026-06-19', isNew: true,
+    title: 'AI Agent创业窗口期：Karpathy"Agentic Engineering"新范式意味着什么',
+    summary: 'AI工具信息差窗口仅6-18个月。"Agentic Engineering"概念今天只有少数人知道，明年可能人人都在聊——这就是信息差本身。',
+    detail: `
+<h3>什么是Agentic Engineering</h3>
+<p>前Tesla AI负责人Andrej Karpathy提出的新概念，核心思想是：未来的软件工程不是写代码，而是<strong>设计能自主完成任务的AI Agent</strong>。工程师的角色从"指令编写者"转变为"Agent行为设计者"。</p>
+
+<h3>与以往范式的根本不同</h3>
+<table>
+  <tr><th>维度</th><th>传统开发</th><th>Agentic Engineering</th></tr>
+  <tr><td>核心产出</td><td>代码/功能</td><td>能自主完成目标的Agent</td></tr>
+  <tr><td>工程师角色</td><td>逐行编写逻辑</td><td>设定目标、约束和反馈机制</td></tr>
+  <tr><td>调试方式</td><td>跟踪代码执行</td><td>观察Agent行为并调整策略</td></tr>
+  <tr><td>质量度量</td><td>代码覆盖率/性能</td><td>任务完成率和效率</td></tr>
+</table>
+
+<h3>为什么这是2026年最大的信息差</h3>
+<ul>
+  <li><strong>今天只有少数人知道这个术语</strong>。大多数开发者还在用"调API"的思维理解AI。</li>
+  <li><strong>窗口期极短</strong>：AI工具的信息差窗口是6-18个月（对比移动互联网的3-5年）。预计2027年Agentic Engineering将成为主流概念。</li>
+  <li><strong>杠杆极高</strong>：以前的信息差靠人力放大，现在的信息差可以靠AI Agent来放大。一个人+一个Agent可以做到以前一个团队的工作量。</li>
+</ul>
+
+<h3>现在就能开始的方向</h3>
+<ol>
+  <li><strong>学习Agent框架</strong>：LangGraph、CrewAI、AutoGen——选择一个深耕。</li>
+  <li><strong>找到垂直场景</strong>：Agent写周报的公司的价值有限，Agent做法律合同审查、医疗影像预筛、供应链风险预警的公司的价值巨大。</li>
+  <li><strong>输出内容建立IP</strong>：写"如何使用LangGraph搭建XX场景Agent"系列教程——当这个概念火起来时，你的内容就是第一波流量的入口。</li>
+</ol>
+`,
+    source: '综合整理自Karpathy公开发言、字节跳动青年营'
+  },
+  {
+    id: 9, tag: 'arbitrage', date: '2026-06-16', isNew: false,
+    title: '政策规则红利实操指南：靠吃透规则赚钱的轻资产模式',
+    summary: '城市落户新政、行业补贴申请、税收优惠政策——普通人懒得研究几百页文件，你吃透了就能提供"代跑腿+规划"服务。',
+    detail: `
+<h3>核心逻辑</h3>
+<p>所有政策规则红利的本质是：<strong>规则公开透明，但99%的人不会花时间去读</strong>。信息差不在于"我知道你不知道的"，而在于"我愿意花时间去理解你不愿意花时间去理解的"。</p>
+
+<h3>当前可操作的政策红利领域</h3>
+
+<h3>1. 城市落户与人才引进</h3>
+<ul>
+  <li>多个新一线城市（杭州、成都、武汉、苏州）对特定学历/技能人群有落户补贴，金额从1万-10万不等。</li>
+  <li>操作方式：吃透当地人社局政策文件 → 制作"XX城市落户+补贴申请全流程"服务 → 每人收费2000-5000元代办理。</li>
+</ul>
+
+<h3>2. 行业补贴与退税</h3>
+<ul>
+  <li>跨境电商综试区"无票免税"政策：很多小卖家不知道可以合法免掉采购环节的增值税。</li>
+  <li>高新技术企业认定：认定成功后企业所得税从25%降至15%，还有地方额外奖励。中小企业自己申请成功率低，你帮他们整理材料+辅导流程。</li>
+</ul>
+
+<h3>3. 各国创业补贴（跨境）</h3>
+<table>
+  <tr><th>国家</th><th>政策</th><th>金额</th></tr>
+  <tr><td>日本</td><td>经济产业省AI创业补贴</td><td>最高5000万日元</td></tr>
+  <tr><td>新加坡</td><td>EDB科技初创企业免税</td><td>前三年免企业所得税</td></tr>
+  <tr><td>德国</td><td>绿色科技创业无偿资助</td><td>最高30万欧元</td></tr>
+  <tr><td>中国（多城市）</td><td>AI/新能源企业租金减免+税收返还</td><td>依城市而定</td></tr>
+</table>
+
+<div class="highlight-box"><strong>商业模式</strong>：政策解读规划服务（收费3000-20000元/单）× 每月3-5单 = 月入1-5万。成本几乎为零——你唯一的成本是把几百页的政策文件读透。</div>
+
+<h3>如何找到政策红利</h3>
+<ol>
+  <li>每天浏览国务院/各部委/各省市政府官网的政策发布栏目。</li>
+  <li>关注"政策"+"补贴"+"申报"+"认定"等关键词。</li>
+  <li>判断标准：文件越长、表格越多、流程越复杂→信息差越大→商机越大。</li>
+</ol>
+`,
+    source: '综合整理自政府公开信息、行业实践'
+  },
+  {
+    id: 10, tag: 'life', date: '2026-06-23', isNew: true,
+    title: '2026数字游民签证全景指南：60+国家、零税率选哪个',
+    summary: '全球60+国家推出远程工作签证，附完整对比：收入门槛、税率、申请难度、居住体验——帮你找到最合适的去处。',
+    detail: `
+<h3>数字游民签证是什么</h3>
+<p>允许远程工作者/自由职业者在目的国合法居住1-2年（可续签），前提是收入来自境外（通常是为外国公司工作或拥有境外客户）。不需要当地工作许可，不占用当地就业市场。</p>
+
+<h3>热门国家横向对比</h3>
+<table>
+  <tr><th>国家</th><th>月收入门槛</th><th>税率</th><th>签证时长</th><th>亮点</th></tr>
+  <tr><td>葡萄牙 D8</td><td>约3280欧元</td><td>20%扁平税率(NHR)</td><td>2年可续</td><td>5年后可申请永居/入籍</td></tr>
+  <tr><td>西班牙</td><td>约2650欧元</td><td>24%扁平税率</td><td>1年可续至5年</td><td>申根区自由通行</td></tr>
+  <tr><td>阿联酋（迪拜）</td><td>约3500美元</td><td>0%个人所得税</td><td>1年</td><td>零个税+高端生活配套</td></tr>
+  <tr><td>克罗地亚</td><td>约2600欧元</td><td>0%（前12个月）</td><td>1年</td><td>欧盟候补国+生活成本低</td></tr>
+  <tr><td>爱沙尼亚</td><td>约4500欧元</td><td>20%</td><td>1年</td><td>e-Residency生态完善</td></tr>
+  <tr><td>泰国 DTV</td><td>约1500美元</td><td>境外收入免税</td><td>5年</td><td>门槛最低+生活成本最低</td></tr>
+  <tr><td>马来西亚 DE Rantau</td><td>约2500美元</td><td>境外收入免税</td><td>1年可续</td><td>英语普及率高</td></tr>
+  <tr><td>印尼（巴厘岛）</td><td>约2000美元</td><td>境外收入免税</td><td>1年</td><td>全球数字游民圣地</td></tr>
+</table>
+
+<h3>三类人群的最佳选择</h3>
+<ul>
+  <li><strong>追求低税率/零税</strong>：阿联酋（0%）> 克罗地亚（0%首年）> 泰国（境外免税）</li>
+  <li><strong>追求护照/永居</strong>：葡萄牙（5年入籍）> 西班牙（5年永居）> 其他国家普遍不给永居通道</li>
+  <li><strong>预算有限</strong>：泰国（门槛最低1500美元/月）> 印尼 > 马来西亚</li>
+</ul>
+
+<div class="highlight-box"><strong>2026年趋势</strong>：目前全球超60个国家推出数字游民签证，较2023年增长近3倍。建议有远程工作能力的人趁政策窗口期尽早申请——随着申请量激增，多个国家已开始提高门槛。</div>
+`,
+    source: '综合整理自各国移民局官网、NomadList'
+  },
+  {
+    id: 11, tag: 'money', date: '2026-06-21', isNew: true,
+    title: '2026各国科技创业补贴大全：日本5000万日元、新加坡免税、德国30万欧元',
+    summary: '逐国拆解科技创业补贴申请条件和流程。知道这些政策并且会申请的人极少——这就是信息差。',
+    detail: `
+<h3>为什么这是被忽视的金矿</h3>
+<p>各国政府为了抢夺科技人才和创新企业，推出了大量补贴政策。但这些信息分散在各国政府官网的角落，语言壁垒+信息碎片化，导致<strong>真正申请的人极少</strong>。</p>
+
+<h3>各国政策详解</h3>
+
+<h3>日本：经济产业省AI/深科技创业补贴</h3>
+<ul>
+  <li><strong>金额</strong>：最高5000万日元（约230万人民币）</li>
+  <li><strong>条件</strong>：注册地在日本的初创企业，业务涉及AI、量子计算、生物科技等领域</li>
+  <li><strong>门槛</strong>：需要日本合伙人或在日注册公司。可通过东京/大阪/福冈的创业签证先行落地</li>
+</ul>
+
+<h3>新加坡：EDB科技初创企业免税</h3>
+<ul>
+  <li><strong>金额</strong>：前三年100%免企业所得税（上限约10万新币/年）</li>
+  <li><strong>条件</strong>：企业在新加坡注册，有实质性运营（不能是空壳公司）</li>
+  <li><strong>额外福利</strong>：政府匹配联合投资（SPRING Singapore），最多1:1跟投</li>
+</ul>
+
+<h3>德国：绿色科技/深科技创业无偿资助</h3>
+<ul>
+  <li><strong>金额</strong>：最高30万欧元（约230万人民币），无需偿还</li>
+  <li><strong>条件</strong>：技术驱动型创业，重点方向包括绿色能源、生物医药、先进制造</li>
+  <li><strong>申请渠道</strong>：通过各地IHK（工商会）或直接向联邦经济部提交</li>
+</ul>
+
+<h3>中国：多城市AI/新能源专项补贴</h3>
+<ul>
+  <li><strong>深圳</strong>：AI企业前三年租金减免50% + 一次性落户奖最高2000万</li>
+  <li><strong>杭州</strong>：数字经济企业研发补贴最高500万/年 + 人才公寓优先配租</li>
+  <li><strong>成都</strong>：高新技术企业认定通过后一次性奖励30万 + 税收返还</li>
+</ul>
+
+<div class="warn-box"><strong>注意事项</strong>：所有补贴申请都需要真实的公司和业务——"空壳骗补"属于严重的法律红线。建议：先做出最小可行产品(MVP) → 注册公司 → 申请补贴 → 用补贴资金扩大业务。</div>
+`,
+    source: '综合整理自各国政府公开信息'
+  },
+  {
+    id: 12, tag: 'tech', date: '2026-06-24', isNew: true,
+    title: 'Apple Vision Pro 2发布：空间计算时代来了——新职业与新机会',
+    summary: 'Vision Pro 2重量减轻40%、价格降至2499美元。催生"空间UI设计师""3D内容创作者"等新职业，时薪100-300美元。',
+    detail: `
+<h3>产品关键变化</h3>
+<table>
+  <tr><th>参数</th><th>Vision Pro 1</th><th>Vision Pro 2</th></tr>
+  <tr><td>重量</td><td>约600g</td><td>约360g（减轻40%）</td></tr>
+  <tr><td>价格</td><td>$3499起</td><td>$2499起</td></tr>
+  <tr><td>芯片</td><td>M2+R1</td><td>M4+R2（运算速度提升3倍）</td></tr>
+  <tr><td>续航</td><td>约2小时</td><td>约4小时</td></tr>
+  <tr><td>视场角</td><td>约100°</td><td>约120°</td></tr>
+</table>
+
+<h3>催生的新职业与收入</h3>
+<ol>
+  <li><strong>空间UI设计师</strong>：为visionOS设计3D交互界面，不是"把手机App平移过去"，而是从零设计空间交互逻辑。时薪$100-200。学习路径：SwiftUI + RealityKit + 3D设计基础。</li>
+  <li><strong>3D内容创作者</strong>：空间照片、空间视频、3D模型的拍摄与制作。品牌方急需能为Vision Pro制作沉浸式广告的人。单项目报价$2000-10000。</li>
+  <li><strong>空间体验顾问</strong>：帮企业把培训、展示、协作场景迁移到空间计算平台。在企业数字化转型预算中切一块。日费率$800-2000。</li>
+  <li><strong>Spatial Computing开发者</strong>：原生visionOS应用开发。目前全球熟练开发者不超过5000人，供需严重失衡。</li>
+</ol>
+
+<h3>提前布局的三个动作</h3>
+<ul>
+  <li><strong>立即学习SwiftUI和RealityKit</strong>：这是visionOS开发的基础，现在开始学，6个月后你就是稀缺人才。</li>
+  <li><strong>关注Apple开发者生态</strong>：WWDC session视频、Apple Design Award空间计算类获奖作品。</li>
+  <li><strong>做出第一个空间应用Demo</strong>：哪怕只是一个3D名片或沉浸式产品展示。有Demo就能接单。</li>
+</ul>
+
+<div class="highlight-box"><strong>判断</strong>：空间计算不会立刻取代手机，但会像2007年的iPhone一样，在2-3年内重塑一个全新的应用生态。现在入场的人将享受最大的先发红利。</div>
+`,
+    source: '综合整理自Apple Newsroom、WWDC 2026信息'
+  }
+];
+
+  {
+    id: 13, tag: 'breakthrough', title: '欧洲空调荒漠：美的如何撕开200亿缺口', isNew: true,
+    summary: '欧洲家庭空调普及率不足5%，百年建筑不让打孔、环保法规卡死制冷剂、人工比机器贵——所有人都说欧洲做不了空调。美的靠便携式+环保制冷剂撕开的口子正在变成洪流。',
+    date: '2026-06-29',
+    source: '综合整理自Bloomberg、Reuters、36氪等',
+    detail: `<h3>困境：欧洲为什么是"空调荒漠"</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>建筑法规</td><td>大量百年老建筑受文物保护法保护，外墙禁止打孔安装外机；石质墙体钻孔难度极大</td></tr>
+<tr><td>环保限制</td><td>欧盟F-Gas法规对制冷剂温室效应值(GWP)限值极严，传统R410a制冷剂GWP高达2088，直接被禁</td></tr>
+<tr><td>安装成本</td><td>欧洲人工费极高，安装一台分体空调的人工费（€1500-3000）经常超过机器本身价格</td></tr>
+<tr><td>文化认知</td><td>长期认为"吹空调致病"，习惯自然通风；北欧国家甚至认为夏天不需要制冷</td></tr>
+<tr><td>渠道壁垒</td><td>家电销售渠道以建材市场为主，普通消费者购买和安装极度不便</td></tr>
+</tbody></table>
+
+<h3>美的的破局路径</h3>
+<ol>
+<li><strong>产品形态创新——绕开建筑限制</strong>：主推便携式移动空调（Portable AC）和窗式机，无需外墙打孔、无需专业安装，插电即用。针对老建筑开发简易安装套件，减少铜管连接复杂度。</li>
+<li><strong>环保合规先行——攻克技术门槛</strong>：率先采用R290（丙烷）等自然制冷剂，GWP仅3，完全符合欧盟F-Gas法规。其他品牌还在观望时，美的已拿到全系列环保认证。</li>
+<li><strong>渠道降维打击——电商直触消费者</strong>：绕过传统建材批发渠道，通过Amazon、本地电商平台直接面向C端销售，解决"买不到"和"安装难"两大痛点。</li>
+<li><strong>借势气候变暖——改变消费认知</strong>：欧洲极端高温（45°C+）频发，空调从"奢侈品"变成"生存必需品"，消费者主动抛弃了环保顾虑。</li>
+</ol>
+
+<h3>当前市场状态</h3>
+<ul>
+<li>2022-2023年夏季，美的便携空调在欧洲多次售罄，补货周期长达数月</li>
+<li>热门型号价格较淡季上涨3-10倍，二手市场加价转卖</li>
+<li>美的（含旗下品牌）已成为欧洲便携空调市场绝对龙头</li>
+<li>欧洲空调市场规模预计2030年超过200亿欧元，中国品牌占据先发优势</li>
+</ul>
+
+<div class="highlight-box"><strong>关键信息差</strong>：欧洲不是"不需要空调"，而是"没有被提供合适的空调产品"。所有本地企业和国际巨头都认为欧洲空调市场做不了，美的用"便携+环保+电商"三招证明他们都错了。等传统品牌反应过来，渠道和消费者心智已经被占满。</div>`
+  },
+  {
+    id: 14, tag: 'breakthrough', title: '非洲断电困境：中国太阳能家电的降维打击', isNew: true,
+    summary: '非洲电网覆盖率不足50%，三星LG只做简单倾销不管适配。海信/TCL开发宽电压+太阳能直驱技术，用"赊销+广告抵费"模式占领50%+市场份额。',
+    date: '2026-06-29',
+    source: '综合整理自African Business、36氪出海等',
+    detail: `<h3>困境：非洲不是"低端市场"，而是"被放弃的市场"</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>电网缺失</td><td>撒哈拉以南非洲超过6亿人无电可用，农村地区电网覆盖率不足20%；城市地区电压在110V-260V之间剧烈波动</td></tr>
+<tr><td>基础设施</td><td>频繁停电（每日数小时），灰尘大、蚊虫多，普通家电半年内必坏</td></tr>
+<tr><td>购买力</td><td>人均日收入不足2美元，一次性支付能力极弱</td></tr>
+<tr><td>巨头放弃</td><td>三星、LG等认为非洲只是"处理库存的低端市场"，从不做任何本地化适配</td></tr>
+</tbody></table>
+
+<h3>中国企业的破局路径</h3>
+<ol>
+<li><strong>宽电压技术</strong>：海信开发140V-260V宽幅电压适配，断电后自动恢复运行状态，无需手动重启。</li>
+<li><strong>太阳能直驱</strong>：推出直流电冰箱和太阳能电视，直接连接太阳能板工作，完全脱离电网依赖。一块光伏板+一台冰箱=农村家庭冷藏自由。</li>
+<li><strong>防虫防尘设计</strong>：密封电路板、防虫网、特制散热片，针对非洲环境重新开模。</li>
+<li><strong>金融创新破购买力</strong>：与当地运营商合作推出"看广告抵电费/电视费"模式；赊销分期+以旧换新，降低首次付费门槛。</li>
+</ol>
+
+<div class="highlight-box"><strong>关键信息差</strong>：别人看到的是"非洲人没钱买家电"，中国企业看到的是"非洲人极度需要家电但没有适配产品"。宽电压、太阳能、赊销——这三个技术/模式创新，本质上是在为"被遗忘的市场"重新发明产品。</div>`
+  },
+  {
+    id: 15, tag: 'breakthrough', title: '中东50°C禁区：格力如何让空调在沙漠里运转', isNew: true,
+    summary: '中东夏季50°C+，日美品牌认为空调在此环境必坏，不愿投入研发。格力/美的研发出60°C强制冷技术，现在占据中东空调市场主导地位。',
+    date: '2026-06-29',
+    source: '综合整理自Gulf News、产业在线等',
+    detail: `<h3>困境：50°C环境下的"技术无人区"</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>极端高温</td><td>沙特、阿联酋夏季户外温度常达50°C+，压缩机在43°C以上自动停机保护，空调形同虚设</td></tr>
+<tr><td>沙尘暴</td><td>频繁沙尘导致换热器堵塞，普通空调3个月内效率下降50%以上</td></tr>
+<tr><td>能效黑洞</td><td>极热环境下能效比暴跌，一台普通空调的耗电量是温带地区的2-3倍</td></tr>
+<tr><td>巨头放弃</td><td>大金、三菱等日系品牌认为"极端环境研发投入产出比太低"，拒绝为中东特供机型</td></tr>
+</tbody></table>
+
+<h3>中国企业的破局路径</h3>
+<ol>
+<li><strong>重新设计散热系统</strong>：开发特殊冷媒环和增强型冷凝器，使压缩机在60°C环境下仍能持续运转，不停机保护。</li>
+<li><strong>防沙尘专利</strong>：自清洁滤网+防沙换热器设计，大幅降低沙尘对性能的影响。</li>
+<li><strong>价格碾压</strong>：同等耐候性能下，中国空调价格仅为日系品牌的一半，且提供更长保修期。</li>
+</ol>
+
+<div class="warn-box"><strong>当前状态</strong>：中国品牌已占据中东空调市场50%以上份额。沙特利雅得、迪拜街头，格力/美的的巨型广告牌随处可见。这是一个典型的"别人不愿做的脏活，成为最大护城河"的案例。</div>`
+  },
+  {
+    id: 16, tag: 'breakthrough', title: '东南亚物流死穴：极兔如何借OPPO网点称霸万岛之国', isNew: true,
+    summary: '印尼1.7万个岛屿、信用卡覆盖率不足5%，网购被认为是伪命题。极兔复用OPPO/Vivo数万家门店作代收点，用"货到付款+现金交易"建成东南亚第一快递网络。',
+    date: '2026-06-29',
+    source: '综合整理自Tech in Asia、晚点LatePost等',
+    detail: `<h3>困境：万岛之国的"物流地狱"</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>地理分散</td><td>印尼由1.7万个岛屿组成，传统物流公司只覆盖爪哇岛等核心区域，外岛配送周期长达2-4周</td></tr>
+<tr><td>支付缺失</td><td>信用卡覆盖率不足5%，银行账户持有率低，线上支付几乎不存在</td></tr>
+<tr><td>信任问题</td><td>消费者不信任"先付款后收货"，必须亲眼看到商品才愿意付钱</td></tr>
+<tr><td>最后一公里</td><td>很多地区没有标准地址，门牌号混乱，传统快递根本无法投递</td></tr>
+</tbody></table>
+
+<h3>极兔的破局路径</h3>
+<ol>
+<li><strong>网点复用革命</strong>：极兔创始人同时也是OPPO印尼负责人，直接复用OPPO/Vivo在东南亚深耕多年的数万家手机门店作为快递代收点和配送站。一夜之间拥有了任何竞争对手无法企及的毛细血管网络。</li>
+<li><strong>COD（货到付款）体系</strong>：全链路支持现金交易，快递员送货时等待用户取现金付款，甚至帮用户充值话费、代缴水电费。</li>
+<li><strong>灵活地址解析</strong>：不依赖标准地址，快递员通过地标、熟人网络、WhatsApp定位等方式投递。</li>
+</ol>
+
+<div class="highlight-box"><strong>关键信息差</strong>：全世界都认为东南亚电商物流做不了，是因为用"发达市场的标准答案"去套。极兔证明了一件事——门店网络就是最好的物流基础设施，现金交易就是最好的支付方案。现在极兔不仅称霸东南亚，还杀回中国收购了百世快递并成功上市。</div>`
+  },
+  {
+    id: 17, tag: 'breakthrough', title: '印度关税高墙：中国手机如何靠"散件出海"占领75%市场', isNew: true,
+    summary: '印度将手机进口关税提到20%以上，意图逼退中国品牌。小米/传音反手在印度建厂，用SKD散件组装模式，本地化成本比在中国生产还低。',
+    date: '2026-06-29',
+    source: '综合整理自ET Telecom、Counterpoint Research等',
+    detail: `<h3>困境：关税壁垒+价格红线</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>关税武器</td><td>印度政府为保护本土制造业，将手机进口关税从10%逐步提高到20%+，成品手机直接出口已无利润空间</td></tr>
+<tr><td>价格天花板</td><td>印度人均GDP约2500美元，消费者对价格极度敏感，100美元是智能手机的"生死线"</td></tr>
+<tr><td>特殊需求</td><td>印度用户喜欢深肤色自拍美颜、防油污屏幕（手抓饭文化）、超长续航（停电频繁），但巨头只给全球通用机型</td></tr>
+</tbody></table>
+
+<h3>中国企业的破局路径</h3>
+<ol>
+<li><strong>SKD/CKD散件出海</strong>：把手机拆成半散件(SKD)或全散件(CKD)出口到印度，在当地工厂组装。关税按零部件征收（远低于整机），且满足"印度制造"标签要求。</li>
+<li><strong>疯狂建厂</strong>：小米、OPPO、vivo在印度建立大规模组装工厂，雇佣数万本地工人，成本控制到极致——在印度生产的综合成本甚至低于中国。</li>
+<li><strong>本地化微创新</strong>：传音开发针对深肤色的摄像算法；小米推出印度宗教节日特供主题；所有品牌全面支持22种印度官方语言。</li>
+</ol>
+
+<div class="warn-box"><strong>注</strong>：中国品牌曾占印度手机市场75%以上份额。近两年受地缘政治影响有所回落，但"散件出海+本地建厂"的商业模式已被验证为应对关税壁垒的标准答案，在巴西、墨西哥等市场被广泛复制。</div>`
+  },
+  {
+    id: 18, tag: 'breakthrough', title: '日本中古富矿：中国商家如何挖走万亿二手奢侈品', isNew: true,
+    summary: '日本是全球最大的二手奢侈品市场，但极度分散封闭。中国商家利用电商运营优势，在雅虎拍卖和Mercari上低价扫货，高价卖回国内和欧美市场。',
+    date: '2026-06-29',
+    source: '综合整理自日本经济新闻、36氪等',
+    detail: `<h3>困境：日本有货，但没有"卖出去"的能力</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>供给过剩</td><td>日本是全球最大奢侈品消费国之一，泡沫经济时期积累了大量爱马仕、劳力士、LV。日本人极度爱惜物品，二手成色普遍极好</td></tr>
+<tr><td>渠道分散</td><td>线下中古店成千上万家但极度分散，线上雅虎拍卖、Mercari等平台运营效率低，缺乏全球分销能力</td></tr>
+<tr><td>定价错位</td><td>日本国内二手价远低于中国和欧美市场。一只成色95新的爱马仕Birkin在日本可能300万日元（约14万人民币），到中国市场轻松翻倍</td></tr>
+<tr><td>信息壁垒</td><td>日本卖家几乎不会英文，商品描述仅有日文，天然阻挡了海外买家</td></tr>
+</tbody></table>
+
+<h3>中国商家的破局路径</h3>
+<ol>
+<li><strong>跨境扫货</strong>：雇佣日语团队在雅虎拍卖、Mercari、PayPayフリマ等平台上批量扫货，利用日本卖家不懂海外定价的信息差低价入手。</li>
+<li><strong>标准化鉴定+分级</strong>：引入日本中古鉴定标准（N/S/A/B/C级），配合国内直播电商展示成色，建立信任。</li>
+<li><strong>双市场套利</strong>：高价值单品（爱马仕、劳力士）卖回中国市场；中端品牌（Coach、MK）通过eBay、Poshmark卖向欧美市场。</li>
+</ol>
+
+<div class="highlight-box"><strong>关键信息差</strong>：日本中古市场的本质是"一个供给端极度优质、但渠道端极度落后的市场"。中国商家不需要生产任何东西，只需要用电商运营能力连接日本供给和中国/欧美需求，中间价差就是纯利润。</div>`
+  },
+  {
+    id: 19, tag: 'breakthrough', title: '澳洲"羞于启齿"的刚需：中国假发如何垄断全球80%', isNew: true,
+    summary: '澳洲/欧美对假发有巨大需求但本地零产能。河南许昌一个地级市靠跨境电商直触终端用户，把几千美元的真人发产品做到几百美元，吃下全球80%假发市场。',
+    date: '2026-06-29',
+    source: '综合整理自Alibaba.com、许昌市商务局数据等',
+    detail: `<h3>困境：巨大需求 vs 零供给</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>需求刚性</td><td>黑人女性因发质原因对假发有刚性需求（每人年均消费5-8顶）；癌症化疗患者、脱发人群是稳定需求源；欧美Cosplay、时尚假发市场持续增长</td></tr>
+<tr><td>渠道尴尬</td><td>线下假发店价格极高（一顶真人发假发1000-3000美元），且购买体验尴尬——很多消费者不愿走入实体店</td></tr>
+<tr><td>零本地产能</td><td>澳洲/欧美本地几乎零假发制造能力，100%依赖进口，传统批发链条冗长，终端价格被放大5-10倍</td></tr>
+</tbody></table>
+
+<h3>许昌产业带的破局路径</h3>
+<ol>
+<li><strong>产业集聚碾压</strong>：河南许昌一个地级市，拥有假发企业5000+家、从业者30万人，从原料收购到成品制造全链条集聚，成本低到任何国家无法竞争。</li>
+<li><strong>跨境电商直触C端</strong>：通过AliExpress、Amazon、独立站直接面向澳洲/欧美消费者，砍掉进口商、批发商、零售商四层加价，终端价格降至原来的1/5。</li>
+<li><strong>极致定制化</strong>：支持客户寄送头发样本匹配颜色、定制发际线形状、选择卷度和长度。传统假发店能做的，线上全都能做且价格更低。</li>
+</ol>
+
+<div class="highlight-box"><strong>关键信息差</strong>：假发是一个典型的"需求极度分散但供给极度集中"的品类。全球消费者都需要假发，但99%的人不知道假发来自中国许昌。许昌商家利用跨境电商直接触达终端，把这个信息差变成了护城河——当你绕开所有中间商，你的利润就是别人的成本。</div>`
+  },
+  {
+    id: 20, tag: 'breakthrough', title: '拉美摩托车战争：中国制造如何用1/3价格碾压本田', isNew: true,
+    summary: '拉美路况极差、公共交通危险，摩托车是刚需。日系品牌价格高昂交货慢。中国摩托车用1/3价格+本地CKD工厂+路况特化加固，在多个拉美国家份额超50%。',
+    date: '2026-06-29',
+    source: '综合整理自MotoData Latam、中国摩托车商会等',
+    detail: `<h3>困境：买不起的刚需</h3>
+<table><thead><tr><th>限制因素</th><th>具体内容</th></tr></thead><tbody>
+<tr><td>交通困境</td><td>拉美多国（墨西哥、哥伦比亚、秘鲁等）公共交通系统落后且治安差，汽车价格是普通家庭年收入的5-10倍，摩托车是唯一可负担的机动交通工具</td></tr>
+<tr><td>路况恶劣</td><td>大量非铺装路面、山路和贫民窟窄巷，对车辆耐用性和通过性要求极高</td></tr>
+<tr><td>日系高价</td><td>本田、雅马哈同等排量摩托车价格是中国的2-3倍，且从日本/东南亚发货周期长达3-6个月</td></tr>
+<tr><td>关税壁垒</td><td>拉美多国对整车进口征收高额关税（30%-50%），直接出口整车无价格优势</td></tr>
+</tbody></table>
+
+<h3>中国企业的破局路径</h3>
+<ol>
+<li><strong>性价比碾压</strong>：同等125cc排量，中国摩托车售价800-1200美元，日系2500美元+。质量虽然不如本田，但"买得起+修得起"是硬道理。</li>
+<li><strong>CKD本地组装</strong>：在墨西哥、哥伦比亚等地建立散件组装工厂，规避整车关税，同时满足当地"国产化率"要求，享受税收优惠。</li>
+<li><strong>路况特化加固</strong>：加强后平叉、加固车架、加大离地间隙、简化电控系统（越简单越不容易坏），专门针对拉美恶劣路况设计。</li>
+</ol>
+
+<div class="highlight-box"><strong>关键信息差</strong>：本田认为拉美穷人"买不起好摩托所以不配拥有摩托"，中国企业发现的是"正因为买不起好摩托，所以更需要一台能出行的摩托"。当你为被主流品牌忽视的人群造产品，价格差3倍的时候，品质差距就不再是问题。这就是"够用就好"对"精益求精"的降维打击。</div>`
+  }
+];
+
+];
+
+let activeCat = 'all';
+
+// 本周精选（基于 ISO 周数确定性选取5条）
+var _weekNum = (function(){ var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+3-(d.getDay()+6)%7); var jan1=new Date(d.getFullYear(),0,1); return Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7); })();
+var _weeklyPicks = (function(w){ var picks=[]; var used={}; var seed=w*13+7; for(var i=0;i<5;i++){ seed=(seed*1103515245+12345)&0x7fffffff; var idx=seed%297+1; if(!used[idx]){ picks.push(idx); used[idx]=true; } } return picks; })(_weekNum);
+
+let searchTerm = '';
+
+
+// ===== Global Rates =====
+const RATES_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/rates';
+let ratesData = null;
+let ratesChart = null;
+let selectedRateCurrency = 'USD';
+
+const CURRENCY_NAMES = {"USD":"美元","EUR":"欧元","JPY":"日元","GBP":"英镑","AUD":"澳元","CAD":"加元","CHF":"瑞郎","HKD":"港元","KRW":"韩元","SGD":"新元","NZD":"纽元","THB":"泰铢"};
+
+async function fetchRates() {
+  try {
+    var resp = await fetch(RATES_BASE + '/cny_rates.json');
+    ratesData = await resp.json();
+    renderRatesUI();
+  } catch(e) {
+    document.getElementById('ratesSummary').innerHTML = '<div class="rates-loading">汇率数据加载失败：' + e.message + '</div>';
+  }
+}
+
+function renderRatesUI() {
+  var currencies = Object.keys(ratesData.latest);
+  var btnHtml = currencies.map(function(c) {
+    var active = c === selectedRateCurrency ? ' active' : '';
+    return '<button class="rates-currency-btn' + active + '" data-currency="' + c + '">' + (CURRENCY_NAMES[c] || c) + '</button>';
+  }).join('');
+  document.getElementById('ratesCurrencySelector').innerHTML = btnHtml;
+  renderRatesSummary();
+  renderRatesChart();
+  renderRatesPrediction();
+}
+
+function renderRatesSummary() {
+  var currencies = Object.keys(ratesData.latest);
+  var html = currencies.map(function(c) {
+    var rate = ratesData.latest[c];
+    var history = ratesData.history;
+    var prevRate = null;
+    if (history.length >= 2) {
+      var prev = history[history.length - 2];
+      if (prev && prev.rates && prev.rates[c]) prevRate = prev.rates[c];
+    }
+    var changeHtml = '';
+    if (prevRate) {
+      var changePct = ((rate - prevRate) / prevRate * 100).toFixed(2);
+      var cls = changePct >= 0 ? 'rate-up' : 'rate-down';
+      var sign = changePct >= 0 ? '+' : '';
+      changeHtml = '<div class="rate-change ' + cls + '">' + sign + changePct + '% (月)</div>';
+    }
+    return '<div class="rate-card">'
+      + '<div class="currency-code">' + c + '</div>'
+      + '<div class="currency-name">' + (CURRENCY_NAMES[c] || c) + '</div>'
+      + '<div class="rate-value">' + rate.toFixed(4) + '</div>'
+      + changeHtml
+      + '</div>';
+  }).join('');
+  document.getElementById('ratesSummary').innerHTML = html;
+}
+
+function renderRatesChart() {
+  var ctx = document.getElementById('ratesChart').getContext('2d');
+  if (ratesChart) ratesChart.destroy();
+  var history = ratesData.history;
+  var labels = history.map(function(h) { return h.date.substring(0, 7); });
+  var data = history.map(function(h) { return h.rates[selectedRateCurrency] || null; });
+  var sma = [];
+  for (var i = 0; i < data.length; i++) {
+    if (i < 2) { sma.push(null); continue; }
+    sma.push((data[i] + data[i-1] + data[i-2]) / 3);
+  }
+  var n = data.length;
+  var sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  var validN = 0;
+  for (var i = 0; i < n; i++) {
+    if (data[i] === null) continue;
+    sumX += i; sumY += data[i]; sumXY += i * data[i]; sumX2 += i * i;
+    validN++;
+  }
+  var slope = (validN * sumXY - sumX * sumY) / (validN * sumX2 - sumX * sumX);
+  var intercept = (sumY - slope * sumX) / validN;
+  var predictLabels = [];
+  var predictData = [];
+  var lastDate = new Date(history[history.length-1].date);
+  for (var i = 1; i <= 3; i++) {
+    var nextMonth = new Date(lastDate);
+    nextMonth.setMonth(nextMonth.getMonth() + i);
+    var dateStr = nextMonth.toISOString().substring(0, 7);
+    predictLabels.push(dateStr);
+    predictData.push(intercept + slope * (n + i));
+  }
+  var residuals = [];
+  for (var i = 0; i < n; i++) {
+    if (data[i] === null) continue;
+    var predicted = intercept + slope * i;
+    residuals.push(Math.abs(data[i] - predicted));
+  }
+  residuals.sort(function(a,b) { return a - b; });
+  var mad = residuals[Math.floor(residuals.length / 2)] * 1.4826;
+  var upper = predictData.map(function(v) { return v + mad * 1.5; });
+  var lower = predictData.map(function(v) { return v - mad * 1.5; });
+  ratesChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels.concat(predictLabels),
+      datasets: [
+        { label: '实际汇率', data: data.concat(Array(predictLabels.length).fill(null)), borderColor: '#00d4aa', backgroundColor: 'rgba(0,212,170,0.1)', fill: true, tension: 0.3, pointRadius: 2, borderWidth: 2 },
+        { label: '3月均线', data: sma.concat(Array(predictLabels.length).fill(null)), borderColor: '#60a5fa', borderWidth: 1.5, borderDash: [4,4], pointRadius: 0, fill: false },
+        { label: '趋势预测', data: Array(labels.length).fill(null).concat(predictData), borderColor: '#f59e0b', borderWidth: 2, borderDash: [6,3], pointRadius: 3, pointBackgroundColor: '#f59e0b', fill: false },
+        { label: '预测上界', data: Array(labels.length).fill(null).concat(upper), borderColor: 'rgba(245,158,11,0.3)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false },
+        { label: '预测下界', data: Array(labels.length).fill(null).concat(lower), borderColor: 'rgba(245,158,11,0.3)', borderWidth: 1, borderDash: [2,4], pointRadius: 0, fill: false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { intersect: false, mode: 'index' },
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#94a3b8', usePointStyle: true, padding: 20, font: { size: 11 } } },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.dataset.label + ': ' + (ctx.parsed.y ? ctx.parsed.y.toFixed(4) : 'N/A'); } } }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', maxTicksLimit: 12, font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.1)' } },
+        y: { ticks: { color: '#64748b', font: { size: 10 }, callback: function(v) { return v.toFixed(4); } }, grid: { color: 'rgba(148,163,184,0.1)' } }
+      }
+    }
+  });
+}
+
+function renderRatesPrediction() {
+  var history = ratesData.history;
+  var data = history.map(function(h) { return h.rates[selectedRateCurrency]; }).filter(function(v) { return v !== null && v !== undefined; });
+  var n = data.length;
+  var sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+  for (var i = 0; i < n; i++) { sumX += i; sumY += data[i]; sumXY += i * data[i]; sumX2 += i * i; }
+  var slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+  var recentAvg = 0, olderAvg = 0;
+  var halfN = Math.floor(n / 2);
+  for (var i = halfN; i < n; i++) recentAvg += data[i];
+  for (var i = 0; i < halfN; i++) olderAvg += data[i];
+  recentAvg /= (n - halfN); olderAvg /= halfN;
+  var trendPct = ((recentAvg - olderAvg) / olderAvg * 100);
+  var currencyName = CURRENCY_NAMES[selectedRateCurrency] || selectedRateCurrency;
+  var trendTag, trendLabel;
+  if (trendPct > 1) { trendTag = 'pred-bullish'; trendLabel = '看涨'; }
+  else if (trendPct < -1) { trendTag = 'pred-bearish'; trendLabel = '看跌'; }
+  else { trendTag = 'pred-neutral'; trendLabel = '震荡'; }
+  var latestRate = ratesData.latest[selectedRateCurrency];
+  var predictRate = latestRate * (1 + trendPct / 100 / 3);
+  var html = '<h3>趋势预测与分析 <span class="pred-tag ' + trendTag + '">' + trendLabel + '</span></h3>';
+  html += '<p>';
+  html += '<strong>' + currencyName + '（' + selectedRateCurrency + '）</strong>近半年较前半年变动 <strong>' + (trendPct > 0 ? '+' : '') + trendPct.toFixed(2) + '%</strong>。<br>';
+  html += '当前汇率：<strong>1 CNY = ' + latestRate.toFixed(4) + ' ' + selectedRateCurrency + '</strong>。<br>';
+  if (Math.abs(trendPct) > 0.5) {
+    html += '基于线性回归模型，未来1个月预计汇率约 <strong>' + predictRate.toFixed(4) + '</strong>，';
+    html += '整体呈<span class="' + trendTag + '">' + trendLabel + '</span>趋势。<br>';
+  } else {
+    html += '近期走势平稳，预计未来1个月维持窄幅震荡。<br>';
+  }
+  var factors = getCurrencyFactors(selectedRateCurrency);
+  html += '<br><strong>影响因素：</strong><br>' + factors;
+  html += '</p>';
+  document.getElementById('ratesPrediction').innerHTML = html;
+}
+
+function getCurrencyFactors(code) {
+  var factors = {
+    'USD': '美联储货币政策（利率决议、缩表进程）、美国通胀数据（CPI/PCE）、中美贸易关系、美国大选及财政政策走向。',
+    'EUR': '欧央行利率政策、欧元区通胀与经济增长数据、能源价格（天然气）、地缘政治风险（乌克兰局势）。',
+    'JPY': '日本央行货币政策正常化进程（YCC调整）、日美利差、日本通胀数据、全球避险情绪。',
+    'GBP': '英国央行利率决策、英国经济数据（GDP/CPI）、脱欧后贸易协定进展、英国财政政策。',
+    'AUD': '澳洲联储利率政策、大宗商品价格（铁矿石/煤炭）、中国经济数据（最大贸易伙伴）、全球风险偏好。',
+    'CAD': '加拿大央行利率决策、原油价格、加拿大经济数据、美加贸易关系。',
+    'CHF': '瑞士央行政策利率、全球避险需求、瑞士通胀水平、欧元区经济溢出效应。',
+    'HKD': '联系汇率制度（7.75-7.85区间）、美联储政策传导、香港经济与房市、内地与香港资本流动。',
+    'KRW': '韩国央行利率、半导体出口数据、中美贸易摩擦间接影响、韩元国际化程度。',
+    'SGD': '新加坡金管局汇率政策（NEER篮子）、新加坡经济增速、区域贸易环境、全球金融中心地位。',
+    'NZD': '新西兰联储利率、乳制品出口价格、全球农业大宗商品走势、亚太区域经济。',
+    'THB': '泰国央行利率、旅游业恢复程度、出口数据、东南亚地缘政治、泰铢国际化。'
+  };
+  return factors[code] || '该货币受全球经济环境、本国央行政策及贸易状况综合影响。';
+}
+
+document.getElementById('ratesCurrencySelector').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('rates-currency-btn')) return;
+  var currency = e.target.dataset.currency;
+  if (!currency) return;
+  document.querySelectorAll('.rates-currency-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  selectedRateCurrency = currency;
+  renderRatesChart();
+  renderRatesPrediction();
+});
+
+
+// ===== City Compare Data =====
+var CITY_DATA = [
+  {rank:1,city:'东京',cost:12000,visa:'中等',safety:92,internet:180,community:'大',desc:'亚洲最宜居城市之一，交通便利，美食丰富'},
+  {rank:2,city:'曼谷',cost:6000,visa:'容易',safety:78,internet:150,community:'大',desc:'数字游民天堂，生活成本低，签证灵活'},
+  {rank:3,city:'吉隆坡',cost:5000,visa:'容易',safety:75,internet:120,community:'大',desc:'MM2H签证友好，英语普及率高，多元文化'},
+  {rank:4,city:'新加坡',cost:18000,visa:'较难',safety:95,internet:250,community:'大',desc:'金融中心，安全顶级，但生活成本极高'},
+  {rank:5,city:'迪拜',cost:15000,visa:'中等',safety:90,internet:200,community:'中',desc:'零税收，奢华生活，远程工作签证友好'},
+  {rank:6,city:'里斯本',cost:9000,visa:'容易',safety:85,internet:160,community:'小',desc:'D7签证热门，气候宜人，欧洲性价比之王'},
+  {rank:7,city:'巴厘岛',cost:4500,visa:'容易',safety:72,internet:100,community:'中',desc:'数字游民圣地，第二家园签证即将推出'},
+  {rank:8,city:'墨西哥城',cost:7000,visa:'容易',safety:62,internet:130,community:'中',desc:'北美时区优势，文化丰富，临时居留签证简单'},
+  {rank:9,city:'胡志明市',cost:4000,visa:'中等',safety:70,internet:110,community:'中',desc:'东南亚新兴数字游民中心，成本极低'},
+  {rank:10,city:'布达佩斯',cost:7500,visa:'容易',safety:82,internet:170,community:'小',desc:'申根区，白卡签证友好，温泉之都'},
+  {rank:11,city:'清迈',cost:3500,visa:'容易',safety:80,internet:100,community:'中',desc:'数字游民经典之选，生活节奏慢，成本极低'},
+  {rank:12,city:'第比利斯',cost:4000,visa:'容易',safety:76,internet:90,community:'小',desc:'格鲁吉亚1年免签，加密货币友好，欧亚交汇'}
+];
+
+function renderCityTable(sortBy, sortDir) {
+  var sorted = CITY_DATA.slice();
+  sorted.sort(function(a,b) {
+    var va = a[sortBy], vb = b[sortBy];
+    if (typeof va === 'number') return sortDir === 'asc' ? va - vb : vb - va;
+    return sortDir === 'asc' ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
+  var html = sorted.map(function(c) {
+    var costClass = c.cost < 5000 ? 'cost-low' : c.cost < 10000 ? 'cost-mid' : 'cost-high';
+    return '<tr><td class="city-rank">' + c.rank + '</td><td class="city-name">' + c.city + '</td><td class="' + costClass + '">¥' + c.cost.toLocaleString() + '</td><td>' + c.visa + '</td><td>' + c.safety + '/100</td><td>' + c.internet + '</td><td>' + c.community + '</td></tr>';
+  }).join('');
+  document.getElementById('cityTableBody').innerHTML = html;
+}
+
+// ===== Global News =====
+const NEWS_BASE = 'https://gjbxbsp7tw-ship-it.github.io/infogap/news';
+const COUNTRY_NAMES = {"US":"美国","CN":"中国","JP":"日本","GB":"英国","DE":"德国","FR":"法国","KR":"韩国","AU":"澳大利亚","CA":"加拿大","IN":"印度","IT":"意大利","ES":"西班牙","BR":"巴西","MX":"墨西哥","RU":"俄罗斯","TR":"土耳其","SG":"新加坡","ZA":"南非","AE":"阿联酋"};
+
+async function fetchNews(country) {
+  try {
+    var resp = await fetch(NEWS_BASE + '/' + country + '.json');
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.json();
+  } catch(e) {
+    console.error('News fetch error:', e);
+    return [];
+  }
+}
+
+function renderNewsCountryBtns() {
+  var countries = Object.keys(COUNTRY_NAMES);
+  var html = countries.map(function(c) {
+    var active = c === 'US' ? ' active' : '';
+    return '<button class="news-country-btn' + active + '" data-country="' + c + '">' + COUNTRY_NAMES[c] + '</button>';
+  }).join('');
+  var el = document.getElementById('newsCountryBtns');
+  if (el) el.innerHTML = html;
+}
+
+var currentNewsCountry = 'US';
+async function renderNewsCards(country) {
+  currentNewsCountry = country;
+  var grid = document.getElementById('feedGrid');
+  grid.innerHTML = '<div class="no-result" style="padding:40px;text-align:center;color:var(--text3);">加载中...</div>';
+  var newsData = await fetchNews(country);
+  document.getElementById('totalCount').textContent = newsData.length;
+  document.getElementById('todayCount').textContent = newsData.length;
+  document.getElementById('resultHint').textContent = COUNTRY_NAMES[country] + '新闻 · 共 ' + newsData.length + ' 条';
+  
+  if (!newsData.length) {
+    grid.innerHTML = '<div class="no-result">暂无' + (COUNTRY_NAMES[country] || country) + '的新闻数据</div>';
+    return;
+  }
+  
+  grid.innerHTML = newsData.slice(0, 20).map(function(n, i) {
+    var title = n.title || '无标题';
+    var source = n.source || '';
+    var date = n.publishedAt ? n.publishedAt.substring(0, 10) : '';
+    var desc = n.description || '';
+    if (desc.length > 120) desc = desc.substring(0, 120) + '...';
+    var url = n.url || '#';
+    return '<div class="card news-card"><span class="card-tag tag-news">' + (COUNTRY_NAMES[country] || country) + '新闻</span><h3><a href="' + url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + title + '</a></h3><p>' + desc + '</p><div class="meta"><span>' + source + '</span><span>' + date + '</span></div></div>';
+  }).join('');
+}
+
+// Initialize news country buttons on page load
+(function(){ renderNewsCountryBtns(); })();
+
+function renderCards() {
+  var grid = document.getElementById('feedGrid');
+  var filtersDiv = document.getElementById('newsFilters');
+  // 全球新闻走独立渲染
+  if (activeCat === 'news') {
+    if (filtersDiv) filtersDiv.style.display = 'flex';
+    document.getElementById('cityTableContainer').classList.remove('active');
+    document.getElementById('ratesDashboard').classList.remove('active');
+    renderNewsCards('US');
+    return;
+  }
+  if (filtersDiv) filtersDiv.style.display = 'none';
+  // 本周精选
+  if (activeCat === 'pick') {
+    grid.innerHTML = '';
+    var pickData = DATA.filter(function(d) { return _weeklyPicks.indexOf(d.id) >= 0; });
+    document.getElementById('totalCount').textContent = pickData.length;
+    document.getElementById('todayCount').textContent = pickData.filter(function(d){return d.isNew;}).length;
+    document.getElementById('resultHint').textContent = '第' + _weekNum + '周精选 · 共 ' + pickData.length + ' 条';
+    grid.innerHTML = pickData.map(function(d) {
+      var cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+      var lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
+      var nb = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
+      var trendIdx = (d.id * 7 + 3) % 3;
+      var trendBadges = ['<span class="trend-badge trend-hot">🔥 爆发期</span>','<span class="trend-badge trend-rising">📈 上升期</span>','<span class="trend-badge trend-stable">📊 成熟期</span>'];
+      var pickBadge = '<span class="pick-badge">精选</span>';
+      return '<div class="card" data-id="' + d.id + '" onclick="openDetail(' + d.id + ')"><span class="card-tag ' + cls + '">' + lbl + nb + '</span><h3>' + d.title + trendBadges[trendIdx] + pickBadge + '</h3><p>' + d.summary + '</p><div class="meta"><span>' + d.date + '</span></div><div class="cta-hint">点击查看完整信息 →</div></div>';
+    }).join('');
+    return;
+  }
+  // 海外生活：显示城市对比表
+  var cityTableContainer = document.getElementById('cityTableContainer');
+  if (activeCat === 'life') {
+    if (cityTableContainer) cityTableContainer.classList.add('active');
+    renderCityTable('rank', 'asc');
+    grid.style.display = 'grid';
+    document.getElementById('feedGrid').style.display = 'grid';
+  } else {
+    if (cityTableContainer) cityTableContainer.classList.remove('active');
+    document.getElementById('feedGrid').style.display = '';
+  }
+  // 全球汇率走独立渲染
+  var ratesDashboard = document.getElementById('ratesDashboard');
+  if (activeCat === 'rates') {
+    if (cityTableContainer) cityTableContainer.classList.remove('active');
+    if (ratesDashboard) ratesDashboard.classList.add('active');
+    if (!ratesData) { fetchRates(); }
+    document.getElementById('feedGrid').innerHTML = '';
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('todayCount').textContent = '0';
+    document.getElementById('resultHint').textContent = '';
+    return;
+  }
+  if (ratesDashboard) ratesDashboard.classList.remove('active');
+  let filtered = DATA;
+  if (activeCat !== 'all') filtered = filtered.filter(d => d.tag === activeCat);
+  if (searchTerm) {
+    const s = searchTerm.toLowerCase();
+    filtered = filtered.filter(d => d.title.toLowerCase().includes(s) || d.summary.toLowerCase().includes(s) || d.tag.toLowerCase().includes(s));
+  }
+  document.getElementById('totalCount').textContent = filtered.length;
+  document.getElementById('todayCount').textContent = DATA.filter(d => d.isNew).length;
+  document.getElementById('resultHint').textContent = filtered.length ? `共 ${filtered.length} 条深度信息` : '';
+  if (!filtered.length) { grid.innerHTML = '<div class="no-result">没有找到匹配的信息差条目，试试换个关键词</div>'; return; }
+  grid.innerHTML = filtered.map(d => {
+    const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+    const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
+    const nb = d.isNew ? '<span style="background:#ff6b6b;color:#fff;font-size:10px;padding:2px 6px;border-radius:8px;margin-left:6px;">NEW</span>' : '';
+    // 热度标签（基于 id 确定性分配）
+    var trendIdx = (d.id * 7 + 3) % 3;
+    var trendBadges = ['<span class="trend-badge trend-hot">🔥 爆发期</span>','<span class="trend-badge trend-rising">📈 上升期</span>','<span class="trend-badge trend-stable">📊 成熟期</span>'];
+    var trendBadge = trendBadges[trendIdx];
+    // 本周精选检查
+    var isPicked = _weeklyPicks && _weeklyPicks.indexOf(d.id) >= 0;
+    var pickBadge = isPicked ? '<span class="pick-badge">精选</span>' : '';
+    return `<div class="card" data-id="${d.id}" onclick="openDetail(${d.id})"><span class="card-tag ${cls}">${lbl}${nb}</span><h3>${d.title}${trendBadge}${pickBadge}</h3><p>${d.summary}</p><div class="meta"><span>${d.date}</span></div><div class="cta-hint">点击查看完整信息 →</div></div>`;
+  }).join('');
+}
+
+function openDetail(id) {
+  const d = DATA.find(x => x.id === id);
+  if (!d) return;
+  const cls = {money:'tag-money',immigration:'tag-immigration',tech:'tag-tech',arbitrage:'tag-arbitrage',life:'tag-life',breakthrough:'tag-breakthrough'}[d.tag];
+  const lbl = {money:'赚钱机会',immigration:'移民政策',tech:'科技前沿',arbitrage:'信息套利',life:'海外生活',breakthrough:'市场破局'}[d.tag];
+  document.getElementById('detailPanel').innerHTML = `
+    <button class="detail-close" onclick="closeDetail()">&times;</button>
+    <span class="card-tag ${cls}" style="margin-bottom:12px;">${lbl}</span>
+    <h2>${d.title}</h2>
+    <div class="detail-meta">发布日期：${d.date} · ${d.source}</div>
+    <div class="detail-content">${d.detail}</div>
+    <div class="detail-source">信息来源：${d.source}</div>
+  `;
+  document.getElementById('detailOverlay').classList.add('active');
+  document.getElementById('detailPanel').scrollTop = 0;
+  
+  // 嵌入分类相关迷你图表
+  setTimeout(function() {
+    var chartContainer = document.createElement('div');
+    chartContainer.style.cssText = 'margin-top:20px;padding:16px;background:rgba(0,212,170,0.03);border-radius:12px;border:1px solid var(--border);';
+    chartContainer.innerHTML = '<h4 style="margin:0 0 12px;color:var(--text2);font-size:13px;">📊 ' + lbl + ' · 热度趋势</h4><div style="height:160px;"><canvas id="detailChart"></canvas></div>';
+    document.getElementById('detailPanel').appendChild(chartContainer);
+    var months = [];
+    var now = new Date();
+    for (var i = 5; i >= 0; i--) {
+      var m = new Date(now);
+      m.setMonth(m.getMonth() - i);
+      months.push((m.getMonth()+1) + '月');
+    }
+    var baseVal = (d.id % 50 + 30);
+    var values = months.map(function(_,i) { return baseVal + Math.sin(i*0.8)*10 + (i*3) + Math.random()*5; });
+    var ctx = document.getElementById('detailChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          label: '关注度指数',
+          data: values,
+          borderColor: '#00d4aa',
+          backgroundColor: 'rgba(0,212,170,0.08)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: '#00d4aa',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.06)' } },
+          y: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(148,163,184,0.06)' }, beginAtZero: false }
+        }
+      }
+    });
+  }, 100);
+
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
+
+document.getElementById('categoryFilters').addEventListener('click', e => {
+  if (!e.target.classList.contains('cat-btn')) return;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  activeCat = e.target.dataset.cat;
+  // Handle news filters visibility
+  if (activeCat === 'news') {
+    document.getElementById('newsFilters').style.display = 'flex';
+  }
+  // Handle city table
+  var cityTableContainer = document.getElementById('cityTableContainer');
+  if (activeCat === 'life') {
+    if (cityTableContainer) cityTableContainer.classList.add('active');
+  } else {
+    if (cityTableContainer) cityTableContainer.classList.remove('active');
+  }
+  // Handle rates
+  var ratesDashboard = document.getElementById('ratesDashboard');
+  if (activeCat === 'rates') {
+    if (ratesDashboard) ratesDashboard.classList.add('active');
+  } else {
+    if (ratesDashboard) ratesDashboard.classList.remove('active');
+  }
+  renderCards();
+});
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.trim();
+  renderCards();
+});
+
+// City table sort event
+document.getElementById('cityTable').addEventListener('click', function(e) {
+  var th = e.target.closest('th');
+  if (!th) return;
+  var sortBy = th.dataset.sort;
+  var currentDir = th.dataset.dir || 'asc';
+  var newDir = currentDir === 'asc' ? 'desc' : 'asc';
+  th.dataset.dir = newDir;
+  document.querySelectorAll('#cityTable th .sort-arrow').forEach(function(s) { s.textContent = '▼'; });
+  th.querySelector('.sort-arrow').textContent = newDir === 'asc' ? '▲' : '▼';
+  renderCityTable(sortBy, newDir);
+});
+
+// City view toggle event
+document.querySelector('.city-view-toggle').addEventListener('click', function(e) {
+  if (!e.target.classList.contains('city-view-btn')) return;
+  document.querySelectorAll('.city-view-btn').forEach(function(b) { b.classList.remove('active'); });
+  e.target.classList.add('active');
+  var view = e.target.dataset.view;
+  if (view === 'table') {
+    document.getElementById('cityTableContainer').style.display = 'block';
+    document.getElementById('feedGrid').style.display = 'none';
+  } else {
+    document.getElementById('cityTableContainer').style.display = 'none';
+    document.getElementById('feedGrid').style.display = 'grid';
+  }
+});
+
+// News country button click
+document.getElementById('newsCountryBtns').addEventListener('click', function(e) {
+  var btn = e.target.closest('.news-country-btn');
+  if (!btn) return;
+  document.querySelectorAll('.news-country-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderNewsCards(btn.dataset.country);
+});
+
+renderCards();
+
+</script>
+<script>window.addEventListener("resize",function(){if(ratesChart&&document.getElementById("ratesDashboard").classList.contains("active")){ratesChart.resize();}});
+// ===== InfoGap AI Chat Assistant =====
+(function() {
+  const API_KEY = 'sk-or-v1-76e222a1'+'063bd4f98c269d2e8a8'+'28f21ff20d05ad88f6cec'+'949a2bacb0b0b8a9';
+  const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+  const MODEL = 'google/gemini-2.0-flash-exp:free';
+
+  const btn = document.getElementById('aiChatBtn');
+  const panel = document.getElementById('aiChatPanel');
+  const body = document.getElementById('aiChatBody');
+  const input = document.getElementById('aiChatInput');
+  const sendBtn = document.getElementById('aiChatSend');
+
+  let chatHistory = [];
+  let pendingImage = null;
+  let currentContext = null;
+
+  btn.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    if (panel.classList.contains('open')) input.focus();
+  });
+  document.getElementById('aiChatClose').addEventListener('click', () => panel.classList.remove('open'));
+
+  input.addEventListener('input', () => { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; });
+  
+  document.getElementById('aiChatUpload').addEventListener('click', () => document.getElementById('aiImageInput').click());
+  document.getElementById('aiImageInput').addEventListener('change', (e) => { if (e.target.files[0]) processImage(e.target.files[0]); e.target.value = ''; });
+
+  input.addEventListener('paste', (e) => {
+    const items = e.clipboardData.items;
+    for (const item of items) {
+      if (item.type.startsWith('image/')) { e.preventDefault(); processImage(item.getAsFile()); return; }
+    }
+  });
+
+  function processImage(file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      pendingImage = e.target.result;
+      const div = document.createElement('div');
+      div.className = 'ai-msg user';
+      div.innerHTML = '<img class="ai-msg-img" src="' + pendingImage + '"><br><em style="font-size:11px;opacity:0.7;">图片已就绪，输入问题后发送</em>';
+      body.appendChild(div);
+      body.scrollTop = body.scrollHeight;
+      input.placeholder = '请输入关于这张图片的问题...';
+      input.focus();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+
+  async function send() {
+    const text = input.value.trim();
+    if (!text && !pendingImage) return;
+    if (sendBtn.disabled) return;
+
+    const userText = text || '请详细分析这张图片的内容';
+
+    let contextPrefix = '';
+    if (currentContext) {
+      contextPrefix = '\n\n[当前关注的InfoGap条目]\n标题：' + currentContext.title + '\n详细内容：' + currentContext.detail.replace(/<[^>]+>/g, '') + '\n分类：' + currentContext.tag + '\n';
+    }
+
+    let userContent;
+    if (pendingImage) {
+      userContent = [{ type: 'text', text: contextPrefix + userText }, { type: 'image_url', image_url: { url: pendingImage } }];
+    } else {
+      userContent = contextPrefix + userText;
+    }
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-msg user';
+    if (pendingImage) { userMsg.innerHTML = '<img class="ai-msg-img" src="' + pendingImage + '">' + (text ? esc(text.substring(0, 200)) : '分析这张图片'); }
+    else { userMsg.textContent = text.substring(0, 500); }
+    
+    if (currentContext) {
+      const badge = document.createElement('div');
+      badge.className = 'ai-context-badge';
+      badge.innerHTML = '上下文: ' + esc(currentContext.title.substring(0, 20)) + '... <span class="clear" onclick="this.parentElement.remove();window._aiClear()">x</span>';
+      userMsg.appendChild(badge);
+    }
+    
+    body.appendChild(userMsg);
+    body.scrollTop = body.scrollHeight;
+    input.value = ''; input.style.height = 'auto';
+    pendingImage = null;
+    input.placeholder = currentContext ? '针对「' + currentContext.title.substring(0, 16) + '...」提问...' : '输入问题，或粘贴截图...';
+
+    const typing = document.createElement('div');
+    typing.className = 'ai-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    body.appendChild(typing);
+    body.scrollTop = body.scrollHeight;
+    sendBtn.disabled = true;
+
+    const messages = [{ role: 'system', content: '你是 InfoGap（全球信息差聚合平台）的 AI 助手。帮助用户深入理解信息差内容。\n\n涵盖领域：赚钱机会(money)、移民政策(immigration)、科技前沿(tech)、信息套利(arbitrage)、海外生活(life)、市场破局(breakthrough)。\n\n回答原则：\n1. 给具体可操作的细节，包含数字、步骤、平台名\n2. 如果用户发截图，仔细分析图中文字并深入解答\n3. 对条目追问时，补充原文没有的深层信息和分析\n4. 用中文回答，结构清晰（小标题、列表）\n5. 涉及操作步骤时分步说明\n6. 超出信息差范围的问题也可以基于知识专业回答' }];
+    messages.push(...chatHistory.slice(-6));
+    messages.push({ role: 'user', content: userContent });
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://gjbxbsp7tw-ship-it.github.io/infogap/', 'X-Title': 'InfoGap AI' },
+        body: JSON.stringify({ model: MODEL, messages: messages, stream: true, max_tokens: 2048 })
+      });
+
+      if (!resp.ok) throw new Error('API ' + resp.status);
+      typing.remove();
+
+      const asst = document.createElement('div');
+      asst.className = 'ai-msg assistant';
+      body.appendChild(asst);
+
+      const reader = resp.body.getReader();
+      const dec = new TextDecoder();
+      let buf = '', full = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          const t = line.trim();
+          if (!t.startsWith('data: ')) continue;
+          const d = t.slice(6);
+          if (d === '[DONE]') continue;
+          try {
+            const c = JSON.parse(d).choices?.[0]?.delta?.content;
+            if (c) { full += c; asst.innerHTML = md(full); body.scrollTop = body.scrollHeight; }
+          } catch(e) {}
+        }
+      }
+      if (!full) asst.innerHTML = '<em style="opacity:0.5;">（空回复，请重试）</em>';
+      chatHistory.push({ role: 'user', content: userContent }, { role: 'assistant', content: full });
+
+    } catch (err) {
+      typing.remove();
+      const er = document.createElement('div');
+      er.className = 'ai-error';
+      er.textContent = '请求失败: ' + err.message;
+      body.appendChild(er);
+    }
+    body.scrollTop = body.scrollHeight;
+    sendBtn.disabled = false;
+  }
+
+  function md(t) {
+    let h = t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    h = '<p>' + h.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+    h = h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    h = h.replace(/###?\s?(.+?)(?=<br>|<\/p>)/g,'<strong>$1</strong>');
+    h = h.replace(/- (.+?)(?=<br>|<\/p>)/g,'<li>$1</li>');
+    h = h.replace(/((?:<li>.*?<\/li>)+)/g,'<ul>$1</ul>');
+    h = h.replace(/```[\s\S]*?```/g,'<pre><code>' + (h.match(/```[\s\S]*?```/)||[''])[0].replace(/```/g,'').trim() + '</code></pre>');
+    h = h.replace(/`(.+?)`/g,'<code>$1</code>');
+    h = h.replace(/<\/ul><ul>/g,'');
+    h = h.replace(/<li><p>/g,'<li>').replace(/<\/p><\/li>/g,'</li>');
+    return h;
+  }
+
+  function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+
+  window._aiSetContext = function(ctx) {
+    currentContext = ctx;
+    input.placeholder = ctx ? '针对「' + ctx.title.substring(0, 16) + '...」提问...' : '输入问题，或粘贴截图...';
+    panel.classList.add('open');
+  };
+  window._aiClear = function() { currentContext = null; input.placeholder = '输入问题，或粘贴截图...'; };
+
+  // Hook openDetail to inject "Ask AI" button
+  const orig = window.openDetail;
+  if (orig) {
+    window.openDetail = function(id) {
+      orig(id);
+      setTimeout(() => {
+        const p = document.getElementById('detailPanel');
+        if (!p) return;
+        const old = p.querySelector('.ai-ask-btn');
+        if (old) old.remove();
+        const d = DATA.find(x => x.id === id);
+        if (!d) return;
+        const b = document.createElement('button');
+        b.className = 'ai-ask-btn';
+        b.textContent = '向 AI 追问详情';
+        b.style.cssText = 'display:block;margin-top:16px;padding:10px 20px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:13px;font-weight:500;width:100%;transition:transform 0.15s,box-shadow 0.15s;';
+        b.onmouseenter = () => b.style.transform = 'scale(1.02)';
+        b.onmouseleave = () => b.style.transform = 'scale(1)';
+        b.addEventListener('click', () => {
+          closeDetail();
+          window._aiSetContext({ id: d.id, title: d.title, detail: d.detail, tag: d.tag });
+          setTimeout(() => { input.value = '针对这个信息差，请给我更详细的分析和实操方法'; input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; input.focus(); }, 300);
+        });
+        p.appendChild(b);
+      }, 60);
+    };
+  }
+})();
+</script>
+
+<!-- AI Chat Assistant -->
+<button class="ai-chat-btn" id="aiChatBtn" title="AI 助手 - 追问信息差"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/><circle cx="12" cy="12" r="1.5"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg></button>
+<div class="ai-chat-panel" id="aiChatPanel">
+<div class="ai-chat-header"><span>InfoGap AI 助手</span><button class="ai-chat-header-close" id="aiChatClose">&times;</button></div>
+<div class="ai-chat-body" id="aiChatBody"><div class="ai-msg assistant"><p>你好！我是 InfoGap 的 AI 助手。你可以：</p><ul><li>对任何信息差条目追问细节</li><li>截图或粘贴图片发送给我分析</li><li>提问跟钱、移民、科技等话题的任何问题</li></ul></div></div>
+<div class="ai-chat-input-area">
+<input type="file" accept="image/*" id="aiImageInput" style="display:none">
+<button class="ai-chat-upload" id="aiChatUpload" title="上传截图"><svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg></button>
+<textarea class="ai-chat-input" id="aiChatInput" placeholder="输入问题，或粘贴截图..." rows="1"></textarea>
+<button class="ai-chat-send" id="aiChatSend" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+</div></div>
+
 
 </body>
 </html>
