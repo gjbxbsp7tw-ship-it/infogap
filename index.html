@@ -4384,7 +4384,7 @@ window._aiCreateDetailChat = function(container, d) {
 
   var wrap = document.createElement('div');
   wrap.className = 'detail-ai-chat';
-  wrap.innerHTML = '<div class="detail-ai-header">AI 分析 · ' + esc(d.title.substring(0, 24)) + '</div><div class="detail-ai-body"><div class="detail-ai-msg assistant"><p>我已了解这条信息。你可以：<br>• 追问背景和深层影响<br>• 问我你能怎么做<br>• 让我对比类似情况</p></div></div><div class="detail-ai-input-area"><input type="file" accept="image/*" class="detail-ai-img-inp" style="display:none"><button class="detail-ai-upload" title="上传截图">+</button><textarea class="detail-ai-input" placeholder="追问这条信息差..." rows="1"></textarea><button class="detail-ai-send" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div>';
+  wrap.innerHTML = '<div class="detail-ai-header">AI 分析 · ' + window._aiEsc(d.title.substring(0, 24)) + '</div><div class="detail-ai-body"><div class="detail-ai-msg assistant"><p>我已了解这条信息。你可以：<br>• 追问背景和深层影响<br>• 问我你能怎么做<br>• 让我对比类似情况</p></div></div><div class="detail-ai-input-area"><input type="file" accept="image/*" class="detail-ai-img-inp" style="display:none"><button class="detail-ai-upload" title="上传截图">+</button><textarea class="detail-ai-input" placeholder="追问这条信息差..." rows="1"></textarea><button class="detail-ai-send" title="发送"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button></div>';
   container.appendChild(wrap);
 
   var dBody = wrap.querySelector('.detail-ai-body');
@@ -4428,7 +4428,7 @@ window._aiCreateDetailChat = function(container, d) {
 
     var userMsg = document.createElement('div');
     userMsg.className = 'detail-ai-msg user';
-    if (detailImg) { userMsg.innerHTML = '<img class="detail-ai-msg-img" src="' + detailImg + '">' + (text ? esc(text.substring(0, 200)) : '分析这张图片'); }
+    if (detailImg) { userMsg.innerHTML = '<img class="detail-ai-msg-img" src="' + detailImg + '">' + (text ? window._aiEsc(text.substring(0, 200)) : '分析这张图片'); }
     else { userMsg.textContent = text.substring(0, 500); }
     dBody.appendChild(userMsg);
     dBody.scrollTop = dBody.scrollHeight;
@@ -4478,7 +4478,7 @@ window._aiCreateDetailChat = function(container, d) {
           if (!t.startsWith('data: ')) continue;
           var d2 = t.slice(6);
           if (d2 === '[DONE]') continue;
-          try { var c = JSON.parse(d2).choices[0].delta.content; if (c) { full += c; asst.innerHTML = md(full); dBody.scrollTop = dBody.scrollHeight; } } catch(e) {}
+          try { var c = JSON.parse(d2).choices[0].delta.content; if (c) { full += c; asst.innerHTML = window._aiMd(full); dBody.scrollTop = dBody.scrollHeight; } } catch(e) {}
         }
       }
       if (!full) asst.innerHTML = '<em style="opacity:0.5;">（空回复，请重试）</em>';
