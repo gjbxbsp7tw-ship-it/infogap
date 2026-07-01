@@ -3638,7 +3638,7 @@ let activeCat = 'all';
 
 // 本周精选（基于 ISO 周数确定性选取5条）
 var _weekNum = (function(){ var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+3-(d.getDay()+6)%7); var jan1=new Date(d.getFullYear(),0,1); return Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7); })();
-var _weeklyPicks = (function(w){ var picks=[]; var used={}; var seed=w*13+7; for(var i=0;i<5;i++){ seed=(seed*1103515245+12345)&0x7fffffff; var idx=seed%297+1; if(!used[idx]){ picks.push(idx); used[idx]=true; } } return picks; })(_weekNum);
+var _weeklyPicks = (function(w){ var picks=[]; var used={}; var seed=w*13+7; for(var i=0;i<5;i++){ seed=(seed*1103515245+12345)&0x7fffffff; var idx=seed%DATA.length+1; if(!used[idx]){ picks.push(idx); used[idx]=true; } } return picks; })(_weekNum);
 
 let searchTerm = '';
 
@@ -3864,25 +3864,41 @@ function renderCityTable(sortBy, sortDir) {
   document.getElementById('cityTableBody').innerHTML = html;
 }
 
+function switchView(view) {
+  var feed = document.getElementById('feedGrid');
+  var dash = document.getElementById('dashboardContainer');
+  var rates = document.getElementById('ratesDashboard');
+  var city = document.getElementById('cityTableContainer');
+  var newsF = document.getElementById('newsFilters');
+  // 全部隐藏
+  if (feed) feed.style.display = 'none';
+  if (dash) dash.style.display = 'none';
+  if (rates) rates.classList.remove('active');
+  if (city) { city.classList.remove('active'); city.style.display = ''; }
+  if (newsF) newsF.style.display = 'none';
+  // 按需显示
+  if (view === 'dashboard') { dash.style.display = 'block'; }
+  else if (view === 'rates') { rates.classList.add('active'); }
+  else if (view === 'life') { city.classList.add('active'); city.style.display = 'block'; feed.style.display = 'grid'; }
+  else if (view === 'news') { feed.style.display = ''; newsF.style.display = 'flex'; }
+  else { feed.style.display = view === 'pick' ? '' : 'grid'; }
+}
+
 function renderCards() {
   var grid = document.getElementById('feedGrid');
   var filtersDiv = document.getElementById('newsFilters');
   var dashboardEl = document.getElementById('dashboardContainer');
-  // Hide dashboard & show feed by default
-  if (dashboardEl) dashboardEl.style.display = 'none';
-  grid.style.display = '';
+  var ratesDashboard = document.getElementById('ratesDashboard');
   // 全球新闻走独立渲染
   if (activeCat === 'news') {
-    document.getElementById('cityTableContainer').classList.remove('active');
-    document.getElementById('ratesDashboard').classList.remove('active');
-    if (filtersDiv) filtersDiv.style.display = 'flex';
+    switchView('news');
     renderNewsCards('US');
     return;
   }
   if (filtersDiv) filtersDiv.style.display = 'none';
   // 本周精选
   if (activeCat === 'pick') {
-    grid.innerHTML = '';
+    switchView('pick');
     var pickData = DATA.filter(function(d) { return _weeklyPicks.indexOf(d.id) >= 0; });
     document.getElementById('totalCount').textContent = pickData.length;
     document.getElementById('todayCount').textContent = pickData.filter(function(d){return d.isNew;}).length;
@@ -3899,31 +3915,20 @@ function renderCards() {
     return;
   }
   // 海外生活：显示城市对比表
-  var cityTableContainer = document.getElementById('cityTableContainer');
   if (activeCat === 'life') {
-    if (cityTableContainer) cityTableContainer.classList.add('active');
+    switchView('life');
     renderCityTable('rank', 'asc');
-    grid.style.display = 'grid';
-    document.getElementById('feedGrid').style.display = 'grid';
-  } else {
-    if (cityTableContainer) { cityTableContainer.classList.remove('active'); cityTableContainer.style.display = ''; }
-    document.getElementById('feedGrid').style.display = '';
   }
   // 数据看板
   if (activeCat === 'dashboard') {
-    grid.style.display = 'none';
-    document.getElementById('feedGrid').style.display = 'none';
-    if (cityTableContainer) { cityTableContainer.classList.remove('active'); cityTableContainer.style.display = ''; }
-    if (ratesDashboard) ratesDashboard.classList.remove('active');
+    switchView('dashboard');
     var latest = _dashboardMonths[_dashboardMonths.length - 1];
     renderDashboard(latest);
     return;
   }
   // 全球汇率走独立渲染
-  var ratesDashboard = document.getElementById('ratesDashboard');
   if (activeCat === 'rates') {
-    if (cityTableContainer) cityTableContainer.classList.remove('active');
-    if (ratesDashboard) ratesDashboard.classList.add('active');
+    switchView('rates');
     if (!ratesData) { fetchRates(); }
     document.getElementById('feedGrid').innerHTML = '';
     document.getElementById('totalCount').textContent = '0';
@@ -3931,7 +3936,7 @@ function renderCards() {
     document.getElementById('resultHint').textContent = '';
     return;
   }
-  if (ratesDashboard) ratesDashboard.classList.remove('active');
+  if (activeCat !== 'life') { switchView('other'); }
   let filtered = DATA;
   if (activeCat !== 'all') filtered = filtered.filter(d => d.tag === activeCat);
   if (searchTerm) {
