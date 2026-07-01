@@ -222,6 +222,26 @@
 .cat-btn-pick { border-color: rgba(168,85,247,0.4); }
 .cat-btn-pick.active { background: #a855f7; color: #fff; border-color: #a855f7; }
 
+/* ===== Dashboard ===== */
+.dashboard-container { margin-bottom: 30px; }
+.dashboard-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.dashboard-tab { padding: 6px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text2); cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.dashboard-tab:hover { border-color: var(--text2); color: var(--text); }
+.dashboard-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; }
+.dashboard-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 12px; }
+.dashboard-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; font-size: 12px; color: var(--text2); background: rgba(255,255,255,0.03); cursor: default; position: relative; min-width: 0; }
+.dashboard-day .day-num { font-weight: 500; }
+.dashboard-day .day-count { font-size: 10px; color: var(--text3); margin-top: 1px; }
+.dashboard-day.has-data { color: #fff; font-weight: 600; }
+.dashboard-day.has-data .day-num { color: #fff; }
+.dashboard-day.has-data .day-count { color: rgba(255,255,255,0.8); }
+.dashboard-day-label { font-size: 10px; color: var(--text3); text-align: center; padding: 4px 0; font-weight: 500; }
+.dashboard-legend { display: flex; gap: 16px; justify-content: center; padding-top: 8px; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text3); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+.dashboard-summary { text-align: center; padding: 12px; margin-bottom: 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; }
+.dashboard-summary strong { color: var(--accent); }
+
 #detailChart { width: 100% !important; }
 
 /* ===== Global News ===== */
@@ -366,7 +386,7 @@ document.body.style.overflow='hidden';
   <div class="hero">
     <h1>全球信息差 · 先人一步</h1>
     <p>不跳转、不搬运、不引流——所有信息直接整理呈现，消除认知差距</p>
-    <div class="live-badge"><span class="live-dot"></span>实时追踪 · 2026年6月</div>
+    <div class="live-badge"><span class="live-dot"></span>实时追踪 · <span id="liveDate"></span></div>
   </div>
   <div class="categories" id="categoryFilters">
     <button class="cat-btn active" data-cat="all">全部</button>
@@ -379,6 +399,7 @@ document.body.style.overflow='hidden';
     <button class="cat-btn" data-cat="news">全球新闻</button>
     <button class="cat-btn" data-cat="rates">全球汇率</button>
     <button class="cat-btn cat-btn-pick" data-cat="pick">本周精选</button>
+    <button class="cat-btn" data-cat="dashboard">📊 数据看板</button>
   </div>
     <div class="rates-dashboard" id="ratesDashboard">
     <div class="rates-chart-container">
@@ -423,6 +444,16 @@ document.body.style.overflow='hidden';
   </div>
 
   <div class="feed-header"><h2>最新信息差</h2><span id="resultHint"></span></div>
+    <div class="dashboard-container" id="dashboardContainer" style="display:none;">
+      <div class="dashboard-tabs" id="dashboardTabs"></div>
+      <div class="dashboard-grid" id="dashboardGrid"></div>
+      <div class="dashboard-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#e2e8f0;"></span> 0-1条</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#93c5fd;"></span> 2-4条</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> 5-9条</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#1d4ed8;"></span> 10+条</span>
+      </div>
+    </div>
   <div class="feed-grid" id="feedGrid"></div>
 </main>
 
@@ -3500,6 +3531,9 @@ async function renderNewsCards(country) {
 
 let activeCat = 'all';
 
+// Dynamic date
+(function(){ var d=new Date(); document.getElementById('liveDate').textContent = d.getFullYear() + '年' + (d.getMonth()+1) + '月'; })();
+
 // 本周精选（基于 ISO 周数确定性选取5条）
 var _weekNum = (function(){ var d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+3-(d.getDay()+6)%7); var jan1=new Date(d.getFullYear(),0,1); return Math.ceil(((d-jan1)/86400000+jan1.getDay()+1)/7); })();
 var _weeklyPicks = (function(w){ var picks=[]; var used={}; var seed=w*13+7; for(var i=0;i<5;i++){ seed=(seed*1103515245+12345)&0x7fffffff; var idx=seed%297+1; if(!used[idx]){ picks.push(idx); used[idx]=true; } } return picks; })(_weekNum);
@@ -3731,6 +3765,10 @@ function renderCityTable(sortBy, sortDir) {
 function renderCards() {
   var grid = document.getElementById('feedGrid');
   var filtersDiv = document.getElementById('newsFilters');
+  var dashboardEl = document.getElementById('dashboardContainer');
+  // Hide dashboard & show feed by default
+  if (dashboardEl) dashboardEl.style.display = 'none';
+  grid.style.display = '';
   // 全球新闻走独立渲染
   if (activeCat === 'news') {
     document.getElementById('cityTableContainer').classList.remove('active');
@@ -3766,8 +3804,18 @@ function renderCards() {
     grid.style.display = 'grid';
     document.getElementById('feedGrid').style.display = 'grid';
   } else {
-    if (cityTableContainer) cityTableContainer.classList.remove('active');
+    if (cityTableContainer) { cityTableContainer.classList.remove('active'); cityTableContainer.style.display = ''; }
     document.getElementById('feedGrid').style.display = '';
+  }
+  // 数据看板
+  if (activeCat === 'dashboard') {
+    grid.style.display = 'none';
+    document.getElementById('feedGrid').style.display = 'none';
+    if (cityTableContainer) { cityTableContainer.classList.remove('active'); cityTableContainer.style.display = ''; }
+    if (ratesDashboard) ratesDashboard.classList.remove('active');
+    var latest = _dashboardMonths[_dashboardMonths.length - 1];
+    renderDashboard(latest);
+    return;
   }
   // 全球汇率走独立渲染
   var ratesDashboard = document.getElementById('ratesDashboard');
@@ -3874,6 +3922,90 @@ function closeDetail() {
   document.body.style.overflow = '';
 }
 document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
+
+// ===== Dashboard =====
+var _dashboardMonths = [];
+var _dashboardData = {};
+(function buildDashboardData() {
+  var monthly = {};
+  DATA.forEach(function(d) {
+    var parts = d.date.split('-');
+    if (parts.length < 2) return;
+    var y = parseInt(parts[0]), m = parseInt(parts[1]);
+    if (y !== 2026) return;
+    var key = y + '-' + (m < 10 ? '0' + m : m);
+    if (!monthly[key]) monthly[key] = {};
+    var day = parseInt(parts[2]) || 1;
+    monthly[key][day] = (monthly[key][day] || 0) + 1;
+  });
+  // Build ordered month list Jan-current
+  var now = new Date();
+  var curYear = now.getFullYear(), curMonth = now.getMonth() + 1;
+  for (var m = 1; m <= (curYear === 2026 ? curMonth : 12); m++) {
+    var k = '2026-' + (m < 10 ? '0' + m : m);
+    _dashboardMonths.push(k);
+    _dashboardData[k] = monthly[k] || {};
+  }
+})();
+
+function renderDashboard(monthKey) {
+  var container = document.getElementById('dashboardContainer');
+  var tabsEl = document.getElementById('dashboardTabs');
+  var gridEl = document.getElementById('dashboardGrid');
+  container.style.display = 'block';
+
+  // Month tabs
+  var MONTH_NAMES = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  tabsEl.innerHTML = _dashboardMonths.map(function(k) {
+    var m = parseInt(k.split('-')[1]);
+    var total = Object.values(_dashboardData[k] || {}).reduce(function(a,b){return a+b;}, 0);
+    var cls = k === monthKey ? ' dashboard-tab active' : 'dashboard-tab';
+    return '<button class="' + cls + '" data-month="' + k + '">' + MONTH_NAMES[m-1] + ' <small>(' + total + '条)</small></button>';
+  }).join('');
+
+  // Day grid
+  var data = _dashboardData[monthKey] || {};
+  var m = parseInt(monthKey.split('-')[1]);
+  var daysInMonth = new Date(2026, m, 0).getDate();
+  var firstDow = new Date(2026, m-1, 1).getDay(); // 0=Sun
+
+  var dayLabels = ['日','一','二','三','四','五','六'];
+  var html = dayLabels.map(function(l) { return '<div class="dashboard-day-label">' + l + '</div>'; }).join('');
+
+  // Empty cells before 1st
+  for (var i = 0; i < firstDow; i++) {
+    html += '<div class="dashboard-day"></div>';
+  }
+  // Day cells
+  for (var d = 1; d <= daysInMonth; d++) {
+    var count = data[d] || 0;
+    var cls = 'dashboard-day';
+    var bg = '';
+    if (count > 0) {
+      cls += ' has-data';
+      if (count >= 10) bg = 'background:#1d4ed8;';
+      else if (count >= 5) bg = 'background:#3b82f6;';
+      else if (count >= 2) bg = 'background:#93c5fd;';
+      else bg = 'background:#60a5fa;';
+    }
+    html += '<div class="' + cls + '" style="' + bg + '"><span class="day-num">' + d + '</span>' + (count > 0 ? '<span class="day-count">' + count + '条</span>' : '') + '</div>';
+  }
+  gridEl.innerHTML = html;
+
+  // Summary
+  var totalEntries = Object.values(data).reduce(function(a,b){return a+b;}, 0);
+  var activeDays = Object.keys(data).length;
+  document.getElementById('resultHint').textContent = MONTH_NAMES[m-1] + ' · ' + activeDays + '天有更新 · 共' + totalEntries + '条';
+  document.getElementById('totalCount').textContent = totalEntries;
+  document.getElementById('todayCount').textContent = activeDays;
+}
+
+// Tab click delegation
+document.getElementById('dashboardTabs').addEventListener('click', function(e) {
+  var btn = e.target.closest('.dashboard-tab');
+  if (!btn) return;
+  renderDashboard(btn.dataset.month);
+});
 
 document.getElementById('categoryFilters').addEventListener('click', e => {
   if (!e.target.classList.contains('cat-btn')) return;
