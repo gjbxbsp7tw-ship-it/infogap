@@ -3518,12 +3518,12 @@ async function renderNewsCards(country) {
   }
   
   grid.innerHTML = newsData.slice(0, 20).map(function(n) {
-    var title = n.title || '';
+    var title = n.title_cn || n.title || '';
     var source = n.source || '';
     var date = n.publishedAt ? n.publishedAt.substring(0, 10) : '';
-    var desc = n.description || '';
+    var desc = n.description_cn || n.description || '';
     if (desc.length > 120) desc = desc.substring(0, 120) + '...';
-    var url = n.url || '#';
+    var url = n.link || n.url || '#';
     return '<div class="card news-card"><span class="card-tag tag-news">' + (COUNTRY_NAMES[country] || country) + '新闻</span><h3><a href="' + url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + title + '</a></h3><p>' + desc + '</p><div class="meta"><span>' + source + '</span><span>' + date + '</span></div></div>';
   }).join('');
 }
